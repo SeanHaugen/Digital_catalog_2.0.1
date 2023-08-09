@@ -16,7 +16,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import SearchIcon from "@mui/icons-material/Search";
-import ClickAwayListener from "@mui/base/ClickAwayListener";
+// import ClickAwayListener from "@mui/base/ClickAwayListener";
 import ArrowDropDownCircleOutlinedIcon from "@mui/icons-material/ArrowDropDownCircleOutlined";
 
 import { Search } from "../search/Search";
@@ -71,7 +71,7 @@ export default function DashBoard({
   console.log(searchEntered && console.log(query));
 
   return (
-    <ClickAwayListener onClickAway={handleClickAway}>
+    <div onClickAway={handleClickAway}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="fixed" open={open}>
@@ -156,6 +156,6 @@ export default function DashBoard({
           <DrawerHeader />
         </Box>
       </Box>
-    </ClickAwayListener>
+    </div>
   );
 }

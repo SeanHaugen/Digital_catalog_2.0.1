@@ -1,5 +1,14 @@
+import React from "react";
+
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+
+import { Routes, Route } from "react-router-dom";
+import CategoriesPage from "./categories/Categories";
+import FrontPage from "./frontPage/FrontPage";
 import SubCategoriesPage from "./subCategory/SubCategory";
-import ItemPage from "./ItemsPage/ItemPage";
+import ItemPage from "./itemsPage/ItemPage";
 import SearchPage from "./searchPage/SearchPage";
 
 function Main({
