@@ -68,7 +68,7 @@ export default function DashBoard({
       navigate(`/search`);
     }
   };
-  // console.log(searchEntered && console.log(query));
+  console.log(searchEntered && console.log(query));
 
   return (
     <div onClickAway={handleClickAway}>

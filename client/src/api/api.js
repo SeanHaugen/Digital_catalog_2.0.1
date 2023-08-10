@@ -5,7 +5,7 @@ export const useCategoryData = (setState) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = "http://localhost:4000/category";
+        const apiUrl = "http://ivory-firefly-hem.cyclic.app/category";
         const response = await axios.get(apiUrl);
         setState(response.data);
       } catch (error) {
@@ -21,7 +21,7 @@ export const useFetchSubCategoryData = (setState) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = "http://localhost:4000/SubCategory";
+        const apiUrl = "http://ivory-firefly-hem.cyclic.app/SubCategory";
         const response = await axios.get(apiUrl);
         setState(response.data);
       } catch (error) {
@@ -39,7 +39,7 @@ export const useFetchSubCategoryItemData = (setState, subCat) => {
       try {
         if (subCat) {
           const endpoint = `${subCat}`;
-          const apiUrl = `http://localhost:4000/SubCategory/${endpoint}`;
+          const apiUrl = `http://ivory-firefly-hem.cyclic.app/SubCategory/${endpoint}`;
 
           const response = await axios.get(apiUrl);
           setState(response.data);
@@ -60,7 +60,7 @@ export const useFetchCategoryData = (setState, category) => {
       try {
         if (category) {
           const endpoint = `${category}`;
-          const apiUrl = `http://localhost:4000/category/${endpoint}`;
+          const apiUrl = `http://ivory-firefly-hem.cyclic.app/category/${endpoint}`;
 
           const response = await axios.get(apiUrl);
           setState(response.data);
@@ -80,7 +80,7 @@ export const useFetchItemData = (setState, item) => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/items?item=${item}`
+          `http://ivory-firefly-hem.cyclic.app/items?item=${item}`
         );
         const itemData = response.data;
         setState(itemData); // Assuming this correctly updates the state
@@ -98,7 +98,7 @@ export const useSearchData = (setState, search) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://localhost:4000/search?q=${search}`
+          `http://ivory-firefly-hem.cyclic.app/search?q=${search}`
         );
         setState(response.data);
       } catch (error) {

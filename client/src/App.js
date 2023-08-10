@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 import Main from "./components/main/main";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import DashBoard from "./components/header/dashboard/dashboard";
 import { useFetchSubCategoryItemData, useFetchItemData } from "./api/api";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Typography from "@mui/material/Typography";
+// import Typography from "@mui/material/Typography";
 import BottomNav from "./components/footer/BottomNav";
 
 function App() {
@@ -58,24 +58,23 @@ function App() {
         onContextMenu={handleContextMenu}
         style={{ cursor: "context-menu" }}
       >
-        <Typography>
-          <DashBoard
-            setCategory={setCategory}
-            setSubCategory={setSubCategory}
-            setSearchData={setSearchData}
-            setQuery={setQuery}
-            query={query}
-          />
-          <Main
-            category={category}
-            setSubCategory={setSubCategory}
-            subCategory={subCategory}
-            item={item}
-            setProduct={setProduct}
-            productData={productData}
-            searchData={searchData}
-          />
-        </Typography>
+        <DashBoard
+          setCategory={setCategory}
+          setSubCategory={setSubCategory}
+          setSearchData={setSearchData}
+          setQuery={setQuery}
+          query={query}
+        />
+        <Main
+          category={category}
+          setSubCategory={setSubCategory}
+          subCategory={subCategory}
+          item={item}
+          setProduct={setProduct}
+          productData={productData}
+          searchData={searchData}
+        />
+
         <Menu
           open={contextMenu !== null}
           onClose={handleClose}
