@@ -8,7 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import CategoriesPage from "./categories/Categories";
 import FrontPage from "./frontPage/FrontPage";
 import SubCategoriesPage from "./subCategory/SubCategory";
-import ItemPage from "./itemsPage/ItemPage";
+import ItemPage from "./itemsPage/ItemsPage";
 import SearchPage from "./searchPage/SearchPage";
 
 function Main({
@@ -29,7 +29,6 @@ function Main({
       <Container fixed>
         <Box sx={{ bgcolor: "#dfe2f2", height: "fitContent" }} className="box">
           <Routes>
-            <Route path="*" element={<FrontPage />} />
             <Route
               path="/:category"
               element={
@@ -51,7 +50,7 @@ function Main({
               }
             />
             <Route
-              path="/:category/:subCategories/:itemPage"
+              path="/:category/:subCategories/:itemsPage"
               element={
                 <ItemPage
                   category={category}
@@ -73,6 +72,7 @@ function Main({
                 />
               }
             />
+            <Route path="*" element={<FrontPage />} />
           </Routes>
         </Box>
       </Container>

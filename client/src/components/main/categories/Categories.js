@@ -14,7 +14,7 @@ function CategoriesPage({ category, setSubCategory }) {
 
   return (
     <div>
-      <p>{category}</p>
+      <h4>{category}</h4>
       {productsCategory.map((subCat, index) => {
         return (
           <div key={index}>
@@ -25,8 +25,6 @@ function CategoriesPage({ category, setSubCategory }) {
             >
               <ListItemText primary={subCat}>{subCat}</ListItemText>
             </ListItemButton>
-
-            {/* <NavLink to={`/${category}/${subCat}`} onClick={() => setSubCategory(subCat)}>{subCat}</NavLink> */}
           </div>
         );
       })}

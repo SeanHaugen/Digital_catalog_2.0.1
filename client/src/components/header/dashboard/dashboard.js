@@ -68,7 +68,7 @@ export default function DashBoard({
       navigate(`/search`);
     }
   };
-  console.log(searchEntered && console.log(query));
+  // console.log(searchEntered && console.log(query));
 
   return (
     <div onClickAway={handleClickAway}>
@@ -116,7 +116,7 @@ export default function DashBoard({
           </DrawerHeader>
 
           <List>
-            {categoryData.map((cat, index) => (
+            {categoryData.slice(1).map((cat, index) => (
               <ListItem
                 key={index}
                 disablePadding
