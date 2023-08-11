@@ -20,7 +20,7 @@ function FrontPage() {
           <Item>Hello</Item>
         </Grid>
         <Grid xs={6}>
-          <Item>This is a test</Item>
+          <Item>This is a test... again</Item>
         </Grid>
         <Grid xs>
           <Item>Goodbye</Item>
