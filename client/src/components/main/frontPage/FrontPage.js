@@ -17,13 +17,13 @@ function FrontPage() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
         <Grid xs="auto">
-          <Item>placeholder</Item>
+          <Item>Hello</Item>
         </Grid>
         <Grid xs={6}>
-          <Item>Placeholder content</Item>
+          <Item>This is a test</Item>
         </Grid>
         <Grid xs>
-          <Item>Placeholder</Item>
+          <Item>Goodbye</Item>
         </Grid>
       </Grid>
     </Box>
