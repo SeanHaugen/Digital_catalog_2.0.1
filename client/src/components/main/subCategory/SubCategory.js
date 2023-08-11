@@ -10,7 +10,7 @@ function SubCategoryPage({ category, subCategory, item, setProduct }) {
 
   return (
     <div>
-      <h4>{subCategory}</h4>
+      <h3>{subCategory}</h3>
       {item.map((i, index) => {
         return (
           <div key={index}>

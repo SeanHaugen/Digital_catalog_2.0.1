@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "./app.css";
 import Main from "./components/main/main";
 import { HashRouter as Router } from "react-router-dom";
 import DashBoard from "./components/header/dashboard/dashboard";
@@ -56,7 +56,13 @@ function App() {
       <div
         className="App"
         onContextMenu={handleContextMenu}
-        style={{ cursor: "context-menu" }}
+        style={{
+          cursor: "context-menu",
+          display: "flex",
+          flexDirection: "row wrap",
+          // flexFlow: "column",
+          marginTop: "4em",
+        }}
       >
         <DashBoard
           setCategory={setCategory}
@@ -85,15 +91,15 @@ function App() {
               : undefined
           }
         >
-          <MenuItem>Hello world</MenuItem>
+          <MenuItem>Open New</MenuItem>
           <MenuItem onClick={handleClose}>Copy</MenuItem>
           <MenuItem onClick={handleClose}>Print</MenuItem>
           <MenuItem onClick={handleClose}>Highlight</MenuItem>
           <MenuItem onClick={handleClose}>Add To PDF</MenuItem>
           <MenuItem onClick={handleClose}>Email</MenuItem>
         </Menu>
-        <BottomNav />
       </div>
+      <BottomNav />
     </Router>
   );
 }

@@ -1,10 +1,19 @@
 import * as React from "react";
+import { NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
+import Tabs from "@mui/joy/Tabs";
+import TabList from "@mui/joy/TabList";
+import Tab from "@mui/joy/Tab";
+import TabPanel from "@mui/joy/TabPanel";
+import Breadcrumbs from "@mui/joy/Breadcrumbs";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import Link from "@mui/joy/Link";
 
 import PricingTable from "./pricing/Pricing";
 
@@ -19,32 +28,109 @@ const Item = styled(Paper)(({ theme }) => ({
 function ItemPage({ productData }) {
   console.log(productData);
 
+  const description = productData.Description || "";
+
+  const descriptionBullets = description
+    .split(/[.!?]/)
+    .filter((sentence) => sentence.trim() !== "");
+
   return (
     <div>
-      <h4>
-        {productData.Category}--{productData.SubCategory}
-      </h4>
+      <Breadcrumbs separator={<KeyboardArrowRight />} aria-label="breadcrumbs">
+        {[
+          {
+            label: productData.Category,
+            path: `/${productData.Category}`,
+          },
+          {
+            label: productData.SubCategory,
+            path: `/${productData.Category}/${productData.SubCategory}`,
+          },
+          {
+            label: productData.Item_Number,
+            path: `/${productData.Category}/${productData.SubCategory}/${productData.Item_Number}`,
+          },
+        ].map((item) => (
+          <Link
+            key={item.label}
+            component={NavLink}
+            to={item.path}
+            color="success"
+            variant="soft"
+            level="h4"
+          >
+            {item.label}
+          </Link>
+        ))}
+        {/* {productData.Category}--{productData.SubCategory} */}
+      </Breadcrumbs>
       <h1>{productData.Name}</h1>
       <h2>{productData.Item_Number}</h2>
-      <Box sx={{ width: "100%" }}>
-        <Stack spacing={{ xs: 1, sm: 2 }} useFlexGap flexWrap="wrap">
-          <Item>Image here{productData.Image}</Item>
-          <Item>{productData.Description}</Item>
-          <Item>Pg: {productData.Page}</Item>
+
+      <Grid sx={{ flexGrow: 1 }} container spacing={2}>
+        <Grid xs={6} md={7} margin="5px" justifyContent="center">
+          <Item>
+            <figure>
+              <img
+                className="placeholder"
+                src="https://fakeimg.pl/400x300"
+                alt="blank placeholder"
+              />
+            </figure>
+          </Item>
+        </Grid>
+        <Grid xs={6} md={4}>
+          <Item>
+            <ul>
+              {descriptionBullets.map((point, index) => {
+                return (
+                  <li key={index} style={{ fontSize: "20px" }}>
+                    {point}
+                  </li>
+                );
+              })}
+            </ul>
+          </Item>
+        </Grid>
+        <Grid xs={12}>
           <PricingTable productData={productData} />
-          <Item>Setup: {productData.SetupChg}</Item>
+        </Grid>
+      </Grid>
+      <Grid sx={{ flexGrow: 1 }} container spacing={0} margin={"5px"}>
+        <Grid>
           <Item>
-            <AccessTimeIcon /> {productData.Lead_Times} Business Days
+            Setup: ${productData.SetupChg}
+            <div>{productData.Lead_Times} Business Days</div>
           </Item>
-          <Item>
-            <MonitorWeightIcon />
-            {productData.Product_Weight}
-          </Item>
-          <Item>Keywords: {productData.Keywords}</Item>
-          <Item>Materials: {productData.Materials}</Item>
-          <Item>Origin: {productData.Origin}</Item>
-        </Stack>
-      </Box>
+        </Grid>
+      </Grid>
+      <Grid>
+        <Grid>
+          <Tabs aria-labe="Basic tabs" defaultValue={0}>
+            <TabList>
+              <Tab>Details</Tab>
+              <Tab>Shipping</Tab>
+              <Tab>Templates/specs</Tab>
+              <Tab>Internal Info</Tab>
+              <Tab>Images</Tab>
+            </TabList>
+            <TabPanel value={0}>
+              <Item>
+                Weight:
+                {productData.Product_Weight}
+              </Item>
+              <Item>Keywords: {productData.Keywords}</Item>
+              <Item>Materials: {productData.Materials}</Item>
+              <Item>Origin: {productData.Origin}</Item>
+              <Item>Pg: {productData.Page}</Item>
+            </TabPanel>
+            <TabPanel value={1}></TabPanel>
+            <TabPanel value={2}></TabPanel>
+            <TabPanel value={3}></TabPanel>
+            <TabPanel value={4}></TabPanel>
+          </Tabs>
+        </Grid>
+      </Grid>
     </div>
   );
 }

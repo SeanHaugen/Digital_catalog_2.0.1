@@ -8,8 +8,8 @@ import Stack from "@mui/material/Stack";
 function SearchPage({
   searchData,
   setProduct,
-  // category,
-  // subCategory,
+  category,
+  subCategory,
   productData,
 }) {
   // const location = useLocation();
