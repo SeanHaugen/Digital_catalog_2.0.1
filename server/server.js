@@ -83,15 +83,19 @@ flatRateSchema.index({
 });
 
 const items = mongoose.model("items", itemSchema);
-const flatRate = mongoose.model("FR_items", flatRateSchema);
+const flatRate = mongoose.model("flatRateShipping", flatRateSchema);
 console.log(flatRate);
 
-app.get("/rate", async (req, res) => {
-  const item = req.query.itemNumber;
-  console.log(item);
-  const itemRate = await flatRate.distinct(item);
-  console.log(itemRate);
-  res.send(itemRate);
+app.get("/flatRate/:itemNumber", async (req, res) => {
+  const itemNumber = req.params.itemNumber;
+  try {
+    const flatRatesForItem = await flatRate.find({ Item_Number: itemNumber });
+    console.log("Found flat Rates: ", flatRatesForItem);
+    res.send(flatRatesForItem);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error!");
+  }
 });
 
 app.get("/category", async (req, res) => {
