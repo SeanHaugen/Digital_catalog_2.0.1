@@ -108,3 +108,23 @@ export const useSearchData = (setState, search) => {
     fetchData();
   }, [search, setState]);
 };
+
+export const usePricingData = (setState, price) => {
+  useEffect(
+    () => {
+      async function fetchData() {
+        try {
+          const response = await axios.get(
+            `http://ivory-firefly-hem.cyclic.app/pricing?item=${price}`
+          );
+          setState(response);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      fetchData();
+    },
+    price,
+    setState
+  );
+};

@@ -31,6 +31,41 @@ const port = process.env.PORT || 4000;
 app.use(express.static("public"));
 app.use(cors());
 
+const PricingSchema = new mongoose.Schema({
+  url: String,
+  Name: String,
+  Item_Number: String,
+  Internal_Info: String,
+  Pricing: [
+    [String, String, String, String, String],
+    [String, String, String, String, String],
+    // ... continue defining the structure of the Pricing array
+  ],
+});
+
+const PricingModel = mongoose.model("itempricing", PricingSchema);
+
+app.get("/pricing/:item", async (req, res) => {
+  try {
+    const pricingItem = req.params.item;
+    const pricingDoc = await PricingModel.findOne({
+      Item_Number: pricingItem.trim(), // Trim whitespace including newlines
+    });
+
+    if (!pricingDoc) {
+      return res.status(404).json({ message: "Pricing not found" });
+    }
+
+    const pricingArrays = pricingDoc.Pricing; // Extract the Pricing arrays
+
+    res.json(pricingArrays);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
 const itemSchema = new mongoose.Schema({
   Item_Number: {
     type: Number,
@@ -66,37 +101,7 @@ itemSchema.index({
   Keywords: "text",
 });
 
-const flatRateSchema = new mongoose.Schema({
-  Item_Number: {
-    type: Number,
-    required: true,
-  },
-  Rate: {
-    type: Number,
-    required: true,
-  },
-});
-
-flatRateSchema.index({
-  Item_Number: "text",
-  Rate: "text",
-});
-
 const items = mongoose.model("items", itemSchema);
-const flatRate = mongoose.model("flatRateShipping", flatRateSchema);
-console.log(flatRate);
-
-app.get("/flatRate/:itemNumber", async (req, res) => {
-  const itemNumber = req.params.itemNumber;
-  try {
-    const flatRatesForItem = await flatRate.find({ Item_Number: itemNumber });
-    console.log("Found flat Rates: ", flatRatesForItem);
-    res.send(flatRatesForItem);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Internal Server Error!");
-  }
-});
 
 app.get("/category", async (req, res) => {
   const allItems = await items.distinct("Category");
