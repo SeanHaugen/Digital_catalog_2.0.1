@@ -16,6 +16,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import Link from "@mui/joy/Link";
 
 import PricingTable from "./pricing/Pricing";
+import FlatRateShipping from "./flat_rate_shipping/FlatRate";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -124,7 +125,11 @@ function ItemPage({ productData }) {
               <Item>Origin: {productData.Origin}</Item>
               <Item>Pg: {productData.Page}</Item>
             </TabPanel>
-            <TabPanel value={1}></TabPanel>
+            <TabPanel value={1}>
+              <Item>
+                <FlatRateShipping productData={productData} />
+              </Item>
+            </TabPanel>
             <TabPanel value={2}></TabPanel>
             <TabPanel value={3}></TabPanel>
             <TabPanel value={4}></TabPanel>

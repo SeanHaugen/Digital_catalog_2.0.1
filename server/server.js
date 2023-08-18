@@ -66,7 +66,33 @@ itemSchema.index({
   Keywords: "text",
 });
 
+const flatRateSchema = new mongoose.Schema({
+  Item_Number: {
+    type: Number,
+    required: true,
+  },
+  Rate: {
+    type: Number,
+    required: true,
+  },
+});
+
+flatRateSchema.index({
+  Item_Number: "text",
+  Rate: "text",
+});
+
 const items = mongoose.model("items", itemSchema);
+const flatRate = mongoose.model("FR_items", flatRateSchema);
+console.log(flatRate);
+
+app.get("/rate", async (req, res) => {
+  const item = req.query.itemNumber;
+  console.log(item);
+  const itemRate = await flatRate.distinct(item);
+  console.log(itemRate);
+  res.send(itemRate);
+});
 
 app.get("/category", async (req, res) => {
   const allItems = await items.distinct("Category");
@@ -119,52 +145,6 @@ app.get("/items", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
-// Search route
-// app.get('/search', async (req, res) => {
-//   const searchQuery = req.query.q; // Assuming the search term is passed as a query parameter named 'q'
-
-//   try {
-//     const results = await items.find(
-//       {
-//         $or: [
-//           { $text: { $search: searchQuery } }, // Search for text match
-//           { Item_Number: parseInt(searchQuery) } // Search for exact match of Item_Number
-//         ]
-//       },
-//       { score: { $meta: 'textScore' } } // Optional: Include score for result ranking
-//     ).sort({ score: { $meta: 'textScore' } });
-
-//     res.json(results);
-//   } catch (error) {
-//     console.log('Error searching database')
-//     res.status(500).json({ error: 'An error occurred while searching the database.' });
-//   }
-
-// });
-
-// app.get('/search', async (req, res) => {
-//   const searchQuery = req.query.q; // Assuming the search term is passed as a query parameter named 'q'
-
-//   try {
-//     const results = await items.find(
-//       {
-//         $or: [
-//           { $text: { $search: searchQuery } }, // Search for text match
-//           { Item_Number: parseInt(searchQuery) } // Search for exact match of Item_Number
-//         ]
-//       },
-//       {
-//         score: { $meta: 'textScore' },
-//       }
-//     ).sort({ score: { $meta: 'textScore' } });
-
-//     res.json(results);
-//   } catch (error) {
-//     console.log('Error searching database');
-//     res.status(500).json({ error: 'An error occurred while searching the database.' });
-//   }
-// });
 
 app.get("/search", async (req, res) => {
   const searchQuery = req.query.q; // Assuming the search term is passed as a query parameter named 'q'
