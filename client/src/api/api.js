@@ -109,22 +109,19 @@ export const useSearchData = (setState, search) => {
   }, [search, setState]);
 };
 
-export const usePricingData = (setState, price) => {
-  useEffect(
-    () => {
-      async function fetchData() {
-        try {
-          const response = await axios.get(
-            `http://ivory-firefly-hem.cyclic.app/pricing?item=${price}`
-          );
-          setState(response);
-        } catch (error) {
-          console.error(error);
-        }
+export const usePricingData = (setState, item) => {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `http://ivory-firefly-hem.cyclic.app/pricing/${item}`
+        );
+        let itemPricing = response.data;
+        setState(itemPricing); // Assuming the response contains the data you want to set
+      } catch (error) {
+        console.error(error);
       }
-      fetchData();
-    },
-    price,
-    setState
-  );
+    }
+    fetchData();
+  }, [item, setState]);
 };
