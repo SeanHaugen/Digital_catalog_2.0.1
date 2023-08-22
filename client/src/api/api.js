@@ -125,3 +125,20 @@ export const usePricingData = (setState, item) => {
     fetchData();
   }, [item, setState]);
 };
+
+export const useInternalInfo = (setState, item) => {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `http://ivory-firefly-hem.cyclic.app/internalInfo/${item}`
+        );
+        let itemPricing = response.data;
+        setState(itemPricing); // Assuming the response contains the data you want to set
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, [item, setState]);
+};

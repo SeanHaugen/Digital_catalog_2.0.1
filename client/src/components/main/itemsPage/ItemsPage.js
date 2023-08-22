@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -18,6 +19,8 @@ import Link from "@mui/joy/Link";
 import PricingTable from "./pricing/Pricing";
 import FlatRateShipping from "./flat_rate_shipping/FlatRate";
 
+import { useInternalInfo } from "../../../api/api";
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -28,6 +31,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function ItemPage({ productData }) {
   console.log(productData);
+
+  const [internalInfo, setInternalInfo] = useState("");
+  useInternalInfo(setInternalInfo, productData.Item_Number);
 
   const description = productData.Description || "";
 
@@ -85,7 +91,7 @@ function ItemPage({ productData }) {
             <ul>
               {descriptionBullets.map((point, index) => {
                 return (
-                  <li key={index} style={{ fontSize: "20px" }}>
+                  <li key={index} style={{ fontSize: "16px" }}>
                     {point}
                   </li>
                 );
@@ -117,7 +123,7 @@ function ItemPage({ productData }) {
             </TabList>
             <TabPanel value={0}>
               <Item>
-                Weight:
+                Product Weight:
                 {productData.Product_Weight}
               </Item>
               <Item>Keywords: {productData.Keywords}</Item>
@@ -129,6 +135,8 @@ function ItemPage({ productData }) {
               <Item>
                 <FlatRateShipping productData={productData} />
               </Item>
+              <Item>{productData.Package_Size}</Item>
+              <Item>{productData.Product_Weight}</Item>
             </TabPanel>
             <TabPanel value={2}></TabPanel>
             <TabPanel value={3}></TabPanel>
