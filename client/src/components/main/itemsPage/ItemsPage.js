@@ -32,7 +32,7 @@ const Item = styled(Paper)(({ theme }) => ({
 function ItemPage({ productData }) {
   console.log(productData);
 
-  const [internalInfo, setInternalInfo] = useState(null);
+  const [internalInfo, setInternalInfo] = useState([]);
   useInternalInfo(setInternalInfo, productData.Item_Number);
   console.log(internalInfo.Internal_Info);
 
@@ -141,9 +141,13 @@ function ItemPage({ productData }) {
             </TabPanel>
             <TabPanel value={2}></TabPanel>
             <TabPanel value={3}>
-              {internalInfo.Internal_Info.map((info, index) => (
-                <div key={index}>{info}</div>
-              ))}
+              {internalInfo.Internal_Info !== undefined ? (
+                internalInfo.Internal_Info.map((info, index) => (
+                  <div key={index}>{info}</div>
+                ))
+              ) : (
+                <div>Loading...</div>
+              )}
             </TabPanel>
             <TabPanel value={4}></TabPanel>
           </Tabs>
