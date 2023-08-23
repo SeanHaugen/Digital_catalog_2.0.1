@@ -105,9 +105,7 @@ app.get("/info", async (req, res) => {
       return res.status(404).json({ message: "Internal Info not found" });
     }
 
-    const internalInfo = info.Internal_Info;
-
-    res.json(internalInfo);
+    res.json(info);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }

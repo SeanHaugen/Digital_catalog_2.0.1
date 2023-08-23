@@ -32,8 +32,9 @@ const Item = styled(Paper)(({ theme }) => ({
 function ItemPage({ productData }) {
   console.log(productData);
 
-  const [internalInfo, setInternalInfo] = useState("");
+  const [internalInfo, setInternalInfo] = useState(null);
   useInternalInfo(setInternalInfo, productData.Item_Number);
+  console.log(internalInfo);
 
   const description = productData.Description || "";
 
