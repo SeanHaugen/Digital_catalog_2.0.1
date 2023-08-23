@@ -34,7 +34,7 @@ function ItemPage({ productData }) {
 
   const [internalInfo, setInternalInfo] = useState(null);
   useInternalInfo(setInternalInfo, productData.Item_Number);
-  console.log(internalInfo);
+  console.log(internalInfo.Internal_Info);
 
   const description = productData.Description || "";
 
@@ -140,7 +140,11 @@ function ItemPage({ productData }) {
               <Item>{productData.Product_Weight}</Item>
             </TabPanel>
             <TabPanel value={2}></TabPanel>
-            <TabPanel value={3}></TabPanel>
+            <TabPanel value={3}>
+              {internalInfo.Internal_Info.map((info, index) => (
+                <div key={index}>{info}</div>
+              ))}
+            </TabPanel>
             <TabPanel value={4}></TabPanel>
           </Tabs>
         </Grid>
