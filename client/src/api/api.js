@@ -134,7 +134,24 @@ export const useInternalInfo = (setState, item) => {
           `http://ivory-firefly-hem.cyclic.app/info?item=${item}`
         );
         let itemPricing = response.data;
-        setState(itemPricing); // Assuming the response contains the data you want to set
+        setState(itemPricing);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, [item, setState]);
+};
+
+export const useFlatRateInfo = (setState, item) => {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `http://ivory-firefly-hem.cyclic.app/flatRates/${item}`
+        );
+        let rates = response.data;
+        setState(rates);
       } catch (error) {
         console.error(error);
       }

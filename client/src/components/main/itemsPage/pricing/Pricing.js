@@ -13,13 +13,7 @@ import { usePricingData } from "../../../../api/api";
 function PricingTable({ productData }) {
   const [priceData, setPriceData] = useState(null);
 
-  const handlePrice = (price) => {
-    return (price * 0.6).toFixed(2);
-  };
-
   usePricingData(setPriceData, productData.Item_Number);
-  console.log(productData.Item_Number);
-  console.log(priceData);
 
   return (
     <TableContainer component={Paper}>

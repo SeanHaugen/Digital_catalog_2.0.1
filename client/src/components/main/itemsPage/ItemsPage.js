@@ -34,7 +34,6 @@ function ItemPage({ productData }) {
 
   const [internalInfo, setInternalInfo] = useState([]);
   useInternalInfo(setInternalInfo, productData.Item_Number);
-  console.log(internalInfo.Internal_Info);
 
   const description = productData.Description || "";
 

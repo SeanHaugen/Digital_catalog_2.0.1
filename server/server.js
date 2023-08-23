@@ -63,25 +63,6 @@ app.get("/pricing/:item", async (req, res) => {
   }
 });
 
-// app.get("/internalInfo/:item", async (req, res) => {
-//   try {
-//     const itemInfo = req.params.item;
-//     const info = await PricingModel.findOne({
-//       Item_Number: itemInfo.trim(),
-//     });
-
-//     if (!info) {
-//       return res.status(404).json({ message: "Internal Info not found" });
-//     }
-
-//     const internalInfo = info.Internal_Info;
-
-//     res.json(internalInfo);
-//   } catch (error) {
-//     res.status(500).json({ message: "Server error" });
-//   }
-// });
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 const InfoSchema = new mongoose.Schema({
@@ -107,6 +88,32 @@ app.get("/info", async (req, res) => {
 
     res.json(info);
   } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+const flatRateSchema = new mongoose.Schema({
+  Item_Number: Number,
+  Service: String,
+  Rate: Number,
+});
+
+const flatRateModel = mongoose.model("flatrateshippings", flatRateSchema);
+
+app.get("/flatRates/:item", async (req, res) => {
+  try {
+    const flatRateItem = req.params.item;
+    const rateInfo = await flatRateModel.findOne({
+      Item_Number: flatRateItem.trim(),
+    });
+    console.log(rateInfo);
+    if (!rateInfo) {
+      return res.status(404).json({ message: "Internal Info not found" });
+    }
+    res.json(rateInfo);
+  } catch (err) {
     res.status(500).json({ message: "Server error" });
   }
 });

@@ -1,25 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { useFlatRateInfo } from "../../../../api/api";
 
 function FlatRateShipping({ productData }) {
-  const [productPricing, setProductPricing] = useState("");
+  const [itemRates, setItemRates] = useState("");
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(
-          `/item/flat_rate_shipping?item_no=${item}`
-        );
-        setProductPricing(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  console.log(productPricing);
+  useFlatRateInfo(setItemRates, productData.Item_Number);
+  console.log(itemRates);
 
   const handleFlatRate = () => {
     if (productPricing.length > 0) {
@@ -30,11 +16,7 @@ function FlatRateShipping({ productData }) {
           {productPricing.map((item) => {
             return (
               <div>
-                <ul>
-                  <li key={item.rate}>
-                    {item.service}: {item.rate}
-                  </li>
-                </ul>
+                <ul></ul>
               </div>
             );
           })}

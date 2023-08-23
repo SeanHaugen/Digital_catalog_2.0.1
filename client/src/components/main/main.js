@@ -28,7 +28,7 @@ function Main({
   productData,
   searchData,
 }) {
-  console.log(searchData);
+  // console.log(searchData);
 
   return (
     <React.Fragment>
