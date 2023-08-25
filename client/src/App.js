@@ -99,7 +99,9 @@ function App() {
           <MenuItem onClick={handleClose}>Email</MenuItem>
         </Menu>
       </div>
-      <BottomNav />
+      <BottomNav productData={productData} />
+
+      {/* <SqrFtItem /> */}
     </Router>
   );
 }

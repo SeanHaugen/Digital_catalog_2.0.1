@@ -31,6 +31,9 @@ const port = process.env.PORT || 4000;
 app.use(express.static("public"));
 app.use(cors());
 
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//Pricing
+
 const PricingSchema = new mongoose.Schema({
   url: String,
   Name: String,
@@ -64,6 +67,7 @@ app.get("/pricing/:item", async (req, res) => {
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+//Internal Information
 
 const InfoSchema = new mongoose.Schema({
   url: String,
@@ -93,6 +97,7 @@ app.get("/info", async (req, res) => {
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////
+//Flat Rate Shipping info
 
 const flatRateSchema = new mongoose.Schema({
   Item_Number: Number,
@@ -120,6 +125,7 @@ app.get("/flatRates/:item", async (req, res) => {
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////
+//Item Information/details
 
 const itemSchema = new mongoose.Schema({
   Item_Number: {
@@ -185,10 +191,9 @@ app.get("/SubCategory", async (req, res) => {
 });
 
 app.get("/subCategory/:items", async (req, res) => {
-  const productCategory = req.params.items; // Use req.params instead of req.query
+  const productCategory = req.params.items;
 
   try {
-    // Find items with the specified subcategory and sort by name
     const products = await items
       .find({ SubCategory: productCategory })
       .sort({ Name: 1 });
@@ -200,7 +205,7 @@ app.get("/subCategory/:items", async (req, res) => {
 });
 
 app.get("/items", async (req, res) => {
-  const itemNumber = req.query.item; // Retrieve the itemNumber from the query parameter
+  const itemNumber = req.query.item;
   try {
     const item = await items.findOne({ Item_Number: itemNumber });
     res.send(item);
@@ -211,22 +216,19 @@ app.get("/items", async (req, res) => {
 });
 
 app.get("/search", async (req, res) => {
-  const searchQuery = req.query.q; // Assuming the search term is passed as a query parameter named 'q'
+  const searchQuery = req.query.q;
 
   try {
-    // Check if the searchQuery can be parsed to a number
     const numericQuery = parseFloat(searchQuery);
     let results;
 
     if (!isNaN(numericQuery)) {
-      // If it's a number, perform a numeric search
       results = await items.find({ Item_Number: numericQuery });
     } else {
-      // If it's not a number, perform a text search
       results = await items
         .find(
           {
-            $text: { $search: searchQuery }, // Search for text match
+            $text: { $search: searchQuery },
           },
           {
             score: { $meta: "textScore" },

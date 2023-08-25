@@ -1,12 +1,20 @@
 import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import RecentlyViewed from "./recents/RecentlyViewed";
 
-export default function BottomNav() {
+export default function BottomNav({ productData }) {
   const [value, setValue] = React.useState(0);
+
+  const [openRecent, setOpenRecent] = useState(true);
+
+  const handleClick = () => {
+    setOpenRecent(!openRecent);
+  };
 
   return (
     <div
@@ -22,14 +30,18 @@ export default function BottomNav() {
         <BottomNavigation
           showLabels
           value={value}
-          // style={{ backgroundColor: "#1976d2", color: "white" }}
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+          <BottomNavigationAction
+            label="Recent"
+            icon={<RestoreIcon />}
+            onClick={handleClick}
+          ></BottomNavigationAction>
           <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
         </BottomNavigation>
+        {openRecent && <RecentlyViewed />}
       </Box>
     </div>
   );

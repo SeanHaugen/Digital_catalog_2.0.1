@@ -18,6 +18,7 @@ import Link from "@mui/joy/Link";
 
 import PricingTable from "./pricing/Pricing";
 import FlatRateShipping from "./flat_rate_shipping/FlatRate";
+import ColorBox from "./color_grid/ColorBox";
 
 import { useInternalInfo } from "../../../api/api";
 
@@ -117,7 +118,7 @@ function ItemPage({ productData }) {
             <TabList>
               <Tab>Details</Tab>
               <Tab>Shipping</Tab>
-              <Tab>Templates/specs</Tab>
+              <Tab>colors</Tab>
               <Tab>Internal Info</Tab>
               <Tab>Images</Tab>
             </TabList>
@@ -138,7 +139,11 @@ function ItemPage({ productData }) {
               <Item>{productData.Package_Size}</Item>
               <Item>{productData.Product_Weight}</Item>
             </TabPanel>
-            <TabPanel value={2}></TabPanel>
+            <TabPanel value={2}>
+              <Item>
+                <ColorBox productData={productData} />
+              </Item>
+            </TabPanel>
             <TabPanel value={3}>
               {internalInfo.Internal_Info !== undefined ? (
                 internalInfo.Internal_Info.map((info, index) => (
