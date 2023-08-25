@@ -6,7 +6,7 @@ function RecentlyViewed({ productData }) {
   const [recentPages, setRecentPages] = useState([]);
   const history = useLocation();
   useEffect(() => {
-    setRecentPages((prevPages) => [history.pathname, ...prevPages.slice(0)]);
+    setRecentPages((prevPages) => [history.pathname, ...prevPages.slice(0, 4)]);
   }, [history]);
 
   const navigate = useNavigate();

@@ -19,6 +19,7 @@ import Link from "@mui/joy/Link";
 import PricingTable from "./pricing/Pricing";
 import FlatRateShipping from "./flat_rate_shipping/FlatRate";
 import ColorBox from "./color_grid/ColorBox";
+import FindImage from "./findImage/FindImage";
 
 import { useInternalInfo } from "../../../api/api";
 
@@ -30,7 +31,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function ItemPage({ productData }) {
+function ItemPage({ productData, category, subCategory }) {
   console.log(productData);
 
   const [internalInfo, setInternalInfo] = useState([]);
@@ -78,13 +79,11 @@ function ItemPage({ productData }) {
       <Grid sx={{ flexGrow: 1 }} container spacing={2}>
         <Grid xs={6} md={7} margin="5px" justifyContent="center">
           <Item>
-            <figure>
-              <img
-                className="placeholder"
-                src="https://fakeimg.pl/400x300"
-                alt="blank placeholder"
-              />
-            </figure>
+            <FindImage
+              productData={productData}
+              category={category}
+              subCategory={subCategory}
+            />
           </Item>
         </Grid>
         <Grid xs={6} md={4}>

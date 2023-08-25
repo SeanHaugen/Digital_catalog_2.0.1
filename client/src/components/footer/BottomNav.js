@@ -10,7 +10,7 @@ import RecentlyViewed from "./recents/RecentlyViewed";
 export default function BottomNav({ productData }) {
   const [value, setValue] = React.useState(0);
 
-  const [openRecent, setOpenRecent] = useState(true);
+  const [openRecent, setOpenRecent] = useState(false);
 
   const handleClick = () => {
     setOpenRecent(!openRecent);
