@@ -2,7 +2,7 @@ import React from "react";
 import "./colorBox.css";
 
 function ColorBox({ productData }) {
-  console.log(productData.Colors.split(","));
+  // console.log(productData.Colors.split(","));
 
   const colorMap = {
     Aquamarine: "#00FFFF",

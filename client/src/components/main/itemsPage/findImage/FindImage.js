@@ -1,12 +1,9 @@
 function FindImage({ productData, category, subCategory }) {
   const imageFolder = "images/01Products";
 
-  console.log(category, subCategory);
-
   const imageName = `${productData.Item_Number}_0.jpg`;
 
   const imagePath = `/${imageFolder}/${imageName}`;
-  console.log(imagePath);
 
   return (
     <div>

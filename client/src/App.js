@@ -22,8 +22,8 @@ function App() {
   useFetchSubCategoryItemData(setItem, subCategory);
   useFetchItemData(setProductData, product);
 
-  console.log(searchData);
-  console.log(product);
+  // console.log(searchData);
+  // console.log(product);
 
   const handleContextMenu = (event) => {
     event.preventDefault();

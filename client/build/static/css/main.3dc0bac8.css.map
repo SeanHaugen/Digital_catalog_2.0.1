@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/main.3dc0bac8.css","mappings":"AAAA,KACE,wBAAoC,CAEpC,0BAAmB,CAAnB,uBAAmB,CAAnB,kBAAmB,CADnB,gBAEF","sources":["app.css"],"sourcesContent":[".App {\r\n  background-color: rgb(223, 222, 215);\r\n  min-height: 100vh;\r\n  height: fit-content;\r\n}\r\n"],"names":[],"sourceRoot":""}

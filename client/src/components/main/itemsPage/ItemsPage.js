@@ -32,7 +32,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function ItemPage({ productData, category, subCategory }) {
-  console.log(productData);
+  // console.log(productData);
 
   const [internalInfo, setInternalInfo] = useState([]);
   useInternalInfo(setInternalInfo, productData.Item_Number);

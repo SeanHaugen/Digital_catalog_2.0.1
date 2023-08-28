@@ -6,7 +6,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 
 function SubCategoryPage({ category, subCategory, item, setProduct }) {
-  console.log(item);
+  // console.log(item);
 
   return (
     <div>

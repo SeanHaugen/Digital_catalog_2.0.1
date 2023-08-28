@@ -11,7 +11,7 @@ function CategoriesPage({ category, setSubCategory }) {
   const [productsCategory, setProductsCategory] = useState([]);
 
   useFetchCategoryData(setProductsCategory, category);
-  console.log(productsCategory);
+  // console.log(productsCategory);
 
   return (
     <div>

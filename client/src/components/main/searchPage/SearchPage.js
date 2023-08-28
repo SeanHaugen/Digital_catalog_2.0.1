@@ -15,9 +15,9 @@ function SearchPage({
   // const location = useLocation();
   // const queryParams = new URLSearchParams(location.search);
   // const searchTerm = queryParams.get('q');
-  console.log(category);
-  console.log(subCategory);
-  console.log(productData.category, productData.subCategory);
+  // console.log(category);
+  // console.log(subCategory);
+  // console.log(productData.category, productData.subCategory);
 
   let itemsPerPage = 13;
   const [currentPage, setCurrentPage] = useState(1);
