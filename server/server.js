@@ -249,6 +249,7 @@ app.get("/search", async (req, res) => {
 //put requests
 
 app.put("/update/:itemNumber", async (req, res) => {
+  console.log("Received PUT request:", req.body);
   const itemNumber = req.params.itemNumber;
 
   try {
