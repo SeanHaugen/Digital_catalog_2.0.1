@@ -248,10 +248,11 @@ app.get("/search", async (req, res) => {
 
 //put requests
 
-app.put("/items/:itemNumber", async (req, res) => {
+app.put("/update/:itemNumber", async (req, res) => {
   const itemNumber = req.params.itemNumber;
 
   try {
+    // Find the item by its Item_Number
     let itemToUpdate = await items.findOne({ Item_Number: itemNumber });
 
     if (!itemToUpdate) {
@@ -265,10 +266,19 @@ app.put("/items/:itemNumber", async (req, res) => {
     if (req.body.Description) itemToUpdate.Description = req.body.Description;
     if (req.body.Keywords) itemToUpdate.Keywords = req.body.Keywords;
 
+    // Save the changes to the database
     await itemToUpdate.save();
-    return res.status(200).json({ message: "Item updated" });
+
+    // Send a success response
+    return res.status(200).json({ message: "Item updated successfully" });
   } catch (error) {
-    return res.status(500).json({ message: "Error updating item" });
+    // Log the error for debugging
+    console.error("Error updating item:", error);
+
+    // Return an error response
+    return res
+      .status(500)
+      .json({ message: "Error updating item", error: error.message });
   }
 });
 
