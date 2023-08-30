@@ -248,7 +248,7 @@ app.get("/search", async (req, res) => {
 
 //put requests
 
-app.put("/api/items/:itemNumber", async (req, res) => {
+app.put("/items/:itemNumber", async (req, res) => {
   const itemNumber = req.params.itemNumber;
 
   try {
