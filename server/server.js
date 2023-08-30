@@ -246,6 +246,31 @@ app.get("/search", async (req, res) => {
   }
 });
 
+//put requests
+
+app.put("/api/items/:itemNumber", async (req, res) => {
+  const itemNumber = req.params.itemNumber;
+
+  try {
+    const itemToUpdate = await items.findOne({ Item_Number: itemNumber });
+
+    if (!itemToUpdate) {
+      return res.status(404).json({ message: "item Not found" });
+    }
+
+    itemToUpdate = req.body.Name || itemToUpdate.Name;
+    itemToUpdate = req.body.Category || itemToUpdate.Category;
+    itemToUpdate = req.body.SubCategory || itemToUpdate.SubCategory;
+    itemToUpdate = req.body.Description || itemToUpdate.Description;
+    itemToUpdate = req.body.Keywords || itemToUpdate.Keywords;
+
+    await itemToUpdate.save();
+    return res.status(200).json({ message: "item Updated" });
+  } catch (error) {
+    return res.status(500).json({ message: "error updating item" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
