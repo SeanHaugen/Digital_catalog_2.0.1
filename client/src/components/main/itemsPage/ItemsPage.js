@@ -161,3 +161,27 @@ function ItemPage({ productData, category, subCategory }) {
 }
 
 export default ItemPage;
+
+// const [imageURL, setImageURL] = useState("");
+
+// useEffect(() => {
+//   const fetchData = async () => {
+//     try {
+//       const imageFolder =
+//         "https://signzoneinc.sharepoint.com/sites/customerservicedatabase/shared%20documents/general/images/01products";
+//       const imageName = `${productData.Item_Number}_0.jpg?web=1`;
+
+//       const imageURL = `${imageFolder}/${imageName}`;
+//       setImageURL(imageURL);
+//     } catch (error) {
+//       console.error("error fetching image", error);
+//     }
+//   };
+//   fetchData();
+// }, [productData.Item_Number]);
+
+// console.log(imageURL);
+
+// // const filePath = '/images'
+// const imagePath = `/images/${productData.Item_Number}_0.jpg`;
+// console.log(imagePath);

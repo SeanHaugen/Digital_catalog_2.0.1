@@ -1,34 +1,17 @@
-// import { image } from "../../../../../../../../../OneDrive - Sign-Zone Inc/Pictures/images/01Products";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
 function FindImage({ productData, category, subCategory }) {
-  const [imageURL, setImageURL] = useState("");
+  const imageFolder = "images";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const imageFolder =
-          "https://signzoneinc.sharepoint.com/sites/customerservicedatabase/shared%20documents/general/images/01products";
-        const imageName = `${productData.Item_Number}_0.jpg?web=1`;
+  const imageName = `${productData.Item_Number}_0.jpg`;
 
-        const imageURL = `${imageFolder}/${imageName}`;
-        setImageURL(imageURL);
-      } catch (error) {
-        console.error("error fetching image", error);
-      }
-    };
-    fetchData();
-  }, [productData.Item_Number]);
-
-  console.log(imageURL);
+  const imagePath = `${imageFolder}/${imageName}`;
+  console.log(imagePath);
 
   return (
     <div>
       <figure>
         <img
           className="item_image"
-          src={imageURL}
+          src={imagePath}
           alt="Tradeshow display image"
           style={{
             maxWidth: "350px",
