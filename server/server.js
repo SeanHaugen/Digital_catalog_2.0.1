@@ -252,22 +252,23 @@ app.put("/items/:itemNumber", async (req, res) => {
   const itemNumber = req.params.itemNumber;
 
   try {
-    const itemToUpdate = await items.findOne({ Item_Number: itemNumber });
+    let itemToUpdate = await items.findOne({ Item_Number: itemNumber });
 
     if (!itemToUpdate) {
-      return res.status(404).json({ message: "item Not found" });
+      return res.status(404).json({ message: "Item not found" });
     }
 
-    itemToUpdate = req.body.Name || itemToUpdate.Name;
-    itemToUpdate = req.body.Category || itemToUpdate.Category;
-    itemToUpdate = req.body.SubCategory || itemToUpdate.SubCategory;
-    itemToUpdate = req.body.Description || itemToUpdate.Description;
-    itemToUpdate = req.body.Keywords || itemToUpdate.Keywords;
+    // Update the fields if they exist in the request body
+    if (req.body.Name) itemToUpdate.Name = req.body.Name;
+    if (req.body.Category) itemToUpdate.Category = req.body.Category;
+    if (req.body.SubCategory) itemToUpdate.SubCategory = req.body.SubCategory;
+    if (req.body.Description) itemToUpdate.Description = req.body.Description;
+    if (req.body.Keywords) itemToUpdate.Keywords = req.body.Keywords;
 
     await itemToUpdate.save();
-    return res.status(200).json({ message: "item Updated" });
+    return res.status(200).json({ message: "Item updated" });
   } catch (error) {
-    return res.status(500).json({ message: "error updating item" });
+    return res.status(500).json({ message: "Error updating item" });
   }
 });
 
