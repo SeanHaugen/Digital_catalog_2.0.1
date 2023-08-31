@@ -134,23 +134,23 @@ const itemSchema = new mongoose.Schema({
   },
   Name: {
     type: String,
-    required: true,
+    required: false,
   },
   Category: {
     type: String,
-    required: true,
+    required: false,
   },
   SubCategory: {
     type: String,
-    required: true,
+    required: false,
   },
   Description: {
     type: String,
-    required: true,
+    required: false,
   },
   Keywords: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 
@@ -262,10 +262,10 @@ app.put("/update/:itemNumber", async (req, res) => {
 
     // Update the fields if they exist in the request body
     if (itemToUpdate.Name) itemToUpdate.Name = req.body.Name;
-    // if (req.body.Category) itemToUpdate.Category = req.body.Category;
-    // if (req.body.SubCategory) itemToUpdate.SubCategory = req.body.SubCategory;
-    // if (req.body.Description) itemToUpdate.Description = req.body.Description;
-    // if (req.body.Keywords) itemToUpdate.Keywords = req.body.Keywords;
+    if (req.body.Category) itemToUpdate.Category = req.body.Category;
+    if (req.body.SubCategory) itemToUpdate.SubCategory = req.body.SubCategory;
+    if (req.body.Description) itemToUpdate.Description = req.body.Description;
+    if (req.body.Keywords) itemToUpdate.Keywords = req.body.Keywords;
 
     // Save the changes to the database
     await itemToUpdate.save();
