@@ -267,8 +267,9 @@ app.put("/update/:itemNumber", async (req, res) => {
     if ("SubCategory" in req.body)
       itemToUpdate.SubCategory = req.body.SubCategory;
     if ("Description" in req.body)
-      itemToUpdate.Description = req.body.Description;
-    if ("Keywords" in req.body) itemToUpdate.Keywords = req.body.Keywords;
+      itemToUpdate.Description += " " + req.body.Description;
+    if ("Keywords" in req.body)
+      itemToUpdate.Keywords += " " + req.body.Keywords;
 
     // Save the changes to the database
     await itemToUpdate.save();
