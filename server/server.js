@@ -131,7 +131,7 @@ app.get("/flatRates/:item", async (req, res) => {
 const itemSchema = new mongoose.Schema({
   Item_Number: {
     type: Number,
-    required: true,
+    required: false,
   },
   Name: {
     type: String,
