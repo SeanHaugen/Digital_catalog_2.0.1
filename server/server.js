@@ -262,11 +262,13 @@ app.put("/update/:itemNumber", async (req, res) => {
     }
 
     // Update the fields if they exist in the request body
-    if (itemToUpdate.Name) itemToUpdate.Name = req.body.Name;
-    if (req.body.Category) itemToUpdate.Category = req.body.Category;
-    if (req.body.SubCategory) itemToUpdate.SubCategory = req.body.SubCategory;
-    if (req.body.Description) itemToUpdate.Description = req.body.Description;
-    if (req.body.Keywords) itemToUpdate.Keywords = req.body.Keywords;
+    if ("Name" in req.body) itemToUpdate.Name = req.body.Name;
+    if ("Category" in req.body) itemToUpdate.Category = req.body.Category;
+    if ("SubCategory" in req.body)
+      itemToUpdate.SubCategory = req.body.SubCategory;
+    if ("Description" in req.body)
+      itemToUpdate.Description = req.body.Description;
+    if ("Keywords" in req.body) itemToUpdate.Keywords = req.body.Keywords;
 
     // Save the changes to the database
     await itemToUpdate.save();
