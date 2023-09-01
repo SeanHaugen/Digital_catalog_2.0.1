@@ -320,9 +320,16 @@ app.put("/pricingUpdate/:itemNumber", async (req, res) => {
       return res.status(404).json({ message: "Item not found" });
     }
 
-    if ("Pricing" in req.body) itemToUpdate = req.body.Pricing;
+    if ("Pricing" in req.body) {
+      itemToUpdate.Pricing = req.body.Pricing;
+    }
+    // if ("Name" in req.body) itemToUpdate.Name = req.body.Name;
+    // if ("Item_Number" in req.body)
+    //   itemToUpdate.Item_Number = req.body.Item_Number;
 
     await itemToUpdate.save();
+
+    res.status(200).json({ message: "Item updated successfully" });
   } catch (error) {
     // Log the error for debugging
     console.error("Error updating Pricing:", error);
