@@ -250,16 +250,24 @@ app.get("/search", async (req, res) => {
 //post requests
 
 app.post("/add", async (req, res) => {
-  const itemData = {
-    Item_Number: req.body.Item_Number,
-    Name: req.body.Name,
-    Description: req.body.Description,
-    Keywords: req.body.Keywords,
-    Category: req.body.Category,
-    SubCategory: req.body.SubCategory,
-  };
-  await items.insertOne(itemData);
-  res.sendStatus(201);
+  try {
+    const { Item_Number, Name, Description, Keywords, Category, SubCategory } =
+      req.body;
+
+    const newItem = new items({
+      Item_Number,
+      Name,
+      Description,
+      Keywords,
+      Category,
+      SubCategory,
+    });
+    await newItem.save();
+    res.sendStatus(201);
+  } catch (error) {
+    console.error("error adding item");
+    res.status(500).json({ message: "error adding item", error });
+  }
 });
 
 //put requests
