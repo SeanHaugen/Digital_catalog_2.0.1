@@ -270,6 +270,41 @@ app.post("/add", async (req, res) => {
   }
 });
 
+//add the item pricing
+// Add the item pricing along with Item_Number and Name
+app.post("/pricingAdd", async (req, res) => {
+  try {
+    const { Item_Number, Name, Pricing } = req.body;
+
+    // Check if an item with the given Item_Number already exists
+    let existingItem = await PricingModel.findOne({ Item_Number });
+
+    if (existingItem) {
+      return res.status(400).json({ message: "Item already exists" });
+    }
+
+    // Create a new item document
+    const newItem = new PricingModel({
+      Item_Number,
+      Name,
+      Pricing,
+    });
+
+    // Save the new item to the database
+    await newItem.save();
+
+    res.status(201).json({ message: "Item pricing added successfully" });
+  } catch (error) {
+    // Log the error for debugging
+    console.error("Error adding item pricing:", error);
+
+    // Return an error response
+    return res
+      .status(500)
+      .json({ message: "Error adding item pricing", error: error.message });
+  }
+});
+
 //put requests
 //update the general item info
 app.put("/update/:itemNumber", async (req, res) => {
@@ -307,37 +342,6 @@ app.put("/update/:itemNumber", async (req, res) => {
     return res
       .status(500)
       .json({ message: "Error updating item", error: error.message });
-  }
-});
-
-//Update the item pricing
-app.post("/pricingAdd", async (req, res) => {
-  const itemNumber = req.params.itemNumber;
-  try {
-    let itemToUpdate = await PricingModel.findOne({ Item_Number: itemNumber });
-
-    if (!itemToUpdate) {
-      return res.status(404).json({ message: "Item not found" });
-    }
-
-    if ("Pricing" in req.body) {
-      itemToUpdate.Pricing = req.body.Pricing;
-    }
-    // if ("Name" in req.body) itemToUpdate.Name = req.body.Name;
-    // if ("Item_Number" in req.body)
-    //   itemToUpdate.Item_Number = req.body.Item_Number;
-
-    await itemToUpdate.save();
-
-    res.status(200).json({ message: "Item updated successfully" });
-  } catch (error) {
-    // Log the error for debugging
-    console.error("Error updating Pricing:", error);
-
-    // Return an error response
-    return res
-      .status(500)
-      .json({ message: "Error updating Pricing", error: error.message });
   }
 });
 
