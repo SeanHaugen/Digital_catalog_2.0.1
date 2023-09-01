@@ -312,11 +312,20 @@ app.put("/update/:itemNumber", async (req, res) => {
 
 //Delete
 app.delete("/delete/:itemNumber", async (req, res) => {
-  let itemToDelete = req.body.itemNumber;
+  try {
+    let itemToDelete = req.body.itemNumber;
 
-  await items.deleteOne({ Item_Number: itemToDelete });
+    await items.deleteOne({ Item_Number: itemToDelete });
 
-  res.sendStatus(201);
+    if (!deletedItem) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    res.sendStatus(201);
+  } catch (error) {
+    console.error("Error deleting item:", error);
+    res.status(500).json({ message: error });
+  }
 });
 
 app.listen(port, () => {
