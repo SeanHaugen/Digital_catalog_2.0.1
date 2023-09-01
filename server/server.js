@@ -271,7 +271,7 @@ app.post("/add", async (req, res) => {
 });
 
 //put requests
-
+//update the general item info
 app.put("/update/:itemNumber", async (req, res) => {
   console.log("Received PUT request:", req.body);
   const itemNumber = req.params.itemNumber;
@@ -307,6 +307,30 @@ app.put("/update/:itemNumber", async (req, res) => {
     return res
       .status(500)
       .json({ message: "Error updating item", error: error.message });
+  }
+});
+
+//Update the item pricing
+app.put("/pricingUpdate/:itemNumber", async (req, res) => {
+  const itemNumber = req.params.itemNumber;
+  try {
+    let itemToUpdate = await PricingModel.findOne({ Item_Number: itemNumber });
+
+    if (!itemToUpdate) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    if ("Pricing" in req.body) itemToUpdate = req.body.Pricing;
+
+    await itemToUpdate.save();
+  } catch (error) {
+    // Log the error for debugging
+    console.error("Error updating Pricing:", error);
+
+    // Return an error response
+    return res
+      .status(500)
+      .json({ message: "Error updating Pricing", error: error.message });
   }
 });
 
