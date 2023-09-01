@@ -311,7 +311,7 @@ app.put("/update/:itemNumber", async (req, res) => {
 });
 
 //Update the item pricing
-app.put("/pricingUpdate/:itemNumber", async (req, res) => {
+app.post("/pricingAdd", async (req, res) => {
   const itemNumber = req.params.itemNumber;
   try {
     let itemToUpdate = await PricingModel.findOne({ Item_Number: itemNumber });
