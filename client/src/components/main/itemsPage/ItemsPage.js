@@ -20,6 +20,7 @@ import PricingTable from "./pricing/Pricing";
 import FlatRateShipping from "./flat_rate_shipping/FlatRate";
 import ColorBox from "./color_grid/ColorBox";
 import FindImage from "./findImage/FindImage";
+import Form from "../forms/Form";
 
 import { useInternalInfo } from "../../../api/api";
 
@@ -32,16 +33,28 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function ItemPage({ productData, category, subCategory }) {
-  // console.log(productData);
+  const [editing, setEditing] = useState(false);
 
   const [internalInfo, setInternalInfo] = useState([]);
   useInternalInfo(setInternalInfo, productData.Item_Number);
+
+  const [editDescription, setEditDescription] = useState(
+    productData.Description
+  );
 
   const description = productData.Description || "";
 
   const descriptionBullets = description
     .split(/[.!?]/)
     .filter((sentence) => sentence.trim() !== "");
+
+  const toggleEditing = () => {
+    setEditing(!editing);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setEditDescription(e.target.value);
+  };
 
   return (
     <div>
@@ -88,15 +101,25 @@ function ItemPage({ productData, category, subCategory }) {
         </Grid>
         <Grid xs={6} md={4}>
           <Item>
-            <ul>
-              {descriptionBullets.map((point, index) => {
-                return (
-                  <li key={index} style={{ fontSize: "16px" }}>
-                    {point}
-                  </li>
-                );
-              })}
-            </ul>
+            {editing ? (
+              <textarea
+                type="text"
+                value={editDescription}
+                onChange={handleDescriptionChange} // Use the correct change handler
+                rows={4}
+                cols={50}
+              />
+            ) : (
+              <ul>
+                {descriptionBullets.map((point, index) => {
+                  return (
+                    <li key={index} style={{ fontSize: "16px" }}>
+                      {point}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </Item>
         </Grid>
         <Grid xs={12}>
@@ -156,6 +179,14 @@ function ItemPage({ productData, category, subCategory }) {
           </Tabs>
         </Grid>
       </Grid>
+      <Form
+        editing={editing}
+        toggleEditing={toggleEditing}
+        productData={productData}
+        editDescription={editDescription}
+        setEditDescription={setEditDescription}
+        handleDescriptionChange={handleDescriptionChange}
+      />
     </div>
   );
 }

@@ -18,6 +18,7 @@ import FrontPage from "./frontPage/FrontPage";
 import SubCategoriesPage from "./subCategory/SubCategory";
 import ItemPage from "./itemsPage/ItemsPage";
 import SearchPage from "./searchPage/SearchPage";
+import Form from "./forms/Form";
 // import FavoriteList from "./favorites/Favorites";
 
 function Main({

@@ -247,6 +247,21 @@ app.get("/search", async (req, res) => {
   }
 });
 
+//post requests
+
+app.post("/add", async (req, res) => {
+  const itemData = {
+    Item_Number: req.body.Item_Number,
+    Name: req.body.Name,
+    Description: req.body.Description,
+    Keywords: req.body.Keywords,
+    Category: req.body.Category,
+    SubCategory: req.body.SubCategory,
+  };
+  await items.insertOne(itemData);
+  res.sendStatus(201);
+});
+
 //put requests
 
 app.put("/update/:itemNumber", async (req, res) => {
@@ -285,6 +300,15 @@ app.put("/update/:itemNumber", async (req, res) => {
       .status(500)
       .json({ message: "Error updating item", error: error.message });
   }
+});
+
+//Delete
+app.delete("/delete/:itemNumber", async (req, res) => {
+  let itemToDelete = req.body.itemNumber;
+
+  await items.deleteOne({ Item_Number: itemToDelete });
+
+  res.sendStatus(201);
 });
 
 app.listen(port, () => {
