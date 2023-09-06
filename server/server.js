@@ -30,7 +30,17 @@ const port = process.env.PORT || 4000;
 
 // app.use(express.static("public"));
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+  origin: "*",
+  methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+  allowedHeaders:
+    "Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Origin,Cache-Control,Content-Type,X-Token,X-Refresh-Token",
+  credentials: true,
+  preflightContinue: false,
+  optionSuccessStatus: 204,
+};
+app.use(cors(corsOptions));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //Pricing
@@ -42,7 +52,6 @@ const PricingSchema = new mongoose.Schema({
   Pricing: [
     [String, String, String, String, String],
     [String, String, String, String, String],
-    // ... continue defining the structure of the Pricing array
   ],
 });
 

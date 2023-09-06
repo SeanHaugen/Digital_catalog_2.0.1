@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 
 function Form({
@@ -8,7 +8,6 @@ function Form({
   productData,
   editDescription,
   setEditDescription,
-  handleDescriptionChange,
 }) {
   console.log(productData.Item_Number);
 
@@ -16,22 +15,15 @@ function Form({
     try {
       // Prepare the updated data
       const updatedData = {
-        description: editDescription,
+        Description: editDescription,
       };
 
-      // Perform the PUT request to update the description
       const response = await axios.put(
         `http://ivory-firefly-hem.cyclic.app/update/${productData.Item_Number}`,
         updatedData
       );
-
-      // Handle response if needed
       console.log(response);
-
-      // Update the local state with the edited description
-      setEditDescription(updatedData.description);
-
-      // Toggle off editing mode after successful update
+      setEditDescription(updatedData.Description);
       toggleEditing();
     } catch (error) {
       console.error(error);
@@ -45,12 +37,6 @@ function Form({
           <button onClick={toggleEditing}>Edit Text</button>
         ) : (
           <div>
-            <textarea
-              value={editDescription}
-              onChange={handleDescriptionChange}
-              rows={4}
-              cols={50}
-            />
             <button onClick={handleUpdateDescription}>
               Update Description
             </button>

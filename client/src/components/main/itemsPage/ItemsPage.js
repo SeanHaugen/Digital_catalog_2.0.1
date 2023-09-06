@@ -56,6 +56,8 @@ function ItemPage({ productData, category, subCategory }) {
     setEditDescription(e.target.value);
   };
 
+  console.log(editDescription);
+
   return (
     <div>
       <Breadcrumbs separator={<KeyboardArrowRight />} aria-label="breadcrumbs">
@@ -105,7 +107,7 @@ function ItemPage({ productData, category, subCategory }) {
               <textarea
                 type="text"
                 value={editDescription}
-                onChange={handleDescriptionChange} // Use the correct change handler
+                onChange={handleDescriptionChange}
                 rows={4}
                 cols={50}
               />
@@ -149,7 +151,6 @@ function ItemPage({ productData, category, subCategory }) {
                 Product Weight:
                 {productData.Product_Weight}
               </Item>
-              <Item>Keywords: {productData.Keywords}</Item>
               <Item>Materials: {productData.Materials}</Item>
               <Item>Origin: {productData.Origin}</Item>
               <Item>Pg: {productData.Page}</Item>
