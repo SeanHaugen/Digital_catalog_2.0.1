@@ -42,6 +42,20 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+app.options("/update/:itemNumber", (req, res) => {
+  // Set CORS headers to allow requests from http://localhost:3000
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Origin,Cache-Control,Content-Type,X-Token,X-Refresh-Token"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+
+  // Respond with a 204 No Content status for preflight requests
+  res.status(204).end();
+});
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //Pricing
 
