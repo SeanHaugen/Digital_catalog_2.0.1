@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const { GridFSBucket } = require("mongodb");
+const multer = require("multer");
 
 dotenv.config({ path: "./config.env" });
 
@@ -41,6 +43,50 @@ const corsOptions = {
   optionSuccessStatus: 204,
 };
 app.use(cors(corsOptions));
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//GridFS
+
+const storage = multer.memoryStorage(); // Store files in memory
+const upload = multer({ storage });
+
+app.post("/upload", upload.single("file"), (req, res) => {
+  const bucket = new GridFSBucket(mongoose.connection.db);
+  const file = req.file; // Assuming you're sending the file in the request body
+
+  if (!file) {
+    return res.status(400).json({ error: "No file provided" });
+  }
+
+  const uploadStream = bucket.openUploadStream(file.originalname);
+  const fileBuffer = Buffer.from(file.buffer, "base64");
+
+  uploadStream.end(fileBuffer);
+
+  uploadStream.on("finish", () => {
+    res.status(201).json({ message: "File uploaded successfully" });
+  });
+
+  uploadStream.on("error", (error) => {
+    console.error("Error uploading file:", error);
+    res.status(500).json({ error: "File upload failed" });
+  });
+});
+
+// Download a file from GridFS
+app.get("/download/:filename", (req, res) => {
+  const bucket = new GridFSBucket(mongoose.connection.db);
+  const { filename } = req.params;
+
+  const downloadStream = bucket.openDownloadStreamByName(filename);
+
+  downloadStream.on("error", (error) => {
+    console.error("Error downloading file:", error);
+    res.status(500).json({ error: "File download failed" });
+  });
+
+  downloadStream.pipe(res);
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //Pricing
