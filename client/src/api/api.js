@@ -181,4 +181,29 @@ export const useFlatRateInfo = (setState, item) => {
 //       updateData();
 //     }
 //   }, [item, setState]);
-// };
+//
+
+export const useHandleUpdatePricing = (setState, item) => {
+  useEffect(() => {
+    async function updatePricing(rowIndex, cellIndex, newValue) {
+      try {
+        const url = `http://ivory-firefly-hem.cyclic/update/pricing/${item}`;
+
+        const data = {
+          rowIndex,
+          cellIndex,
+          newValue,
+        };
+
+        const response = await axios.put(url, data);
+
+        const responseData = response.data;
+        setState(responseData);
+        setState(responseData);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    updatePricing();
+  }, [item, setState]);
+};

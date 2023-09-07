@@ -328,29 +328,45 @@ app.put("/update/:itemNumber", async (req, res) => {
       return res.status(404).json({ message: "Item not found" });
     }
 
-    // Update the fields if they exist in the request body
-    if ("Name" in req.body) itemToUpdate.Name = req.body.Name;
-    if ("Category" in req.body) itemToUpdate.Category = req.body.Category;
-    if ("SubCategory" in req.body)
-      itemToUpdate.SubCategory = req.body.SubCategory;
+    // if ("Name" in req.body) itemToUpdate.Name = req.body.Name;
+    // if ("Category" in req.body) itemToUpdate.Category = req.body.Category;
+    // if ("SubCategory" in req.body)
+    //   itemToUpdate.SubCategory = req.body.SubCategory;
     if ("Description" in req.body)
       itemToUpdate.Description += " " + req.body.Description;
-    if ("Keywords" in req.body)
-      itemToUpdate.Keywords += " " + req.body.Keywords;
+    // if ("Keywords" in req.body)
+    //   itemToUpdate.Keywords += " " + req.body.Keywords;
 
-    // Save the changes to the database
     await itemToUpdate.save();
 
-    // Send a success response
     return res.status(200).json({ message: "Item updated successfully" });
   } catch (error) {
-    // Log the error for debugging
     console.error("Error updating item:", error);
 
-    // Return an error response
     return res
       .status(500)
       .json({ message: "Error updating item", error: error.message });
+  }
+});
+
+app.put("/update/pricing/:itemNumber", async (req, res) => {
+  try {
+    const priceToUpdate = req.params.itemNumber;
+    const elementToUpdate = req.body.elementToUpdate;
+
+    await PricingModel.updateOne(
+      { Item_Number: priceToUpdate, Pricing: { $elemMatch: elementToUpdate } },
+      {
+        $set: {
+          "Pricing.$": elementToUpdate,
+        },
+      }
+    );
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.error("Error updating item", error);
+    res.status(500).json({ message: "Could not update item", error });
   }
 });
 
@@ -371,6 +387,32 @@ app.delete("/delete/:itemNumber", async (req, res) => {
     res.status(500).json({ message: "Could not delete item", error });
   }
 });
+
+// app.delete("/delete/pricing/:itemNumber", async (req, res) => {
+//   try {
+//     let priceToDelete = req.params.itemNumber;
+//     let elementToDelete = req.body.elementToDelete;
+
+//     await PricingModel.updateOne(
+//       { Item_Number: priceToDelete },
+//       {
+//         $pull: {
+//           pricing: elementToDelete,
+//         },
+//       }
+//     );
+
+//     res.sendStatus(201);
+//   } catch (error) {
+//     console.error("Error deleting item", error);
+//     restart.status(500).json({ message: "could not delete item", error });
+//   }
+// });
+
+/////////////////////////////////////////
+//additional item info requests
+
+app.get("");
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -122,6 +122,14 @@ function ItemPage({ productData, category, subCategory }) {
                 })}
               </ul>
             )}
+            <Form
+              editing={editing}
+              toggleEditing={toggleEditing}
+              productData={productData}
+              editDescription={editDescription}
+              setEditDescription={setEditDescription}
+              handleDescriptionChange={handleDescriptionChange}
+            />
           </Item>
         </Grid>
         <Grid xs={12}>
@@ -160,7 +168,7 @@ function ItemPage({ productData, category, subCategory }) {
                 <FlatRateShipping productData={productData} />
               </Item>
               <Item>{productData.Package_Size}</Item>
-              <Item>{productData.Product_Weight}</Item>
+              <Item>{productData.Package_Weight}</Item>
             </TabPanel>
             <TabPanel value={2}>
               <Item>
@@ -180,14 +188,6 @@ function ItemPage({ productData, category, subCategory }) {
           </Tabs>
         </Grid>
       </Grid>
-      <Form
-        editing={editing}
-        toggleEditing={toggleEditing}
-        productData={productData}
-        editDescription={editDescription}
-        setEditDescription={setEditDescription}
-        handleDescriptionChange={handleDescriptionChange}
-      />
     </div>
   );
 }
