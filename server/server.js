@@ -59,9 +59,9 @@ app.post("/upload", upload.single("file"), (req, res) => {
   }
 
   const uploadStream = bucket.openUploadStream(file.originalname);
-  const fileBuffer = Buffer.from(file.buffer, "base64");
 
-  uploadStream.end(fileBuffer);
+  // You can directly use the file buffer here
+  uploadStream.end(file.buffer);
 
   uploadStream.on("finish", () => {
     res.status(201).json({ message: "File uploaded successfully" });
@@ -87,7 +87,6 @@ app.get("/download/:filename", (req, res) => {
 
   downloadStream.pipe(res);
 });
-
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //Pricing
 
