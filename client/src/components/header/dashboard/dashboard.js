@@ -26,6 +26,7 @@ import { StyledInputBase } from "../input/StyledInputBase";
 import { AppBar } from "../appBar/AppBar";
 
 import { useCategoryData, useSearchData } from "../../../api/api";
+import Navigation from "../../navigation/BackForward";
 
 export default function DashBoard({
   setCategory,
@@ -102,6 +103,7 @@ export default function DashBoard({
                 onKeyDown={handleSearch}
               />
             </Search>
+            <Navigation className="nav_buttons" />
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

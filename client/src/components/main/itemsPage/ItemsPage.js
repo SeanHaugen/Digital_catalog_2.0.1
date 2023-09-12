@@ -188,14 +188,6 @@ function ItemPage({ productData, category, subCategory }) {
           </Tabs>
         </Grid>
       </Grid>
-      <form
-        action="https://ivory-firefly-hem.cyclic.app/upload"
-        method="post"
-        enctype="multipart/form-data"
-      >
-        <input type="file" name="file" />
-        <input type="submit" value="Upload" />
-      </form>
     </div>
   );
 }

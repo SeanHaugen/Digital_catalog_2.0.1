@@ -1,12 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-function BackForward({ productData }) {
-  const navigate = useNavigate();
+function Navigation({ productData }) {
+  let navigate = useNavigate();
 
-  const navigateBack = () => {
-    navigate(-1); // Go back to the previous page
+  const goBack = () => {
+    navigate(-1);
+  };
+
+  const goForward = () => {
+    navigate(1);
   };
 
   return (
@@ -14,8 +19,11 @@ function BackForward({ productData }) {
       <ul>
         <li>
           <div>
-            <button onClick={navigateBack}>
-              <ArrowBackIosIcon /> Go Back
+            <button onClick={goBack}>
+              <ArrowBackIosIcon />
+            </button>
+            <button onClick={goForward}>
+              <ArrowForwardIosIcon />
             </button>
           </div>
         </li>
@@ -24,4 +32,4 @@ function BackForward({ productData }) {
   );
 }
 
-export default BackForward;
+export default Navigation;

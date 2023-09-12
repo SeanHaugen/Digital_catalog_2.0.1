@@ -63,9 +63,9 @@ app.post("/upload", upload.single("file"), (req, res) => {
   // You can directly use the file buffer here
   uploadStream.end(file.buffer);
 
-  uploadStream.on("finish", () => {
-    res.status(201).json({ message: "File uploaded successfully" });
-  });
+  // uploadStream.on("finish", () => {
+  //   res.status(201).json({ message: "File uploaded successfully" });
+  // });
 
   uploadStream.on("error", (error) => {
     console.error("Error uploading file:", error);

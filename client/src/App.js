@@ -44,13 +44,6 @@ function App() {
     setContextMenu(null);
   };
 
-  // const { ipcRenderer } = require('electron');
-
-  // function handleNewTabClick() {
-  //   const newTabUrl = 'https://example.com'; // Replace this with the desired URL for the new tab
-  //   ipcRenderer.send('create-new-tab', newTabUrl);
-  // }
-
   return (
     <Router>
       <div
@@ -100,8 +93,6 @@ function App() {
         </Menu>
       </div>
       <BottomNav productData={productData} />
-
-      {/* <SqrFtItem /> */}
     </Router>
   );
 }
