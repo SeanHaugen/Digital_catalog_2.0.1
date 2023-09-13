@@ -168,7 +168,7 @@ const EuroModel = mongoose.model("Eurofits", EuroSchema);
 app.get("/info/eurofits", async (req, res) => {
   try {
     const euroInfo = req.query.item;
-    const info = await EuroModel.findOne({
+    const info = await EuroModel.find({
       Item_Number: euroInfo,
     });
     console.log(info);
