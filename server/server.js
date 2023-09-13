@@ -169,7 +169,7 @@ app.get("/info/eurofits", async (req, res) => {
   try {
     const euroInfo = req.query.item;
     const info = await EuroModel.findOne({
-      Item_Number: euroInfo.trim(),
+      Item_Number: euroInfo,
     });
     console.log(info);
 
