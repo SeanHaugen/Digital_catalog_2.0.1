@@ -6,6 +6,8 @@ const cors = require("cors");
 const { GridFSBucket } = require("mongodb");
 const multer = require("multer");
 
+//imports
+
 dotenv.config({ path: "./config.env" });
 
 const NODE_ENV = "development";
@@ -138,6 +140,36 @@ app.get("/info", async (req, res) => {
     const itemInfo = req.query.item;
     const info = await InfoModel.findOne({
       Item_Number: itemInfo.trim(),
+    });
+    console.log(info);
+
+    if (!info) {
+      return res.status(404).json({ message: "Internal Info not found" });
+    }
+
+    res.json(info);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//Additional Eurofit Info
+
+const EuroSchema = new mongoose.Schema({
+  Name: String,
+  Item_Number: String,
+  Measurements: String,
+  Additional_Information: String,
+});
+
+const EuroModel = mongoose.model("Eurofits", EuroSchema);
+
+app.get("/info/eurofits", async (req, res) => {
+  try {
+    const euroInfo = req.query.item;
+    const info = await EuroModel.findOne({
+      Item_Number: euroInfo.trim(),
     });
     console.log(info);
 

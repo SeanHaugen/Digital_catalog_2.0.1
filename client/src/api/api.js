@@ -83,7 +83,7 @@ export const useFetchItemData = (setState, item) => {
           `http://ivory-firefly-hem.cyclic.app/items?item=${item}`
         );
         const itemData = response.data;
-        setState(itemData); // Assuming this correctly updates the state
+        setState(itemData);
       } catch (err) {
         console.error(err);
       }
@@ -117,7 +117,7 @@ export const usePricingData = (setState, item) => {
           `http://ivory-firefly-hem.cyclic.app/pricing/${item}`
         );
         let itemPricing = response.data;
-        setState(itemPricing); // Assuming the response contains the data you want to set
+        setState(itemPricing);
       } catch (error) {
         console.error(error);
       }
@@ -159,29 +159,6 @@ export const useFlatRateInfo = (setState, item) => {
     fetchData();
   }, [item, setState]);
 };
-
-// export const useHandleUpdate = (setState, item) => {
-//   useEffect(() => {
-//     async function updateData() {
-//       try {
-//         const updatedData = { description: "Updated Description" };
-//         const response = await axios.put(
-//           `http://ivory-firefly-hem.cyclic.app/update/${item}`,
-//           updatedData
-//         );
-
-//         const responseData = response.data;
-//         setState(responseData);
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     }
-
-//     if (item) {
-//       updateData();
-//     }
-//   }, [item, setState]);
-//
 
 export const useHandleUpdatePricing = (setState, item) => {
   useEffect(() => {

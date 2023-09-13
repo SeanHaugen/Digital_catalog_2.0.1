@@ -152,6 +152,7 @@ function ItemPage({ productData, category, subCategory }) {
               <Tab>Shipping</Tab>
               <Tab>colors</Tab>
               <Tab>Internal Info</Tab>
+              <Tab>Additional Info</Tab>
               <Tab>Images</Tab>
             </TabList>
             <TabPanel value={0}>
