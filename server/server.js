@@ -158,7 +158,7 @@ app.get("/info", async (req, res) => {
 
 const EuroSchema = new mongoose.Schema({
   Name: String,
-  Item_Number: String,
+  Item_Number: Number,
   Measurements: String,
   Additional_Information: String,
 });
