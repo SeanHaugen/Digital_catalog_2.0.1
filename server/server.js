@@ -174,7 +174,7 @@ app.get("/info/eurofits", async (req, res) => {
     console.log(info);
 
     if (!info) {
-      return res.status(404).json({ message: "Internal Info not found" });
+      return res.status(404).json({ message: "Internal Info not found!" });
     }
 
     res.json(info);
