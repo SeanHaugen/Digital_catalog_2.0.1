@@ -52,27 +52,47 @@ app.use(cors(corsOptions));
 const storage = multer.memoryStorage(); // Store files in memory
 const upload = multer({ storage });
 
-app.post("/upload", upload.single("file"), (req, res) => {
+app.post("/upload", upload.array("file", 10), (req, res) => {
   const bucket = new GridFSBucket(mongoose.connection.db);
-  const file = req.file; // Assuming you're sending the file in the request body
+  const files = req.files; // Assuming you're sending the files in the request body
 
-  if (!file) {
-    return res.status(400).json({ error: "No file provided" });
+  if (!files || files.length === 0) {
+    return res.status(400).json({ error: "No files provided" });
   }
 
-  const uploadStream = bucket.openUploadStream(file.originalname);
+  const uploadPromises = [];
 
-  // You can directly use the file buffer here
-  uploadStream.end(file.buffer);
+  files.forEach((file) => {
+    const uploadStream = bucket.openUploadStream(file.originalname, {
+      contentType: "application/pdf",
+    });
 
-  // uploadStream.on("finish", () => {
-  //   res.status(201).json({ message: "File uploaded successfully" });
-  // });
+    // You can directly use the file buffer here
+    uploadStream.end(file.buffer);
 
-  uploadStream.on("error", (error) => {
-    console.error("Error uploading file:", error);
-    res.status(500).json({ error: "File upload failed" });
+    const fileType = file.mimetype;
+
+    uploadPromises.push(
+      new Promise((resolve, reject) => {
+        uploadStream.on("finish", () => {
+          resolve();
+        });
+
+        uploadStream.on("error", (error) => {
+          console.error("Error uploading file:", error);
+          reject(error);
+        });
+      })
+    );
   });
+
+  Promise.all(uploadPromises)
+    .then(() => {
+      res.status(201).json({ message: "Files uploaded successfully" });
+    })
+    .catch((error) => {
+      res.status(500).json({ error: "File upload failed" });
+    });
 });
 
 // Download a file from GridFS
@@ -157,21 +177,20 @@ app.get("/info", async (req, res) => {
 //Additional Eurofit Info
 
 const EuroSchema = new mongoose.Schema({
+  Measurements: String,
   Name: String,
   Item_Number: Number,
-  Measurements: String,
   Additional_Information: String,
 });
 
 const EuroModel = mongoose.model("Eurofits", EuroSchema);
 
-app.get("/eurofitInfo", async (req, res) => {
+app.get("/info/eurofits/:item", async (req, res) => {
   try {
-    const euroInfo = req.query.item;
+    const itemNumber = req.params.item;
     const info = await EuroModel.findOne({
-      Item_Number: euroInfo,
+      Item_Number: itemNumber,
     });
-    console.log(info);
 
     if (!info) {
       return res.status(404).json({ message: "Internal Info not found!" });
