@@ -192,13 +192,14 @@ app.get("/eurofits", async (req, res) => {
     //   Item_Number: itemNumber.trim(),
     // });
     const eurofits = await Eurofit.find({
-      Name: "Eurofit Arch Plus Kit 20ft",
       Item_Number: 255165,
     }).exec();
 
     // if (!info) {
     //   return res.status(404).json({ message: "Internal Info not found!" });
     // }
+
+    console.log("Query:", eurofits);
 
     res.json(eurofits);
   } catch (error) {
