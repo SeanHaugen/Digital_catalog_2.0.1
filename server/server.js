@@ -195,11 +195,11 @@ app.get("/eurofits", async (req, res) => {
 
     const info = await Eurofit.find({
       Item_Number: itemNumber,
-    }).exec();
+    });
 
-    // if (!info) {
-    //   return res.status(404).json({ message: "Internal Info not found!" });
-    // }
+    if (!info) {
+      return res.status(404).json({ message: "Internal Info not found!" });
+    }
 
     console.log("Query:", info);
 
