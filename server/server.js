@@ -176,27 +176,31 @@ app.get("/info", async (req, res) => {
 /////////////////////////////////////////////////////////////////////////////////////////////
 //Additional Eurofit Info
 
-const EuroSchema = new mongoose.Schema({
+const eurofitSchema = new mongoose.Schema({
   Measurements: String,
   Name: String,
   Item_Number: Number,
   Additional_Information: String,
 });
 
-const EuroModel = mongoose.model("Eurofits", EuroSchema);
+const Eurofit = mongoose.model("Eurofit", eurofitSchema);
 
-app.get("/info/eurofits/:item", async (req, res) => {
+app.get("/eurofits/:item", async (req, res) => {
   try {
-    const itemNumber = req.params.item;
-    const info = await EuroModel.findOne({
-      Item_Number: itemNumber.trim(),
-    });
+    // const itemNumber = req.params.item;
+    // const info = await EuroModel.findOne({
+    //   Item_Number: itemNumber.trim(),
+    // });
+    const eurofits = await Eurofit.find({
+      Name: "Eurofit Arch Plus Kit 20ft",
+      Item_Number: 255165,
+    }).exec();
 
-    if (!info) {
-      return res.status(404).json({ message: "Internal Info not found!" });
-    }
+    // if (!info) {
+    //   return res.status(404).json({ message: "Internal Info not found!" });
+    // }
 
-    res.json(info);
+    res.json(eurofits);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
