@@ -192,10 +192,6 @@ app.get("/info/eurofits/:item", async (req, res) => {
       Item_Number: itemNumber,
     });
 
-    if (!info) {
-      return res.status(404).json({ message: "Internal Info not found!" });
-    }
-
     res.json(info);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
