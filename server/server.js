@@ -185,7 +185,7 @@ const eurofitSchema = new mongoose.Schema({
 
 const Eurofit = mongoose.model("Eurofit", eurofitSchema);
 
-app.get("/eurofits/:item", async (req, res) => {
+app.get("/eurofits", async (req, res) => {
   try {
     // const itemNumber = req.params.item;
     // const info = await EuroModel.findOne({
