@@ -169,7 +169,8 @@ function ItemPage({ productData, category, subCategory }) {
                 <FlatRateShipping productData={productData} />
               </Item>
               <Item>{productData.Package_Size}</Item>
-              <Item>{productData.Package_Weight}</Item>
+              <Item>Shipping Weight: {productData.Package_Weight}</Item>
+              <Item>Dimensional Weight: NA</Item>
             </TabPanel>
             <TabPanel value={2}>
               <Item>

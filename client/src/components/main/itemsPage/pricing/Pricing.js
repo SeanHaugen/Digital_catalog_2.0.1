@@ -24,6 +24,13 @@ function PricingTable({ productData }) {
 
   usePricingData(setPriceData, productData.Item_Number);
 
+  console.log(productData.Item_Number);
+  // console.log(
+  //   priceData.map((price, index) => {
+  //     return price;
+  //   })
+  // );
+
   useHandleUpdatePricing(
     setUpdatePricing,
     productData.Item_Number,

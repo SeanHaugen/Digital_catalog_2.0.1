@@ -9,11 +9,11 @@ function FlatRateShipping({ productData }) {
   const handleFlatRate = () => {
     return (
       <div className="box">
-        <h1>Flat Rate</h1>
-        <h4>Qty 1</h4>
         {itemRates !== undefined ? (
           itemRates.map((items, index) => (
             <div>
+              <h1>Flat Rate</h1>
+              <h4>Qty 1</h4>
               <p key={index}>
                 {items.Service}: {items.Rate}
               </p>
