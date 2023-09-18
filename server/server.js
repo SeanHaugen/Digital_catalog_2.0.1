@@ -178,8 +178,8 @@ app.get("/info", async (req, res) => {
 
 const eurofitSchema = new mongoose.Schema({
   // Measurements: String,
-  // Name: String,
-  Item_Number: Number,
+  Name: String,
+  Item_Number: String,
   // Additional_Information: String,
 });
 
@@ -187,8 +187,8 @@ const Eurofit = mongoose.model("Eurofits", eurofitSchema);
 
 app.get("/eurofits", async (req, res) => {
   try {
-    const itemNumber = req.params.item;
-    const info = await EuroModel.findOne({
+    const itemNumber = req.query.item;
+    const info = await Eurofit.findOne({
       Item_Number: itemNumber.trim(),
     });
 
