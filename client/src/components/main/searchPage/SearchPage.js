@@ -5,13 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-function SearchPage({
-  searchData,
-  setProduct,
-  category,
-  subCategory,
-  productData,
-}) {
+function SearchPage({ searchData, setProduct }) {
   // const location = useLocation();
   // const queryParams = new URLSearchParams(location.search);
   // const searchTerm = queryParams.get('q');
