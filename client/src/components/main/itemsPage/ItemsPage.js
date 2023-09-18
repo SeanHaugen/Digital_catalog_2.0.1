@@ -140,7 +140,9 @@ function ItemPage({ productData, category, subCategory }) {
         <Grid>
           <Item>
             Setup: ${productData.SetupChg}
-            <div>{productData.Lead_Times} Business Days</div>
+            <div>
+              <b> Lead Time: {productData.Lead_Times} Business Days</b>
+            </div>
           </Item>
         </Grid>
       </Grid>
@@ -163,6 +165,13 @@ function ItemPage({ productData, category, subCategory }) {
               <Item>Materials: {productData.Materials}</Item>
               <Item>Origin: {productData.Origin}</Item>
               <Item>Pg: {productData.Page}</Item>
+              <Item>
+                <a
+                  href={` https://www.showdowndisplays.com/Product/Select?Sku=${productData.Item_Number}`}
+                >
+                  Showdown Item Page
+                </a>
+              </Item>
             </TabPanel>
             <TabPanel value={1}>
               <Item>
