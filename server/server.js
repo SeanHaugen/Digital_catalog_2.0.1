@@ -189,8 +189,12 @@ app.get("/info/eurofits/:item", async (req, res) => {
   try {
     const itemNumber = req.params.item;
     const info = await EuroModel.findOne({
-      Item_Number: itemNumber,
+      Item_Number: itemNumber.trim(),
     });
+
+    if (!info) {
+      return res.status(404).json({ message: "Internal Info not found!" });
+    }
 
     res.json(info);
   } catch (error) {
