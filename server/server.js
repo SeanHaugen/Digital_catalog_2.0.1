@@ -177,23 +177,28 @@ app.get("/info", async (req, res) => {
 //Additional Eurofit Info
 
 const eurofitSchema = new mongoose.Schema({
-  // Measurements: String,
+  Measurements: String,
   Name: String,
-  Item_Number: String,
-  // Additional_Information: String,
+  Item_Number: Number,
+  Additional_Information: String,
 });
 
 const Eurofit = mongoose.model("Eurofits", eurofitSchema);
 
 app.get("/eurofits", async (req, res) => {
   try {
-    const itemNumber = req.query.item;
+    const itemNumber = parseInt(req.query.item);
+
+    if (isNaN(itemNumber)) {
+      return res.status(400).json({ message: "Invalid Item_Number provided" });
+    }
+
     const info = await Eurofit.findOne({
-      Item_Number: itemNumber.trim(),
+      Item_Number: itemNumber,
     });
 
     if (!info) {
-      return res.status(404).json({ message: "Internal Info not found!" });
+      return res.status(404).json({ message: "Eurofit Info not found!" });
     }
 
     console.log("Query:", info);
