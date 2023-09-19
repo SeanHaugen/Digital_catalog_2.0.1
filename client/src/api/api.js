@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 
 export const useCategoryData = (setState) => {
@@ -109,57 +109,21 @@ export const useSearchData = (setState, search) => {
   }, [search, setState]);
 };
 
-// export const usePricingData = (setState, item) => {
-//   useEffect(() => {
-//     const cachedData = sessionStorage.getItem(`pricing_${item}`);
-//     if (cachedData) {
-//       setItemPricing(JSON.parse(cachedData));
-//     } else {
-//       async function fetchData() {
-//         try {
-//           const response = await axios.get(
-//             `http://ivory-firefly-hem.cyclic.app/pricing/${item}`
-//           );
-//           let itemPricing = response.data;
-//           sessionStorage.setItem(`pricing_${item}`, JSON.stringify(data));
-//           setState(itemPricing);
-//         } catch (error) {
-//           console.error(error);
-//         }
-//       }
-//       fetchData();
-//     }
-//   }, [item, setState]);
-// };
-
-export const usePricingData = (item) => {
-  const [itemPricing, setItemPricing] = useState(null);
-
+export const usePricingData = (setState, item) => {
   useEffect(() => {
-    // Attempt to retrieve pricing data from sessionStorage
-    const cachedData = sessionStorage.getItem(`pricing_${item}`);
-    if (cachedData) {
-      setItemPricing(JSON.parse(cachedData));
-    } else {
-      // Fetch pricing data if not found in sessionStorage
-      async function fetchData() {
-        try {
-          const response = await axios.get(
-            `http://ivory-firefly-hem.cyclic.app/pricing/${item}`
-          );
-          const data = response.data;
-          // Store pricing data in sessionStorage for future use
-          sessionStorage.setItem(`pricing_${item}`, JSON.stringify(data));
-          setItemPricing(data);
-        } catch (error) {
-          console.error(error);
-        }
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `http://ivory-firefly-hem.cyclic.app/pricing/${item}`
+        );
+        let itemPricing = response.data;
+        setState(itemPricing);
+      } catch (error) {
+        console.error(error);
       }
-      fetchData();
     }
-  }, [item]);
-
-  return itemPricing;
+    fetchData();
+  }, [item, setState]);
 };
 
 export const useInternalInfo = (setState, item) => {
