@@ -23,8 +23,6 @@ mongoose
   .connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    // useCreateIndex: true,
-    // useFindAndModify: false,
   })
   .then(() => {
     console.log("Connected to MongoDB!!");
@@ -353,11 +351,6 @@ app.get("/search", async (req, res) => {
     if (!isNaN(numericQuery)) {
       results = await items.find({ Item_Number: numericQuery });
     } else {
-      const searchTerms = searchQuery
-        .split(/\s+/)
-        .map((term) => `(?=.*${term})`);
-      const regexPattern = new RegExp(`^${searchTerms.join("")}`, "i");
-
       results = await items
         .find(
           {
@@ -365,9 +358,6 @@ app.get("/search", async (req, res) => {
           },
           {
             score: { $meta: "textScore" },
-          },
-          {
-            Name: { $regex: regexPattern },
           }
         )
         .sort({ score: { $meta: "textScore" } });
