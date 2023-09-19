@@ -69,7 +69,7 @@ function PricingTable({ productData }) {
         </TableHead>
         <TableBody>
           {priceData !== null ? (
-            priceData.splice(0, 5).map((rowData, rowIndex) => (
+            priceData.slice(0, 5).map((rowData, rowIndex) => (
               <TableRow key={rowIndex}>
                 {rowData.map((cellData, cellIndex) => (
                   <TableCell key={cellIndex}>

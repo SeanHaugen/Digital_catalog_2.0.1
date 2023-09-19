@@ -114,7 +114,7 @@ export const usePricingData = (setState, item) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://ivory-firefly-hem.cyclic.app/pricing/${item}`
+          `http://ivory-firefly-hem.cyclic.app/pricing/item_number/${item}`
         );
         let itemPricing = response.data;
         setState(itemPricing);
