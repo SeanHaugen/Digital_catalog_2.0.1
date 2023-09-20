@@ -301,6 +301,10 @@ const mediaSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  Type: {
+    type: String,
+    required: true,
+  },
 });
 
 const mediaModel = mongoose.model("mediaspecs", mediaSchema);
