@@ -42,8 +42,10 @@ function ItemPage({ productData, category, subCategory }) {
   const [eurofitInfo, setEurofitInfo] = useState([]);
   useHandleEurofitInfo(setEurofitInfo, productData.Item_Number);
   let eurofitObj = eurofitInfo;
-  let eurofitArray = Object.entries(eurofitObj);
-  let eurofitSlice = eurofitArray.splice(2, 4);
+  console.log(eurofitObj);
+  let eurofitArray = Object.entries(eurofitObj).map(([key, value]) => value);
+  console.log(eurofitArray);
+  let eurofitSlice = eurofitArray.splice(1, 2);
   console.log(eurofitSlice);
 
   const [editDescription, setEditDescription] = useState(

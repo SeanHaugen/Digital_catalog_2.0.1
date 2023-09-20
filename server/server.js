@@ -304,12 +304,9 @@ const mediaSchema = new mongoose.Schema({
 });
 
 const mediaModel = mongoose.model("mediaspecs", mediaSchema);
-
 app.get("/mediaspecs", async (req, res) => {
   try {
-    const mediaInfo = await mediaModel.findOne({
-      title: "Titan Vinyl Mesh without Backer",
-    });
+    const mediaInfo = await mediaModel.find();
     console.log(mediaInfo);
     res.json(mediaInfo);
   } catch (err) {
