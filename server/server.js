@@ -222,6 +222,105 @@ app.get("/eurofits", async (req, res) => {
   }
 });
 
+//Additional info - mediaspecs
+
+const mediaSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  itemNumbers: {
+    type: [String],
+    required: false,
+  },
+  inkCompatibility: {
+    type: String,
+    required: false,
+  },
+  content: {
+    type: String,
+    required: false,
+  },
+  surface: {
+    type: String,
+    required: false,
+  },
+  scrimConstruction: {
+    type: String,
+    required: false,
+  },
+  thickness: {
+    type: String,
+    required: false,
+  },
+  weight: {
+    type: String,
+    required: false,
+  },
+  coldCrack: {
+    type: String,
+    required: false,
+  },
+  tensileStrength: {
+    type: String,
+    required: false,
+  },
+  tearStrength: {
+    type: String,
+    required: false,
+  },
+  rollLength: {
+    type: String,
+    required: false,
+  },
+  core: {
+    type: String,
+    required: false,
+  },
+  packaging: {
+    type: String,
+    required: false,
+  },
+  countryOfOrigin: {
+    type: String,
+    required: false,
+  },
+  flameResistance: {
+    type: String,
+    required: false,
+  },
+  applications: {
+    type: String,
+    required: false,
+  },
+  storage: {
+    type: String,
+    required: false,
+  },
+  prop65: {
+    type: String,
+    required: false,
+  },
+});
+
+const mediaModel = mongoose.model("mediaspecs", mediaSchema);
+
+app.get("/mediaspecs", async (req, res) => {
+  try {
+    const mediaInfo = await mediaModel.findOne({
+      title: "Titan Vinyl Mesh without Backer",
+    });
+    console.log(mediaInfo);
+    res.json(mediaInfo);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+//additional info -parades and floats
+
+//stands and furniture
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 //Flat Rate Shipping info
 

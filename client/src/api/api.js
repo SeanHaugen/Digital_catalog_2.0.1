@@ -184,3 +184,20 @@ export const useHandleUpdatePricing = (setState, item) => {
     updatePricing();
   }, [item, setState]);
 };
+
+export const useHandleEurofitInfo = (setState, item) => {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `https://ivory-firefly-hem.cyclic.app/eurofits?item=${item}`
+        );
+        let info = response.data;
+        setState(info);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, [item, setState]);
+};

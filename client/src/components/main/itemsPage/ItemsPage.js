@@ -23,6 +23,7 @@ import FindImage from "./findImage/FindImage";
 import Form from "../forms/Form";
 
 import { useInternalInfo } from "../../../api/api";
+import { useHandleEurofitInfo } from "../../../api/api";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -37,6 +38,13 @@ function ItemPage({ productData, category, subCategory }) {
 
   const [internalInfo, setInternalInfo] = useState([]);
   useInternalInfo(setInternalInfo, productData.Item_Number);
+
+  const [eurofitInfo, setEurofitInfo] = useState([]);
+  useHandleEurofitInfo(setEurofitInfo, productData.Item_Number);
+  let eurofitObj = eurofitInfo;
+  let eurofitArray = Object.entries(eurofitObj);
+  let eurofitSlice = eurofitArray.splice(2, 4);
+  console.log(eurofitSlice);
 
   const [editDescription, setEditDescription] = useState(
     productData.Description
@@ -57,6 +65,12 @@ function ItemPage({ productData, category, subCategory }) {
   };
 
   console.log(editDescription);
+
+  // const [copiedText, setCopiedText] = useState("");
+  // const copyText = () => {
+  //   copiedText.select();
+  //   navigator.clipboard.writeText(copyText.value);
+  // };
 
   return (
     <div>
@@ -195,7 +209,7 @@ function ItemPage({ productData, category, subCategory }) {
                 <div>Loading...</div>
               )}
             </TabPanel>
-            <TabPanel value={4}></TabPanel>
+            <TabPanel value={4}>{eurofitSlice}</TabPanel>
           </Tabs>
         </Grid>
       </Grid>
