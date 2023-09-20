@@ -301,7 +301,7 @@ const mediaSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  Type: {
+  type: {
     type: String,
     required: true,
   },
