@@ -306,7 +306,10 @@ const mediaSchema = new mongoose.Schema({
 const mediaModel = mongoose.model("mediaspecs", mediaSchema);
 app.get("/mediaspecs", async (req, res) => {
   try {
-    const mediaInfo = await mediaModel.find();
+    const media = req.query.item;
+    const mediaInfo = await mediaModel.find({
+      Type: media,
+    });
     console.log(mediaInfo);
     res.json(mediaInfo);
   } catch (err) {
