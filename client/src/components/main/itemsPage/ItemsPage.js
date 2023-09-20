@@ -24,6 +24,7 @@ import Form from "../forms/Form";
 
 import { useInternalInfo } from "../../../api/api";
 import { useHandleEurofitInfo } from "../../../api/api";
+import { useHandleMediaInfo } from "../../../api/api";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -48,6 +49,13 @@ function ItemPage({ productData, category, subCategory }) {
   let eurofitSlice = eurofitArray.splice(1, 2);
   console.log(eurofitSlice);
 
+  const [mediaInfo, setMediaInfo] = useState([]);
+  useHandleMediaInfo(setMediaInfo, productData.Materials);
+  let mediaSpecs = mediaInfo;
+  console.log(mediaSpecs);
+  // let mediaSpecsArray = Object.entries(mediaSpecs);
+  // console.log(Object.keys(mediaSpecsArray).map((item) => <p>{item}</p>));
+
   const [editDescription, setEditDescription] = useState(
     productData.Description
   );
@@ -66,7 +74,7 @@ function ItemPage({ productData, category, subCategory }) {
     setEditDescription(e.target.value);
   };
 
-  console.log(editDescription);
+  // console.log(editDescription);
 
   // const [copiedText, setCopiedText] = useState("");
   // const copyText = () => {
@@ -171,7 +179,7 @@ function ItemPage({ productData, category, subCategory }) {
               <Tab>colors</Tab>
               <Tab>Internal Info</Tab>
               <Tab>Additional Info</Tab>
-              <Tab>Images</Tab>
+              <Tab>Media Specs</Tab>
             </TabList>
             <TabPanel value={0}>
               <Item>
@@ -212,6 +220,7 @@ function ItemPage({ productData, category, subCategory }) {
               )}
             </TabPanel>
             <TabPanel value={4}>{eurofitSlice}</TabPanel>
+            <TabPanel value={5}></TabPanel>
           </Tabs>
         </Grid>
       </Grid>
