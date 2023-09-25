@@ -160,7 +160,7 @@ export const useFlatRateInfo = (setState, item) => {
   }, [item, setState]);
 };
 
-export const useHandleUpdatePricing = (setState, item) => {
+export const useHandleUpdatePricing = (setState, item, row, cell, value) => {
   useEffect(() => {
     async function updatePricing(rowIndex, cellIndex, newValue) {
       try {
@@ -176,12 +176,11 @@ export const useHandleUpdatePricing = (setState, item) => {
 
         const responseData = response.data;
         setState(responseData);
-        setState(responseData);
       } catch (error) {
         console.error(error);
       }
     }
-    updatePricing();
+    updatePricing(row, cell, value);
   }, [item, setState]);
 };
 

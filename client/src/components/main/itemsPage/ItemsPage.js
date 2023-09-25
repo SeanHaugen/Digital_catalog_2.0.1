@@ -44,17 +44,36 @@ function ItemPage({ productData, category, subCategory }) {
   useHandleEurofitInfo(setEurofitInfo, productData.Item_Number);
   let eurofitObj = eurofitInfo;
   console.log(eurofitObj);
-  let eurofitArray = Object.entries(eurofitObj).map(([key, value]) => value);
+  let eurofitArray = Object.entries(eurofitObj).map(([key, value], index) => (
+    <ul key={index}>
+      <li>{value}</li>
+    </ul>
+  ));
   console.log(eurofitArray);
   let eurofitSlice = eurofitArray.splice(1, 2);
   console.log(eurofitSlice);
 
   const [mediaInfo, setMediaInfo] = useState([]);
   useHandleMediaInfo(setMediaInfo, productData.Materials);
-  let mediaSpecs = mediaInfo;
-  console.log(mediaSpecs);
-  // let mediaSpecsArray = Object.entries(mediaSpecs);
-  // console.log(Object.keys(mediaSpecsArray).map((item) => <p>{item}</p>));
+  // let mediaSpecs = mediaInfo;
+  // console.log(mediaSpecs);
+  let renderMediaSpecs = (mediaObject) => {
+    return Object.entries(mediaObject).map(([key, value], index) => (
+      <ul key={index}>
+        <li>
+          <b>{key}</b>
+          {value}
+        </li>
+      </ul>
+    ));
+  };
+
+  console.log(
+    mediaInfo.map((mediaSpecs, index) => {
+      return <div key={index}>{renderMediaSpecs(mediaSpecs)};</div>;
+    })
+  );
+  console.log(productData.Materials);
 
   const [editDescription, setEditDescription] = useState(
     productData.Description
@@ -220,7 +239,11 @@ function ItemPage({ productData, category, subCategory }) {
               )}
             </TabPanel>
             <TabPanel value={4}>{eurofitSlice}</TabPanel>
-            <TabPanel value={5}></TabPanel>
+            <TabPanel value={5}>
+              {mediaInfo.map((mediaSpecs, index) => {
+                return <div key={index}>{renderMediaSpecs(mediaSpecs)};</div>;
+              })}
+            </TabPanel>
           </Tabs>
         </Grid>
       </Grid>
@@ -229,27 +252,3 @@ function ItemPage({ productData, category, subCategory }) {
 }
 
 export default ItemPage;
-
-// const [imageURL, setImageURL] = useState("");
-
-// useEffect(() => {
-//   const fetchData = async () => {
-//     try {
-//       const imageFolder =
-//         "https://signzoneinc.sharepoint.com/sites/customerservicedatabase/shared%20documents/general/images/01products";
-//       const imageName = `${productData.Item_Number}_0.jpg?web=1`;
-
-//       const imageURL = `${imageFolder}/${imageName}`;
-//       setImageURL(imageURL);
-//     } catch (error) {
-//       console.error("error fetching image", error);
-//     }
-//   };
-//   fetchData();
-// }, [productData.Item_Number]);
-
-// console.log(imageURL);
-
-// // const filePath = '/images'
-// const imagePath = `/images/${productData.Item_Number}_0.jpg`;
-// console.log(imagePath);

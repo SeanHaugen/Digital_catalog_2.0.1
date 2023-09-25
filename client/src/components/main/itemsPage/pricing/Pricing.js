@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 import { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,7 +16,7 @@ import { useHandleUpdatePricing } from "../../../../api/api";
 
 function PricingTable({ productData }) {
   const [priceData, setPriceData] = useState(null);
-  const [updatePricing, setUpdatePricing] = useState();
+  // const [updatePricing, setUpdatePricing] = useState(null);
   const [selectedElement, setSelectedElement] = useState({
     rowIndex: null,
     cellIndex: null,
@@ -24,11 +25,35 @@ function PricingTable({ productData }) {
 
   usePricingData(setPriceData, productData.Item_Number);
 
-  useHandleUpdatePricing(
-    setUpdatePricing,
-    productData.Item_Number,
-    selectedElement
-  );
+  // useHandleUpdatePricing(
+  //   setUpdatePricing,
+  //   productData.Item_Number,
+  //   selectedElement.rowIndex,
+  //   selectedElement.cellIndex,
+  //   selectedElement.value
+  // );
+
+  const [updatePricing, setUpdatePricing] = useState(() => {
+    return async (rowIndex, cellIndex, newValue) => {
+      try {
+        const url = `http://ivory-firefly-hem.cyclic/update/pricing/${productData.Item_Number}`;
+
+        const data = {
+          rowIndex,
+          cellIndex,
+          newValue,
+        };
+
+        const response = await axios.put(url, data);
+
+        const responseData = response.data;
+        setPriceData(responseData);
+        setSelectedElement({ rowIndex: null, cellIndex: null, value: null });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  });
   const handlePriceUpdateClick = (rowIndex, cellIndex, cellData) => {
     setSelectedElement({ rowIndex, cellIndex, value: cellData });
   };
