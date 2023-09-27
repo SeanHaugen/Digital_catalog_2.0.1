@@ -118,6 +118,34 @@ app.get("/download/:filename", (req, res) => {
 
   downloadStream.pipe(res);
 });
+
+app.get("/images/:imageName", (req, res) => {
+  const imageName = req.params.imageName;
+
+  // Find the image in fs.files by _id
+  DB.collection("fs.files").findOne(
+    { filename: new ObjectId(imageName) },
+    (err, file) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Error retrieving image");
+      }
+
+      if (!file) {
+        return res.status(404).send("Image not found");
+      }
+
+      // Create a read stream from fs.chunks
+      const readStream = bucket.openDownloadStream(file._id);
+
+      // Set the response content type based on the file's contentType field
+      res.set("Content-Type", file.contentType);
+
+      // Pipe the image data to the response
+      readStream.pipe(res);
+    }
+  );
+});
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //Pricing
 
