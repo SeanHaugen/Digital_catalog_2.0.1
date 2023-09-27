@@ -12,6 +12,7 @@ export default function BottomNav({ productData }) {
   const [value, setValue] = React.useState(0);
   const [openRecent, setOpenRecent] = useState(false);
   const [recentPages, setRecentPages] = useState([]);
+  const [fileQueue, setFileQueue] = useState([]);
   const history = useLocation();
   const navigate = useNavigate();
 
@@ -33,6 +34,54 @@ export default function BottomNav({ productData }) {
       ]);
     }
   }, [history]);
+
+  const handleFileChange = (e) => {
+    const selectedFiles = e.target.files;
+    setFileQueue([...fileQueue, ...selectedFiles]);
+  };
+
+  const handleUpload = async () => {
+    if (fileQueue.length === 0) {
+      return;
+    }
+
+    for (const file of fileQueue) {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        // Display the file as "Uploading" in the queue
+        file.status = "Uploading";
+        setFileQueue([...fileQueue]);
+
+        const response = await fetch(
+          "https://ivory-firefly-hem.cyclic.app/upload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        if (response.ok) {
+          // Update the file status to "Uploaded" in the queue
+          file.status = "Uploaded";
+          setFileQueue([...fileQueue]);
+        } else {
+          // Update the file status to "Failed" in the queue
+          file.status = "Failed";
+          setFileQueue([...fileQueue]);
+        }
+      } catch (error) {
+        console.error("File upload failed:", error);
+        // Update the file status to "Failed" in the queue
+        file.status = "Failed";
+        setFileQueue([...fileQueue]);
+      }
+    }
+
+    // Clear the file queue after uploads are complete
+    setFileQueue([]);
+  };
 
   return (
     <div
@@ -57,9 +106,21 @@ export default function BottomNav({ productData }) {
             method="post"
             enctype="multipart/form-data"
           >
-            <input type="file" name="file" multiple />
-            <input type="submit" value="Upload" />
+            <input
+              type="file"
+              name="file"
+              multiple
+              onChange={handleFileChange}
+            />
+            <button onClick={handleUpload}>Upload</button>
           </form>
+          <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
+            {fileQueue.map((file, index) => (
+              <li key={index}>
+                {file.name} - {file.status}
+              </li>
+            ))}
+          </ul>
           <BottomNavigationAction
             label="Recent"
             icon={<RestoreIcon />}

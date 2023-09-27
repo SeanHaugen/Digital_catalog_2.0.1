@@ -33,8 +33,8 @@ const port = process.env.PORT || 4000;
 
 // app.use(express.static("public"));
 app.use(express.json());
-app.use(bodyParser.json({ limit: "1000mb" }));
-app.use(bodyParser.urlencoded({ limit: "1000mb", extended: true }));
+app.use(bodyParser.json({ limit: "10000mb" }));
+app.use(bodyParser.urlencoded({ limit: "10000mb", extended: true }));
 
 const corsOptions = {
   origin: "*",
@@ -54,7 +54,7 @@ const storage = multer.memoryStorage(); // Store files in memory
 const upload = multer({
   storage,
   limits: {
-    fileSize: 50 * 1024 * 1024, // 50MB (adjust as needed)
+    fileSize: 500 * 1024 * 1024, // 50MB (adjust as needed)
   },
 });
 
