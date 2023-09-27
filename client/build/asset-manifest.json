@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "./static/css/main.0aec8ce6.css",
-    "main.js": "./static/js/main.c7edf487.js",
+    "main.js": "./static/js/main.5b11e148.js",
     "static/media/cb84cb63-bdb0-4c50-af78-5fc0fb0e0e15.jpg": "./static/media/cb84cb63-bdb0-4c50-af78-5fc0fb0e0e15.b277156b970b04cc0653.jpg",
     "static/media/outDoor_products.jpg": "./static/media/outDoor_products.b50e29abc6a19e289c1c.jpg",
     "index.html": "./index.html",
     "main.0aec8ce6.css.map": "./static/css/main.0aec8ce6.css.map",
-    "main.c7edf487.js.map": "./static/js/main.c7edf487.js.map"
+    "main.5b11e148.js.map": "./static/js/main.5b11e148.js.map"
   },
   "entrypoints": [
     "static/css/main.0aec8ce6.css",
-    "static/js/main.c7edf487.js"
+    "static/js/main.5b11e148.js"
   ]
 }

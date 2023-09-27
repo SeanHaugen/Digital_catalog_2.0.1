@@ -18,6 +18,7 @@ import ListItemText from "@mui/material/ListItemText";
 import SearchIcon from "@mui/icons-material/Search";
 // import ClickAwayListener from "@mui/base/ClickAwayListener";
 import ArrowDropDownCircleOutlinedIcon from "@mui/icons-material/ArrowDropDownCircleOutlined";
+import logo from "../../../frontpage_images/sd-logo.png";
 
 import { Search } from "../search/Search";
 import { SearchIconWrapper } from "../search/SearchIconWrapper";
@@ -90,7 +91,9 @@ export default function DashBoard({
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div" className="title">
-              <NavLink to="/">Showdown Displays Digital Catalog</NavLink>
+              <NavLink to="/">
+                <img src={logo} />
+              </NavLink>
             </Typography>
             <Search>
               <SearchIconWrapper>

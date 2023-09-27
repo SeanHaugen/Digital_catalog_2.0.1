@@ -34,11 +34,6 @@ function Main({
 
   return (
     <React.Fragment>
-      {/* <CssBaseline /> */}
-
-      {/* <Container> */}
-      {/* <Sheet variant="soft" color="primary" className="box"> */}
-      {/* <Box sx={{ minHeight: 350 }}> */}
       <Card
         variant="outlined"
         sx={(theme) => ({
@@ -53,35 +48,8 @@ function Main({
           // resize: "vertical",
           // overflow: "scroll",
           gap: "clamp(0px, (100% - 360px + 32px) * 999, 16px)",
-          // transition: "transform 0.3s, border 0.3s",
-          // "&:hover": {
-          //   borderColor: theme.vars.palette.primary.outlinedHoverBorder,
-          //   transform: "translateY(-2px)",
-          // },
-          // "& > *": { minWidth: "clamp(0px, (360px - 100%) * 999,100%)" },
         })}
       >
-        {/* <AspectRatio
-          variant="soft"
-          sx={{
-            flexGrow: 1,
-            display: "contents",
-            "--AspectRatio-paddingBottom":
-              "clamp(0px, (100% - 360px) * 999, min(calc(100% / (16 / 9)), 300px))",
-          }}
-        > */}
-        {/* <Box sx={{ display: "flex" }}>
-              <IconButton
-                size="sm"
-                variant="plain"
-                color="neutral"
-                sx={{ ml: "auto", alignSelf: "flex-start" }}
-              >
-                <FavoriteBorderRoundedIcon color="danger" />
-              </IconButton>
-            </Box> */}
-        {/* </AspectRatio> */}
-
         <Routes>
           <Route
             path="/:category"

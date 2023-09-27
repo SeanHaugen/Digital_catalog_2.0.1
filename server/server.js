@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 const { GridFSBucket } = require("mongodb");
 const multer = require("multer");
+const bodyParser = require("body-parser");
 
 //imports
 
@@ -32,6 +33,8 @@ const port = process.env.PORT || 4000;
 
 // app.use(express.static("public"));
 app.use(express.json());
+app.use(bodyParser.json({ limit: "1000mb" }));
+app.use(bodyParser.urlencoded({ limit: "1000mb", extended: true }));
 
 const corsOptions = {
   origin: "*",
@@ -48,7 +51,12 @@ app.use(cors(corsOptions));
 //GridFS
 
 const storage = multer.memoryStorage(); // Store files in memory
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 50 * 1024 * 1024, // 50MB (adjust as needed)
+  },
+});
 
 app.post("/upload", upload.array("file", 10), (req, res) => {
   const bucket = new GridFSBucket(mongoose.connection.db);
@@ -62,13 +70,16 @@ app.post("/upload", upload.array("file", 10), (req, res) => {
 
   files.forEach((file) => {
     const uploadStream = bucket.openUploadStream(file.originalname, {
-      contentType: "application/pdf",
+      contentType: file.mimetype,
+      chunkSizeBytes: 1024 * 1024,
     });
 
     // You can directly use the file buffer here
-    uploadStream.end(file.buffer);
+    const readableStream = new Readable();
+    readableStream.push(file.buffer);
+    readableStream.push(null);
 
-    const fileType = file.mimetype;
+    readableStream.pipe(uploadStream);
 
     uploadPromises.push(
       new Promise((resolve, reject) => {
