@@ -49,7 +49,7 @@ app.use(cors(corsOptions));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //GridFS
-const bucket = new GridFSBucket(mongoose.connection.db);
+// const bucket = new GridFSBucket(mongoose.connection.db);
 
 const storage = multer.memoryStorage(); // Store files in memory
 const upload = multer({
