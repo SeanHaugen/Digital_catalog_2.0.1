@@ -5,7 +5,6 @@ const app = express();
 const cors = require("cors");
 const { GridFSBucket } = require("mongodb");
 const multer = require("multer");
-const bodyParser = require("body-parser");
 
 //imports
 
@@ -33,8 +32,6 @@ const port = process.env.PORT || 4000;
 
 // app.use(express.static("public"));
 app.use(express.json());
-app.use(bodyParser.json({ limit: "10000mb" }));
-app.use(bodyParser.urlencoded({ limit: "10000mb", extended: true }));
 
 const corsOptions = {
   origin: "*",
@@ -49,15 +46,9 @@ app.use(cors(corsOptions));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //GridFS
-// const bucket = new GridFSBucket(mongoose.connection.db);
 
 const storage = multer.memoryStorage(); // Store files in memory
-const upload = multer({
-  storage,
-  limits: {
-    fileSize: 500 * 1024 * 1024, // 50MB (adjust as needed)
-  },
-});
+const upload = multer({ storage });
 
 app.post("/upload", upload.array("file", 10), (req, res) => {
   const bucket = new GridFSBucket(mongoose.connection.db);
@@ -71,16 +62,13 @@ app.post("/upload", upload.array("file", 10), (req, res) => {
 
   files.forEach((file) => {
     const uploadStream = bucket.openUploadStream(file.originalname, {
-      contentType: file.mimetype,
-      chunkSizeBytes: 1024 * 1024,
+      contentType: "application/pdf",
     });
 
     // You can directly use the file buffer here
-    const readableStream = new Readable();
-    readableStream.push(file.buffer);
-    readableStream.push(null);
+    uploadStream.end(file.buffer);
 
-    readableStream.pipe(uploadStream);
+    const fileType = file.mimetype;
 
     uploadPromises.push(
       new Promise((resolve, reject) => {
@@ -119,31 +107,6 @@ app.get("/download/:filename", (req, res) => {
 
   downloadStream.pipe(res);
 });
-
-// app.get("/images/:imageName", (req, res) => {
-//   const imageName = req.params.imageName;
-
-//   // Find the image in fs.files by _id
-//   DB.collection("fs.files").findOne({ filename: imageName }, (err, file) => {
-//     if (err) {
-//       console.error(err);
-//       return res.status(500).send("Error retrieving image");
-//     }
-
-//     if (!file) {
-//       return res.status(404).send("Image not found");
-//     }
-
-//     // Create a read stream from fs.chunks
-//     const readStream = bucket.openDownloadStream(file._id);
-
-//     // Set the response content type based on the file's contentType field
-//     res.set("Content-Type", file.contentType);
-
-//     // Pipe the image data to the response
-//     readStream.pipe(res);
-//   });
-// });
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //Pricing
 
