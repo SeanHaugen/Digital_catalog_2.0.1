@@ -3,8 +3,6 @@ const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { GridFSBucket } = require("mongodb");
-const multer = require("multer");
 
 //imports
 
@@ -47,66 +45,66 @@ app.use(cors(corsOptions));
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //GridFS
 
-const storage = multer.memoryStorage(); // Store files in memory
-const upload = multer({ storage });
+// const storage = multer.memoryStorage(); // Store files in memory
+// const upload = multer({ storage });
 
-app.post("/upload", upload.array("file", 10), (req, res) => {
-  const bucket = new GridFSBucket(mongoose.connection.db);
-  const files = req.files; // Assuming you're sending the files in the request body
+// app.post("/upload", upload.array("file", 10), (req, res) => {
+//   const bucket = new GridFSBucket(mongoose.connection.db);
+//   const files = req.files; // Assuming you're sending the files in the request body
 
-  if (!files || files.length === 0) {
-    return res.status(400).json({ error: "No files provided" });
-  }
+//   if (!files || files.length === 0) {
+//     return res.status(400).json({ error: "No files provided" });
+//   }
 
-  const uploadPromises = [];
+//   const uploadPromises = [];
 
-  files.forEach((file) => {
-    const uploadStream = bucket.openUploadStream(file.originalname, {
-      contentType: "application/pdf",
-    });
+//   files.forEach((file) => {
+//     const uploadStream = bucket.openUploadStream(file.originalname, {
+//       contentType: "application/pdf",
+//     });
 
-    // You can directly use the file buffer here
-    uploadStream.end(file.buffer);
+//     // You can directly use the file buffer here
+//     uploadStream.end(file.buffer);
 
-    const fileType = file.mimetype;
+//     const fileType = file.mimetype;
 
-    uploadPromises.push(
-      new Promise((resolve, reject) => {
-        uploadStream.on("finish", () => {
-          resolve();
-        });
+//     uploadPromises.push(
+//       new Promise((resolve, reject) => {
+//         uploadStream.on("finish", () => {
+//           resolve();
+//         });
 
-        uploadStream.on("error", (error) => {
-          console.error("Error uploading file:", error);
-          reject(error);
-        });
-      })
-    );
-  });
+//         uploadStream.on("error", (error) => {
+//           console.error("Error uploading file:", error);
+//           reject(error);
+//         });
+//       })
+//     );
+//   });
 
-  Promise.all(uploadPromises)
-    .then(() => {
-      res.status(201).json({ message: "Files uploaded successfully" });
-    })
-    .catch((error) => {
-      res.status(500).json({ error: "File upload failed" });
-    });
-});
+//   Promise.all(uploadPromises)
+//     .then(() => {
+//       res.status(201).json({ message: "Files uploaded successfully" });
+//     })
+//     .catch((error) => {
+//       res.status(500).json({ error: "File upload failed" });
+//     });
+// });
 
-// Download a file from GridFS
-app.get("/download/:filename", (req, res) => {
-  const bucket = new GridFSBucket(mongoose.connection.db);
-  const { filename } = req.params;
+// // Download a file from GridFS
+// app.get("/download/:filename", (req, res) => {
+//   const bucket = new GridFSBucket(mongoose.connection.db);
+//   const { filename } = req.params;
 
-  const downloadStream = bucket.openDownloadStreamByName(filename);
+//   const downloadStream = bucket.openDownloadStreamByName(filename);
 
-  downloadStream.on("error", (error) => {
-    console.error("Error downloading file:", error);
-    res.status(500).json({ error: "File download failed" });
-  });
+//   downloadStream.on("error", (error) => {
+//     console.error("Error downloading file:", error);
+//     res.status(500).json({ error: "File download failed" });
+//   });
 
-  downloadStream.pipe(res);
-});
+//   downloadStream.pipe(res);
+// });
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //Pricing
 
