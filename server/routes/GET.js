@@ -102,6 +102,7 @@ router.get("/eurofits", async (req, res) => {
   }
 });
 
+//get media info Specifications
 router.get("/mediaspecs", async (req, res) => {
   try {
     const media = req.query.item;
@@ -115,11 +116,13 @@ router.get("/mediaspecs", async (req, res) => {
   }
 });
 
+//Get the item category
 router.get("/category", async (req, res) => {
   const allItems = await items.distinct("Category");
   res.send(allItems);
 });
 
+//Get the item category
 router.get("/category/:category", async (req, res) => {
   try {
     const productCategory = req.params.category.replace(/"/g, "");
@@ -136,11 +139,13 @@ router.get("/category/:category", async (req, res) => {
   }
 });
 
+//Get the subcategory
 router.get("/SubCategory", async (req, res) => {
   const allItems = await items.distinct("SubCategory");
   res.send(allItems);
 });
 
+//get the item
 router.get("/subCategory/:items", async (req, res) => {
   const productCategory = req.params.items;
 
@@ -155,6 +160,7 @@ router.get("/subCategory/:items", async (req, res) => {
   }
 });
 
+//Get items through Search
 router.get("/items", async (req, res) => {
   const itemNumber = req.query.item;
   try {
@@ -187,7 +193,6 @@ router.get("/search", async (req, res) => {
         )
         .sort({ score: { $meta: "textScore" } });
     }
-
     res.json(results);
   } catch (error) {
     console.log("Error searching database");

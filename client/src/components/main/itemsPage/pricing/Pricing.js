@@ -111,7 +111,7 @@ function PricingTable({ productData }) {
                     ) : (
                       <>
                         {cellData}
-                        <MonetizationOnIcon
+                        <button
                           onClick={() =>
                             handlePriceUpdateClick(
                               rowIndex,
@@ -119,7 +119,9 @@ function PricingTable({ productData }) {
                               cellData
                             )
                           }
-                        />
+                        >
+                          edit
+                        </button>
                       </>
                     )}
                   </TableCell>
