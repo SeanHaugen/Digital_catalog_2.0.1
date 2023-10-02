@@ -7,4 +7,6 @@ const InfoSchema = new mongoose.Schema({
   Pricing: [String],
 });
 
-export const InfoModel = mongoose.model("internalinfos", InfoSchema);
+const InfoModel = mongoose.model("internalinfos", InfoSchema);
+
+module.exports = InfoModel;

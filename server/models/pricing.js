@@ -12,4 +12,6 @@ const PricingSchema = new mongoose.Schema({
   ],
 });
 
-export const PricingModel = mongoose.model("itempricing", PricingSchema);
+const PricingModel = mongoose.model("itempricing", PricingSchema);
+
+module.exports = PricingModel;

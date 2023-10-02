@@ -7,4 +7,6 @@ const eurofitSchema = new mongoose.Schema({
   Additional_Information: String,
 });
 
-export const Eurofit = mongoose.model("Eurofits", eurofitSchema);
+const Eurofit = mongoose.model("Eurofits", eurofitSchema);
+
+module.exports = Eurofit;

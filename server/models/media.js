@@ -83,4 +83,6 @@ const mediaSchema = new mongoose.Schema({
   },
 });
 
-export const mediaModel = mongoose.model("mediaspecs", mediaSchema);
+const mediaModel = mongoose.model("mediaspecs", mediaSchema);
+
+module.exports = mediaModel;

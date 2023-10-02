@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const PricingModel = require("../models/pricing");
 const InfoModel = require("../models/info");
-const Eurofit = require("../models/eurofits");
+const Eurofit = require("../models/eurofit");
 const mediaModel = require("../models/media");
+const items = require("../models/item");
 
 router.get("/pricing/:criteria/:item", async (req, res) => {
   try {
@@ -58,6 +59,24 @@ router.get("/info", async (req, res) => {
   }
 });
 
+//get flatrates
+router.get("/flatRates/:item", async (req, res) => {
+  try {
+    const flatRateItem = req.params.item;
+    const rateInfo = await flatRateModel.find({
+      Item_Number: flatRateItem,
+      Service: { $in: ["GROUND SERVICE", "2DAY", "STANDARD OVERNIGHT"] },
+    });
+    console.log(rateInfo);
+    if (rateInfo.length === 0) {
+      return res.status(404).json({ message: "Internal Info not found" });
+    }
+    res.json(rateInfo);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 //get Eurofit info
 router.get("/eurofits", async (req, res) => {
   try {
@@ -83,7 +102,7 @@ router.get("/eurofits", async (req, res) => {
   }
 });
 
-app.get("/mediaspecs", async (req, res) => {
+router.get("/mediaspecs", async (req, res) => {
   try {
     const media = req.query.item;
     const mediaInfo = await mediaModel.find({
@@ -93,6 +112,88 @@ app.get("/mediaspecs", async (req, res) => {
     res.json(mediaInfo);
   } catch (err) {
     res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.get("/category", async (req, res) => {
+  const allItems = await items.distinct("Category");
+  res.send(allItems);
+});
+
+router.get("/category/:category", async (req, res) => {
+  try {
+    const productCategory = req.params.category.replace(/"/g, "");
+    const result = await items.aggregate([
+      { $match: { Category: productCategory } },
+      { $group: { _id: "$SubCategory" } },
+      { $sort: { _id: 1 } },
+    ]);
+    const subcategories = result.map((item) => item._id);
+    res.send(subcategories);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error!");
+  }
+});
+
+router.get("/SubCategory", async (req, res) => {
+  const allItems = await items.distinct("SubCategory");
+  res.send(allItems);
+});
+
+router.get("/subCategory/:items", async (req, res) => {
+  const productCategory = req.params.items;
+
+  try {
+    const products = await items
+      .find({ SubCategory: productCategory })
+      .sort({ Name: 1 });
+    res.send(products);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.get("/items", async (req, res) => {
+  const itemNumber = req.query.item;
+  try {
+    const item = await items.findOne({ Item_Number: itemNumber });
+    res.send(item);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.get("/search", async (req, res) => {
+  const searchQuery = req.query.q;
+
+  try {
+    const numericQuery = parseFloat(searchQuery);
+    let results;
+
+    if (!isNaN(numericQuery)) {
+      results = await items.find({ Item_Number: numericQuery });
+    } else {
+      results = await items
+        .find(
+          {
+            $text: { $search: searchQuery },
+          },
+          {
+            score: { $meta: "textScore" },
+          }
+        )
+        .sort({ score: { $meta: "textScore" } });
+    }
+
+    res.json(results);
+  } catch (error) {
+    console.log("Error searching database");
+    res
+      .status(500)
+      .json({ error: "An error occurred while searching the database." });
   }
 });
 

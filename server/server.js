@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 //requests
 const getRoutes = require("./routes/GET");
+const putRoutes = require("./routes/PUT");
 
 //imports
 
@@ -32,8 +33,9 @@ const port = process.env.PORT || 4000;
 
 // app.use(express.static("public"));
 app.use(express.json());
-app.use("/pricing", getRoutes);
-app.use("/info", getRoutes);
+// app.use("/pricing", getRoutes);
+app.use("/get", getRoutes);
+app.use("/put", putRoutes);
 
 const corsOptions = {
   origin: "*",
@@ -46,259 +48,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-//Additional info - mediaspecs
-
-// const mediaSchema = new mongoose.Schema({
-//   title: {
-//     type: String,
-//     required: true,
-//   },
-//   itemNumbers: {
-//     type: [String],
-//     required: false,
-//   },
-//   inkCompatibility: {
-//     type: String,
-//     required: false,
-//   },
-//   content: {
-//     type: String,
-//     required: false,
-//   },
-//   surface: {
-//     type: String,
-//     required: false,
-//   },
-//   scrimConstruction: {
-//     type: String,
-//     required: false,
-//   },
-//   thickness: {
-//     type: String,
-//     required: false,
-//   },
-//   weight: {
-//     type: String,
-//     required: false,
-//   },
-//   coldCrack: {
-//     type: String,
-//     required: false,
-//   },
-//   tensileStrength: {
-//     type: String,
-//     required: false,
-//   },
-//   tearStrength: {
-//     type: String,
-//     required: false,
-//   },
-//   rollLength: {
-//     type: String,
-//     required: false,
-//   },
-//   core: {
-//     type: String,
-//     required: false,
-//   },
-//   packaging: {
-//     type: String,
-//     required: false,
-//   },
-//   countryOfOrigin: {
-//     type: String,
-//     required: false,
-//   },
-//   flameResistance: {
-//     type: String,
-//     required: false,
-//   },
-//   applications: {
-//     type: String,
-//     required: false,
-//   },
-//   storage: {
-//     type: String,
-//     required: false,
-//   },
-//   prop65: {
-//     type: String,
-//     required: false,
-//   },
-//   type: {
-//     type: String,
-//     required: true,
-//   },
-// });
-
-// const mediaModel = mongoose.model("mediaspecs", mediaSchema);
-
-// app.get("/mediaspecs", async (req, res) => {
-//   try {
-//     const media = req.query.item;
-//     const mediaInfo = await mediaModel.find({
-//       Type: media,
-//     });
-//     console.log(mediaInfo);
-//     res.json(mediaInfo);
-//   } catch (err) {
-//     res.status(500).json({ message: "Server error" });
-//   }
-// });
-
 //additional info -parades and floats
 
 //stands and furniture
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-//Flat Rate Shipping info
-
-const flatRateSchema = new mongoose.Schema({
-  Item_Number: Number,
-  Service: String,
-  Rate: Number,
-});
-
-const flatRateModel = mongoose.model("flatrateshippings", flatRateSchema);
-
-app.get("/flatRates/:item", async (req, res) => {
-  try {
-    const flatRateItem = req.params.item;
-    const rateInfo = await flatRateModel.find({
-      Item_Number: flatRateItem,
-      Service: { $in: ["GROUND SERVICE", "2DAY", "STANDARD OVERNIGHT"] },
-    });
-    console.log(rateInfo);
-    if (rateInfo.length === 0) {
-      return res.status(404).json({ message: "Internal Info not found" });
-    }
-    res.json(rateInfo);
-  } catch (err) {
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-//Item Information/details
-
-const itemSchema = new mongoose.Schema({
-  Item_Number: {
-    type: Number,
-    required: false,
-  },
-  Name: {
-    type: String,
-    required: false,
-  },
-  Category: {
-    type: String,
-    required: false,
-  },
-  SubCategory: {
-    type: String,
-    required: false,
-  },
-  Description: {
-    type: String,
-    required: false,
-  },
-  Keywords: {
-    type: String,
-    required: false,
-  },
-});
-
-itemSchema.index({
-  Name: "text",
-  Category: "text",
-  SubCategory: "text",
-  Description: "text",
-  Keywords: "text",
-});
-
-const items = mongoose.model("items", itemSchema);
-
-app.get("/category", async (req, res) => {
-  const allItems = await items.distinct("Category");
-  res.send(allItems);
-});
-
-app.get("/category/:category", async (req, res) => {
-  try {
-    const productCategory = req.params.category.replace(/"/g, "");
-    const result = await items.aggregate([
-      { $match: { Category: productCategory } },
-      { $group: { _id: "$SubCategory" } },
-      { $sort: { _id: 1 } },
-    ]);
-    const subcategories = result.map((item) => item._id);
-    res.send(subcategories);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Internal Server Error!");
-  }
-});
-
-app.get("/SubCategory", async (req, res) => {
-  const allItems = await items.distinct("SubCategory");
-  res.send(allItems);
-});
-
-app.get("/subCategory/:items", async (req, res) => {
-  const productCategory = req.params.items;
-
-  try {
-    const products = await items
-      .find({ SubCategory: productCategory })
-      .sort({ Name: 1 });
-    res.send(products);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-app.get("/items", async (req, res) => {
-  const itemNumber = req.query.item;
-  try {
-    const item = await items.findOne({ Item_Number: itemNumber });
-    res.send(item);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-app.get("/search", async (req, res) => {
-  const searchQuery = req.query.q;
-
-  try {
-    const numericQuery = parseFloat(searchQuery);
-    let results;
-
-    if (!isNaN(numericQuery)) {
-      results = await items.find({ Item_Number: numericQuery });
-    } else {
-      results = await items
-        .find(
-          {
-            $text: { $search: searchQuery },
-          },
-          {
-            score: { $meta: "textScore" },
-          }
-        )
-        .sort({ score: { $meta: "textScore" } });
-    }
-
-    res.json(results);
-  } catch (error) {
-    console.log("Error searching database");
-    res
-      .status(500)
-      .json({ error: "An error occurred while searching the database." });
-  }
-});
 
 //post requests
 
