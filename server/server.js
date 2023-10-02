@@ -46,170 +46,105 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-///////////////////////////////////////////////////////////////////////////////////////////
-//Internal Information
+//Additional info - mediaspecs
 
-// const InfoSchema = new mongoose.Schema({
-//   url: String,
-//   Name: String,
-//   Item_Number: String,
-//   Pricing: [String],
+// const mediaSchema = new mongoose.Schema({
+//   title: {
+//     type: String,
+//     required: true,
+//   },
+//   itemNumbers: {
+//     type: [String],
+//     required: false,
+//   },
+//   inkCompatibility: {
+//     type: String,
+//     required: false,
+//   },
+//   content: {
+//     type: String,
+//     required: false,
+//   },
+//   surface: {
+//     type: String,
+//     required: false,
+//   },
+//   scrimConstruction: {
+//     type: String,
+//     required: false,
+//   },
+//   thickness: {
+//     type: String,
+//     required: false,
+//   },
+//   weight: {
+//     type: String,
+//     required: false,
+//   },
+//   coldCrack: {
+//     type: String,
+//     required: false,
+//   },
+//   tensileStrength: {
+//     type: String,
+//     required: false,
+//   },
+//   tearStrength: {
+//     type: String,
+//     required: false,
+//   },
+//   rollLength: {
+//     type: String,
+//     required: false,
+//   },
+//   core: {
+//     type: String,
+//     required: false,
+//   },
+//   packaging: {
+//     type: String,
+//     required: false,
+//   },
+//   countryOfOrigin: {
+//     type: String,
+//     required: false,
+//   },
+//   flameResistance: {
+//     type: String,
+//     required: false,
+//   },
+//   applications: {
+//     type: String,
+//     required: false,
+//   },
+//   storage: {
+//     type: String,
+//     required: false,
+//   },
+//   prop65: {
+//     type: String,
+//     required: false,
+//   },
+//   type: {
+//     type: String,
+//     required: true,
+//   },
 // });
 
-// const InfoModel = mongoose.model("internalinfos", InfoSchema);
+// const mediaModel = mongoose.model("mediaspecs", mediaSchema);
 
-// app.get("/info", async (req, res) => {
+// app.get("/mediaspecs", async (req, res) => {
 //   try {
-//     const itemInfo = req.query.item;
-//     const info = await InfoModel.findOne({
-//       Item_Number: itemInfo.trim(),
+//     const media = req.query.item;
+//     const mediaInfo = await mediaModel.find({
+//       Type: media,
 //     });
-//     console.log(info);
-
-//     if (!info) {
-//       return res.status(404).json({ message: "Internal Info not found" });
-//     }
-
-//     res.json(info);
-//   } catch (error) {
+//     console.log(mediaInfo);
+//     res.json(mediaInfo);
+//   } catch (err) {
 //     res.status(500).json({ message: "Server error" });
 //   }
 // });
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-//Additional Eurofit Info
-
-const eurofitSchema = new mongoose.Schema({
-  Measurements: String,
-  Name: String,
-  Item_Number: Number,
-  Additional_Information: String,
-});
-
-const Eurofit = mongoose.model("Eurofits", eurofitSchema);
-
-app.get("/eurofits", async (req, res) => {
-  try {
-    const itemNumber = parseInt(req.query.item);
-
-    if (isNaN(itemNumber)) {
-      return res.status(400).json({ message: "Invalid Item_Number provided" });
-    }
-
-    const info = await Eurofit.findOne({
-      Item_Number: itemNumber,
-    });
-
-    if (!info) {
-      return res.status(404).json({ message: "Eurofit Info not found!" });
-    }
-
-    console.log("Query:", info);
-
-    res.json(info);
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
-//Additional info - mediaspecs
-
-const mediaSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  itemNumbers: {
-    type: [String],
-    required: false,
-  },
-  inkCompatibility: {
-    type: String,
-    required: false,
-  },
-  content: {
-    type: String,
-    required: false,
-  },
-  surface: {
-    type: String,
-    required: false,
-  },
-  scrimConstruction: {
-    type: String,
-    required: false,
-  },
-  thickness: {
-    type: String,
-    required: false,
-  },
-  weight: {
-    type: String,
-    required: false,
-  },
-  coldCrack: {
-    type: String,
-    required: false,
-  },
-  tensileStrength: {
-    type: String,
-    required: false,
-  },
-  tearStrength: {
-    type: String,
-    required: false,
-  },
-  rollLength: {
-    type: String,
-    required: false,
-  },
-  core: {
-    type: String,
-    required: false,
-  },
-  packaging: {
-    type: String,
-    required: false,
-  },
-  countryOfOrigin: {
-    type: String,
-    required: false,
-  },
-  flameResistance: {
-    type: String,
-    required: false,
-  },
-  applications: {
-    type: String,
-    required: false,
-  },
-  storage: {
-    type: String,
-    required: false,
-  },
-  prop65: {
-    type: String,
-    required: false,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-});
-
-const mediaModel = mongoose.model("mediaspecs", mediaSchema);
-app.get("/mediaspecs", async (req, res) => {
-  try {
-    const media = req.query.item;
-    const mediaInfo = await mediaModel.find({
-      Type: media,
-    });
-    console.log(mediaInfo);
-    res.json(mediaInfo);
-  } catch (err) {
-    res.status(500).json({ message: "Server error" });
-  }
-});
 
 //additional info -parades and floats
 
