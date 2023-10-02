@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
 const cors = require("cors");
+//requests
+const getRoutes = require("./routes/GET");
 
 //imports
 
@@ -30,6 +32,7 @@ const port = process.env.PORT || 4000;
 
 // app.use(express.static("public"));
 app.use(express.json());
+app.use("/pricing", getRoutes);
 
 const corsOptions = {
   origin: "*",
@@ -42,117 +45,53 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//GridFS
-
-// const storage = multer.memoryStorage(); // Store files in memory
-// const upload = multer({ storage });
-
-// app.post("/upload", upload.array("file", 10), (req, res) => {
-//   const bucket = new GridFSBucket(mongoose.connection.db);
-//   const files = req.files; // Assuming you're sending the files in the request body
-
-//   if (!files || files.length === 0) {
-//     return res.status(400).json({ error: "No files provided" });
-//   }
-
-//   const uploadPromises = [];
-
-//   files.forEach((file) => {
-//     const uploadStream = bucket.openUploadStream(file.originalname, {
-//       contentType: "application/pdf",
-//     });
-
-//     // You can directly use the file buffer here
-//     uploadStream.end(file.buffer);
-
-//     const fileType = file.mimetype;
-
-//     uploadPromises.push(
-//       new Promise((resolve, reject) => {
-//         uploadStream.on("finish", () => {
-//           resolve();
-//         });
-
-//         uploadStream.on("error", (error) => {
-//           console.error("Error uploading file:", error);
-//           reject(error);
-//         });
-//       })
-//     );
-//   });
-
-//   Promise.all(uploadPromises)
-//     .then(() => {
-//       res.status(201).json({ message: "Files uploaded successfully" });
-//     })
-//     .catch((error) => {
-//       res.status(500).json({ error: "File upload failed" });
-//     });
-// });
-
-// // Download a file from GridFS
-// app.get("/download/:filename", (req, res) => {
-//   const bucket = new GridFSBucket(mongoose.connection.db);
-//   const { filename } = req.params;
-
-//   const downloadStream = bucket.openDownloadStreamByName(filename);
-
-//   downloadStream.on("error", (error) => {
-//     console.error("Error downloading file:", error);
-//     res.status(500).json({ error: "File download failed" });
-//   });
-
-//   downloadStream.pipe(res);
-// });
-//////////////////////////////////////////////////////////////////////////////////////////////////
 //Pricing
 
-const PricingSchema = new mongoose.Schema({
-  url: String,
-  Name: String,
-  Item_Number: String,
-  Pricing: [
-    [String, String, String, String, String],
-    [String, String, String, String, String],
-  ],
-});
+// const PricingSchema = new mongoose.Schema({
+//   url: String,
+//   Name: String,
+//   Item_Number: String,
+//   Pricing: [
+//     [String, String, String, String, String],
+//     [String, String, String, String, String],
+//   ],
+// });
 
-const PricingModel = mongoose.model("itempricing", PricingSchema);
+// const PricingModel = mongoose.model("itempricing", PricingSchema);
 
-app.get("/pricing/:criteria/:item", async (req, res) => {
-  try {
-    const criteria = req.params.criteria;
-    const itemValue = req.params.item;
-    let query = {};
+// app.get("/pricing/:criteria/:item", async (req, res) => {
+//   try {
+//     const criteria = req.params.criteria;
+//     const itemValue = req.params.item;
+//     let query = {};
 
-    // Define the query based on the criteria
-    if (criteria === "item_number") {
-      query.Item_Number = itemValue.trim();
-    } else if (criteria === "name") {
-      query.Name = itemValue.trim();
-    } else if (criteria === "url") {
-      query.url = itemValue.trim();
-    } else {
-      return res.status(400).json({ message: "Invalid search criteria" });
-    }
+//     // Define the query based on the criteria
+//     if (criteria === "item_number") {
+//       query.Item_Number = itemValue.trim();
+//     } else if (criteria === "name") {
+//       query.Name = itemValue.trim();
+//     } else if (criteria === "url") {
+//       query.url = itemValue.trim();
+//     } else {
+//       return res.status(400).json({ message: "Invalid search criteria" });
+//     }
 
-    const pricingDoc = await PricingModel.findOne(query);
-    // const pricingDoc = await PricingModel.findOne({
-    //   Item_Number: pricingItem.trim(), // Trim whitespace including newlines
-    // });
+//     const pricingDoc = await PricingModel.findOne(query);
+//     // const pricingDoc = await PricingModel.findOne({
+//     //   Item_Number: pricingItem.trim(), // Trim whitespace including newlines
+//     // });
 
-    if (!pricingDoc) {
-      return res.status(404).json({ message: "Pricing not found" });
-    }
+//     if (!pricingDoc) {
+//       return res.status(404).json({ message: "Pricing not found" });
+//     }
 
-    const pricingArrays = pricingDoc.Pricing; // Extract the Pricing arrays
+//     const pricingArrays = pricingDoc.Pricing; // Extract the Pricing arrays
 
-    res.json(pricingArrays);
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
-  }
-});
+//     res.json(pricingArrays);
+//   } catch (error) {
+//     res.status(500).json({ message: "Server error" });
+//   }
+// });
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //Internal Information
@@ -551,8 +490,14 @@ app.put("/update/:itemNumber", async (req, res) => {
     //   itemToUpdate.SubCategory = req.body.SubCategory;
     if ("Description" in req.body)
       itemToUpdate.Description += " " + req.body.Description;
-    // if ("Keywords" in req.body)
-    //   itemToUpdate.Keywords += " " + req.body.Keywords;
+    if ("Materials" in req.body)
+      itemToUpdate.Materials += " " + req.body.Materials;
+    if ("Package_Weight" in req.body)
+      itemToUpdate.Package_Weight += " " + req.body.Package_Weight;
+    if ("Imprint_Method" in req.body)
+      itemToUpdate.Imprint_Method += " " + req.body.Imprint_Method;
+    if ("Imprint_Method" in req.body)
+      itemToUpdate.Imprint_Method += " " + req.body.Imprint_Method;
 
     await itemToUpdate.save();
 
