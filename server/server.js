@@ -33,6 +33,7 @@ const port = process.env.PORT || 4000;
 // app.use(express.static("public"));
 app.use(express.json());
 app.use("/pricing", getRoutes);
+app.use("/info", getRoutes);
 
 const corsOptions = {
   origin: "*",
@@ -45,83 +46,35 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-//Pricing
+///////////////////////////////////////////////////////////////////////////////////////////
+//Internal Information
 
-// const PricingSchema = new mongoose.Schema({
+// const InfoSchema = new mongoose.Schema({
 //   url: String,
 //   Name: String,
 //   Item_Number: String,
-//   Pricing: [
-//     [String, String, String, String, String],
-//     [String, String, String, String, String],
-//   ],
+//   Pricing: [String],
 // });
 
-// const PricingModel = mongoose.model("itempricing", PricingSchema);
+// const InfoModel = mongoose.model("internalinfos", InfoSchema);
 
-// app.get("/pricing/:criteria/:item", async (req, res) => {
+// app.get("/info", async (req, res) => {
 //   try {
-//     const criteria = req.params.criteria;
-//     const itemValue = req.params.item;
-//     let query = {};
+//     const itemInfo = req.query.item;
+//     const info = await InfoModel.findOne({
+//       Item_Number: itemInfo.trim(),
+//     });
+//     console.log(info);
 
-//     // Define the query based on the criteria
-//     if (criteria === "item_number") {
-//       query.Item_Number = itemValue.trim();
-//     } else if (criteria === "name") {
-//       query.Name = itemValue.trim();
-//     } else if (criteria === "url") {
-//       query.url = itemValue.trim();
-//     } else {
-//       return res.status(400).json({ message: "Invalid search criteria" });
+//     if (!info) {
+//       return res.status(404).json({ message: "Internal Info not found" });
 //     }
 
-//     const pricingDoc = await PricingModel.findOne(query);
-//     // const pricingDoc = await PricingModel.findOne({
-//     //   Item_Number: pricingItem.trim(), // Trim whitespace including newlines
-//     // });
-
-//     if (!pricingDoc) {
-//       return res.status(404).json({ message: "Pricing not found" });
-//     }
-
-//     const pricingArrays = pricingDoc.Pricing; // Extract the Pricing arrays
-
-//     res.json(pricingArrays);
+//     res.json(info);
 //   } catch (error) {
 //     res.status(500).json({ message: "Server error" });
 //   }
 // });
-
-///////////////////////////////////////////////////////////////////////////////////////////
-//Internal Information
-
-const InfoSchema = new mongoose.Schema({
-  url: String,
-  Name: String,
-  Item_Number: String,
-  Pricing: [String],
-});
-
-const InfoModel = mongoose.model("internalinfos", InfoSchema);
-
-app.get("/info", async (req, res) => {
-  try {
-    const itemInfo = req.query.item;
-    const info = await InfoModel.findOne({
-      Item_Number: itemInfo.trim(),
-    });
-    console.log(info);
-
-    if (!info) {
-      return res.status(404).json({ message: "Internal Info not found" });
-    }
-
-    res.json(info);
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
-  }
-});
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //Additional Eurofit Info

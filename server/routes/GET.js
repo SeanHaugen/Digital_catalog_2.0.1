@@ -36,4 +36,22 @@ router.get("/pricing/:criteria/:item", async (req, res) => {
   }
 });
 
+router.get("/info", async (req, res) => {
+  try {
+    const itemInfo = req.query.item;
+    const info = await InfoModel.findOne({
+      Item_Number: itemInfo.trim(),
+    });
+    console.log(info);
+
+    if (!info) {
+      return res.status(404).json({ message: "Internal Info not found" });
+    }
+
+    res.json(info);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = router;
