@@ -13,6 +13,7 @@ function AdditionalInfo({ productData }) {
     </ul>
   ));
   let eurofitSlice = eurofitArray.splice(1, 2);
+  console.log(eurofitSlice);
 
   return <div>{eurofitSlice}</div>;
 }

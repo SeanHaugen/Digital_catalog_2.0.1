@@ -37,7 +37,7 @@ function Main({
       <Card
         variant="outlined"
         sx={(theme) => ({
-          width: "90%",
+          width: "95%",
           marginLeft: 10,
           marginRight: 10,
           // height: "fitContent",
@@ -51,6 +51,16 @@ function Main({
         })}
       >
         <Routes>
+          <Route
+            path="/"
+            element={
+              <FrontPage
+                category={category}
+                subCategory={subCategory}
+                setSubCategory={setSubCategory}
+              />
+            }
+          />
           <Route
             path="/:category"
             element={
@@ -94,7 +104,6 @@ function Main({
               />
             }
           />
-          <Route path="*" element={<FrontPage />} />
         </Routes>
 
         {/* </Container> */}
