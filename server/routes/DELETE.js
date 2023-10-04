@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const items = require("../models/item");
 
-router.delete("/:itemNumber", async (req, res) => {
+router.delete("/delete/:itemNumber", async (req, res) => {
   try {
     let itemToDelete = req.params.itemNumber;
 

@@ -222,7 +222,7 @@ export const useDeleteItem = (item, onDeleteSuccess, onDeleteError) => {
   const deleteItem = async () => {
     try {
       const response = await axios.delete(
-        `https://ivory-firefly-hem.cyclic.app/${item}`
+        `https://ivory-firefly-hem.cyclic.app/delete/${item}`
       );
 
       // Check the status code to ensure the deletion was successful
