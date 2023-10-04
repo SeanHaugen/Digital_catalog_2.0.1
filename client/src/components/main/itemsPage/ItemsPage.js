@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import { Item } from "../../../helper/Item";
 import PricingTable from "./pricing/Pricing";
@@ -6,6 +7,7 @@ import FindImage from "./findImage/FindImage";
 import Description from "./description/Description";
 import Breadcrumb from "./breadcrumbs/BreadCrumbs";
 import ItemTabs from "./tabs/ItemTabs";
+import DeleteButton from "./Delete/DeleteButton.js";
 
 function ItemPage({ productData, category, subCategory }) {
   // const [copiedText, setCopiedText] = useState("");
@@ -13,6 +15,19 @@ function ItemPage({ productData, category, subCategory }) {
   //   copiedText.select();
   //   navigator.clipboard.writeText(copyText.value);
   // };
+
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
+
+  const handleDeleteSuccess = () => {
+    setDeleteSuccess(true);
+    setDeleteError(null);
+  };
+
+  const handleDeleteError = (error) => {
+    setDeleteSuccess(false);
+    setDeleteError(error);
+  };
 
   return (
     <div>
@@ -46,6 +61,17 @@ function ItemPage({ productData, category, subCategory }) {
       <Grid>
         <ItemTabs productData={productData} />
       </Grid>
+      <div>
+        <h2>Delete Product Item</h2>
+        <DeleteButton
+          itemNumber={productData.Item_Number} // Replace with your actual item number
+          onDeleteSuccess={handleDeleteSuccess}
+          onDeleteError={handleDeleteError}
+        />
+
+        {deleteSuccess && <p>Item deleted successfully!</p>}
+        {deleteError && <p>Error: {deleteError}</p>}
+      </div>
     </div>
   );
 }

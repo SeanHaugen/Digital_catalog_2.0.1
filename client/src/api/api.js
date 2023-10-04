@@ -217,3 +217,25 @@ export const useHandleMediaInfo = (setState, item) => {
     fetchData();
   }, [item, setState]);
 };
+
+export const useDeleteItem = (item, onDeleteSuccess, onDeleteError) => {
+  const deleteItem = async () => {
+    try {
+      const response = await axios.delete(
+        `https://ivory-firefly-hem.cyclic.app/${item}`
+      );
+
+      // Check the status code to ensure the deletion was successful
+      if (response.status === 200) {
+        onDeleteSuccess();
+      } else {
+        onDeleteError("Delete request failed");
+      }
+    } catch (error) {
+      console.error(error);
+      onDeleteError("An error occurred while deleting");
+    }
+  };
+
+  return deleteItem;
+};

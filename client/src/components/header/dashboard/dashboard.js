@@ -36,7 +36,7 @@ export default function DashBoard({
   setQuery,
 }) {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [categoryData, setCategoryData] = useState([]);
   const [searchEntered, setSearchEntered] = useState(false);
   const navigate = useNavigate();
@@ -55,11 +55,11 @@ export default function DashBoard({
 
   const handleCategoryClick = (cat) => {
     setCategory(cat);
-    setOpen(false);
+    setOpen(true);
   };
 
   const handleClickAway = () => {
-    setOpen(false);
+    setOpen(true);
   };
 
   const handleSearch = (e) => {

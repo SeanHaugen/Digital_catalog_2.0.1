@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const items = require("../models/item");
 
-router.delete("/delete/:itemNumber", async (req, res) => {
+router.delete("/:itemNumber", async (req, res) => {
   try {
     let itemToDelete = req.params.itemNumber;
 
-    await items.findOneAndDelete({ Item_Number: itemToDelete });
+    const deletedItem = await items.findOneAndDelete({
+      Item_Number: itemToDelete,
+    });
 
     if (!deletedItem) {
       return res.status(404).json({ message: "Item not found" });

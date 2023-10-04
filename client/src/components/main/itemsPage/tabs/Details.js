@@ -1,4 +1,5 @@
 import * as React from "react";
+import { NavLink } from "react-router-dom";
 import { Item } from "../../../../helper/Item";
 
 function Details({ productData }) {
@@ -12,11 +13,20 @@ function Details({ productData }) {
       <Item>Origin: {productData.Origin}</Item>
       <Item>Pg: {productData.Page}</Item>
       <Item>
-        <a
-          href={` https://www.showdowndisplays.com/Product/Select?Sku=${productData.Item_Number}`}
+        <NavLink
+          className="link"
+          onClick={() => {
+            if (
+              window.confirm(
+                "You are leaving the app, once you leave you will need to reopen the app"
+              )
+            ) {
+              window.location.href = ` https://www.showdowndisplays.com/Product/Select?Sku=${productData.Item_Number}`;
+            }
+          }}
         >
-          Showdown Item Page
-        </a>
+          Showdown Item Page Link
+        </NavLink>
       </Item>
     </div>
   );
