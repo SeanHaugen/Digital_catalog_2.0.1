@@ -16,18 +16,14 @@ function Navigation({ productData }) {
 
   return (
     <div>
-      <ul>
-        <li>
-          <div>
-            <button onClick={goBack}>
-              <ArrowBackIosIcon />
-            </button>
-            <button onClick={goForward}>
-              <ArrowForwardIosIcon />
-            </button>
-          </div>
-        </li>
-      </ul>
+      <div>
+        <button onClick={goBack}>
+          <ArrowBackIosIcon />
+        </button>
+        <button onClick={goForward}>
+          <ArrowForwardIosIcon />
+        </button>
+      </div>
     </div>
   );
 }

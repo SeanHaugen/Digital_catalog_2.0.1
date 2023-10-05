@@ -70,7 +70,7 @@ function ItemPage({ productData, category, subCategory }) {
         />
 
         {deleteSuccess && <p>Item deleted successfully!</p>}
-        {deleteError && <p>Error: {deleteError}</p>}
+        {deleteError && <p>Deleted: Reopen app to apply update</p>}
       </div>
     </div>
   );

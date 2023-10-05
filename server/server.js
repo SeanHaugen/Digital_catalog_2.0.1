@@ -7,6 +7,7 @@ const cors = require("cors");
 const getRoutes = require("./routes/GET");
 const putRoutes = require("./routes/PUT");
 const deleteRoutes = require("./routes/DELETE");
+const postRoutes = require("./routes/POST");
 
 dotenv.config({ path: "./config.env" });
 
@@ -34,6 +35,7 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 app.use("/get", getRoutes);
 app.use("/put", putRoutes);
+app.use("/post", postRoutes);
 app.use("/delete", deleteRoutes);
 
 const corsOptions = {

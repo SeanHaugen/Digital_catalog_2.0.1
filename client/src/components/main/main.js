@@ -19,6 +19,7 @@ import SubCategoriesPage from "./subCategory/SubCategory";
 import ItemPage from "./itemsPage/ItemsPage";
 import SearchPage from "./searchPage/SearchPage";
 import Form from "./forms/Form";
+import FormPage from "./forms/FormPage";
 // import FavoriteList from "./favorites/Favorites";
 
 function Main({
@@ -95,6 +96,19 @@ function Main({
             path="/search"
             element={
               <SearchPage
+                searchData={searchData}
+                setProduct={setProduct}
+                category={category}
+                subCategory={subCategory}
+                item={item}
+                productData={productData}
+              />
+            }
+          />
+          <Route
+            path="/addProduct"
+            element={
+              <FormPage
                 searchData={searchData}
                 setProduct={setProduct}
                 category={category}

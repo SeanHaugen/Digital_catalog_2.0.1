@@ -107,6 +107,10 @@ export default function DashBoard({
               />
             </Search>
             <Navigation className="nav_buttons" />
+
+            <NavLink to="/addProduct">
+              <button>Add new product</button>
+            </NavLink>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
