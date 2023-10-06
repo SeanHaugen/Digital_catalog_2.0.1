@@ -19,16 +19,18 @@ function FrontPage({ category, setSubCategory }) {
       <Grid>
         <Grid>
           <figure style={{ display: "flex", justifyContent: "center" }}>
-            <img
-              className="placeholder"
-              src={Q4}
-              alt="Outdoor products"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-              }}
-            />
+            <NavLink to={"/Promos"}>
+              <img
+                className="placeholder"
+                src={Q4}
+                alt="Outdoor products"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                }}
+              />
+            </NavLink>
           </figure>
         </Grid>
       </Grid>
@@ -36,7 +38,6 @@ function FrontPage({ category, setSubCategory }) {
         <Grid>
           <figure style={{ display: "flex", justifyContent: "center" }}>
             <NavLink
-              // to={"https://www.showdowndisplays.com/Category/BuildYourOwn"}
               onClick={() => {
                 if (
                   window.confirm(
