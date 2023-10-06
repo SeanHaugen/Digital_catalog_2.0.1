@@ -18,6 +18,18 @@ router.post("/add", async (req, res) => {
       Keywords,
       Category,
       SubCategory,
+      Colors,
+      Product_Width_inches,
+      Product_Height_Inches,
+      Produce_Depth_Inches,
+      Artwork_Required,
+      Package_Size,
+      Package_Weight,
+      Product_Weight,
+      Kit_Includes,
+      Materials,
+      Imprint_Method,
+      Origin,
     });
 
     await newItem.save();

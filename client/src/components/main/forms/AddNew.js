@@ -9,6 +9,18 @@ function AddNew() {
     Keywords: "",
     Category: "",
     SubCategory: "",
+    Colors: "",
+    Product_Width_inches: "",
+    Product_Height_Inches: "",
+    Produce_Depth_Inches: "",
+    Artwork_Required: "",
+    Package_Size: "",
+    Package_Weight: "",
+    Product_Weight: "",
+    Kit_Includes: "",
+    Materials: "",
+    Imprint_Method: "",
+    Origin: "",
   });
 
   const handleChange = (e) => {
@@ -30,6 +42,18 @@ function AddNew() {
         Keywords: "",
         Category: "",
         SubCategory: "",
+        Colors: "",
+        Product_Width_inches: "",
+        Product_Height_Inches: "",
+        Produce_Depth_Inches: "",
+        Artwork_Required: "",
+        Package_Size: "",
+        Package_Weight: "",
+        Product_Weight: "",
+        Kit_Includes: "",
+        Materials: "",
+        Imprint_Method: "",
+        Origin: "",
       });
 
       console.log("Item added successfully");
@@ -81,6 +105,90 @@ function AddNew() {
         name="SubCategory"
         placeholder="SubCategory"
         value={formData.SubCategory}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Colors"
+        placeholder="Colors"
+        value={formData.Colors}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Product_Width_inches"
+        placeholder="Product_Width_inches"
+        value={formData.Product_Width_inches}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Product_Height_Inches"
+        placeholder="Product_Height_Inches"
+        value={formData.Product_Height_Inches}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Produce_Depth_Inches"
+        placeholder="Produce_Depth_Inches"
+        value={formData.Produce_Depth_Inches}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Artwork_Required"
+        placeholder="Artwork_Required"
+        value={formData.Artwork_Required}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Package_Size"
+        placeholder="Package_Size"
+        value={formData.Package_Size}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Package_Weight"
+        placeholder="Package_Weight"
+        value={formData.Package_Weight}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Product_Weight"
+        placeholder="Product_Weight"
+        value={formData.Product_Weight}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Kit_Includes"
+        placeholder="Kit_Includes"
+        value={formData.Kit_Includes}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Materials"
+        placeholder="Materials"
+        value={formData.Materials}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Imprint_Method"
+        placeholder="Imprint_Method"
+        value={formData.Imprint_Method}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="Origin"
+        placeholder="Origin"
+        value={formData.Origin}
         onChange={handleChange}
       />
       <label>

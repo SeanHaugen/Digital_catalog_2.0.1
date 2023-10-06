@@ -1,16 +1,5 @@
-import React from "react";
-
-import CssBaseline from "@mui/material/CssBaseline";
-// import Box from "@mui/material/Box";
-import Sheet from "@mui/joy/Sheet";
-// import Paper from "@mui/material/Paper";
-// import Container from "@mui/material/Container";
-
-import Box from "@mui/joy/Box";
+import React, { useState } from "react";
 import Card from "@mui/joy/Card";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import IconButton from "@mui/joy/IconButton";
-import AspectRatio from "@mui/joy/AspectRatio";
 
 import { Routes, Route } from "react-router-dom";
 import CategoriesPage from "./categories/Categories";
@@ -18,8 +7,8 @@ import FrontPage from "./frontPage/FrontPage";
 import SubCategoriesPage from "./subCategory/SubCategory";
 import ItemPage from "./itemsPage/ItemsPage";
 import SearchPage from "./searchPage/SearchPage";
-import Form from "./forms/Form";
 import FormPage from "./forms/FormPage";
+import Promos from "./promoPage/Promos";
 // import FavoriteList from "./favorites/Favorites";
 
 function Main({
@@ -32,6 +21,8 @@ function Main({
   searchData,
 }) {
   // console.log(searchData);
+
+  const [selectedPromo, setSelectedPromo] = useState([]);
 
   return (
     <React.Fragment>
@@ -115,6 +106,23 @@ function Main({
                 subCategory={subCategory}
                 item={item}
                 productData={productData}
+                selectedPromo={selectedPromo}
+                setSelectedPromo={setSelectedPromo}
+              />
+            }
+          />
+          <Route
+            path="/Promos"
+            element={
+              <Promos
+                searchData={searchData}
+                setProduct={setProduct}
+                category={category}
+                subCategory={subCategory}
+                item={item}
+                productData={productData}
+                selectedPromo={selectedPromo}
+                setSelectedPromo={setSelectedPromo}
               />
             }
           />

@@ -40,7 +40,10 @@ const AddPricingForm = () => {
     e.preventDefault();
 
     try {
-      await axios.post("/pricingAdd", formData);
+      await axios.post(
+        "https://ivory-firefly-hem.cyclic.app/pricingAdd",
+        formData
+      );
 
       // Clear the form or show a success message
       setFormData({
