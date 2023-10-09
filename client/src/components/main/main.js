@@ -123,7 +123,7 @@ function Main({
               <ItemPage
                 productData={productData}
                 selectedPromo={selectedPromo}
-                handlePromoSelect={handlePromoSelect}
+                // handlePromoSelect={handlePromoSelect}
               />
             }
           />
@@ -167,7 +167,6 @@ function Main({
                 productData={productData}
                 selectedPromo={selectedPromo}
                 setSelectedPromo={setSelectedPromo}
-                onDeletePromoItem={onDeletePromoItem}
               />
             }
           />
