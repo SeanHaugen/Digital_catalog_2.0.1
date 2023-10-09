@@ -31,23 +31,30 @@ mongoose
 
 const port = process.env.PORT || 4000;
 
+const corsOptions = {
+  // origin: "*",
+  // methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+  // allowedHeaders:
+  //   "Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Origin,Cache-Control,Content-Type,X-Token,X-Refresh-Token",
+  // credentials: true,
+  // preflightContinue: false,
+  // optionSuccessStatus: 204,
+  origin: "http://localhost:3000",
+  methods: "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS", // Include OPTIONS
+  allowedHeaders:
+    "Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Origin,Cache-Control,Content-Type,X-Token,X-Refresh-Token",
+  credentials: true,
+  preflightContinue: true, // Allow preflight requests
+  optionSuccessStatus: 204,
+};
+app.use(cors(corsOptions));
+
 // app.use(express.static("public"));
 app.use(express.json());
 app.use("/get", getRoutes);
 app.use("/put", putRoutes);
 app.use("/post", postRoutes);
 app.use("/delete", deleteRoutes);
-
-const corsOptions = {
-  origin: "*",
-  methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-  allowedHeaders:
-    "Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Origin,Cache-Control,Content-Type,X-Token,X-Refresh-Token",
-  credentials: true,
-  preflightContinue: false,
-  optionSuccessStatus: 204,
-};
-app.use(cors(corsOptions));
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
