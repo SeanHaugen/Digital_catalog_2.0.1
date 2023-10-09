@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const PromoItemModel = require("../models/promoItems");
+
 router.post("/add", async (req, res) => {
   try {
     const { Item_Number, Name, Description, Keywords, Category, SubCategory } =
@@ -79,7 +81,7 @@ router.post("/pricingAdd", async (req, res) => {
 router.post("/promo-items", async (req, res) => {
   try {
     const newItemData = req.body; // This should contain the selected item data
-    const newPromoItem = new promos(newItemData);
+    const newPromoItem = new PromoItemModel(newItemData);
     await newPromoItem.save();
     res.status(201).json(newPromoItem);
   } catch (error) {
