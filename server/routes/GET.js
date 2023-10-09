@@ -203,16 +203,11 @@ router.get("/search", async (req, res) => {
   }
 });
 
-router.get("/promoitem/:promoitemNumber", async (req, res) => {
+router.get("/promoitems", async (req, res) => {
   try {
-    const itemNumber = req.params.itemNumber;
-    const promoItem = await PromoItemModel.findOne({ Item_Number: itemNumber });
+    const promoItems = await PromoItemModel.find({}); // Find all items in the collection
 
-    if (!promoItem) {
-      return res.status(404).json({ message: "Promo item not found" });
-    }
-
-    res.json(promoItem);
+    res.json(promoItems);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

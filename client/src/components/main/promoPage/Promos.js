@@ -11,12 +11,12 @@ function Promos({
   onDeletePromoItem,
   productData,
 }) {
-  const useFetchPromoData = (setState, item) => {
+  const useFetchPromoData = (setState) => {
     useEffect(() => {
       async function fetchData() {
         try {
           const response = await axios.get(
-            `http://ivory-firefly-hem.cyclic.app/promoitem/${item}`
+            "http://ivory-firefly-hem.cyclic.app/promoitems" // Replace with the actual URL for fetching all data
           );
           setState(response.data);
         } catch (error) {
@@ -24,12 +24,10 @@ function Promos({
         }
       }
       fetchData();
-    }, [item, setState]);
+    }, []);
   };
 
-  useFetchPromoData(setSelectedPromo, productData.Item_Number);
-
-  console.log(useFetchPromoData(setSelectedPromo, productData.Item_Number));
+  console.log();
 
   return (
     <div>
