@@ -104,7 +104,7 @@ export default function BottomNav({ productData }) {
           <form
             action="https://ivory-firefly-hem.cyclic.app/upload"
             method="post"
-            enctype="multipart/form-data"
+            encType="multipart/form-data"
           >
             <input
               type="file"
@@ -122,11 +122,10 @@ export default function BottomNav({ productData }) {
             ))}
           </ul>
           <BottomNavigationAction
-            label="Recent"
             icon={<RestoreIcon />}
             onClick={handleClick}
           ></BottomNavigationAction>
-          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+          <BottomNavigationAction icon={<FavoriteIcon />} />
         </BottomNavigation>
         {openRecent && <RecentlyViewed recentPages={recentPages} />}
       </Box>

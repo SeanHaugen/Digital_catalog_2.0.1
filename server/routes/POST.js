@@ -75,4 +75,17 @@ router.post("/pricingAdd", async (req, res) => {
       .json({ message: "Error adding item pricing", error: error.message });
   }
 });
+
+router.post("/promo-items", async (req, res) => {
+  try {
+    const newItemData = req.body; // This should contain the selected item data
+    const newPromoItem = new promos(newItemData);
+    await newPromoItem.save();
+    res.status(201).json(newPromoItem);
+  } catch (error) {
+    console.error("Error adding promo item:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 module.exports = router;

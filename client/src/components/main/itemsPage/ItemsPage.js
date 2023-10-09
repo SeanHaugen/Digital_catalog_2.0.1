@@ -9,7 +9,7 @@ import Breadcrumb from "./breadcrumbs/BreadCrumbs";
 import ItemTabs from "./tabs/ItemTabs";
 import DeleteButton from "./Delete/DeleteButton.js";
 
-function ItemPage({ productData, category, subCategory }) {
+function ItemPage({ productData, handlePromoSelect, selectedPromo }) {
   // const [copiedText, setCopiedText] = useState("");
   // const copyText = () => {
   //   copiedText.select();
@@ -42,7 +42,9 @@ function ItemPage({ productData, category, subCategory }) {
           </Item>
         </Grid>
         <Grid xs={6} md={4}>
-          <Description productData={productData} />
+          <Item>
+            <Description productData={productData} />
+          </Item>
         </Grid>
         <Grid xs={12}>
           <PricingTable productData={productData} />
@@ -68,6 +70,14 @@ function ItemPage({ productData, category, subCategory }) {
           onDeleteSuccess={handleDeleteSuccess}
           onDeleteError={handleDeleteError}
         />
+        {/* <label>Promo Item</label> */}
+        <button type="button" onClick={() => handlePromoSelect(productData)}>
+          add to promo page
+        </button>
+        <label>Inventory Low</label>
+        <input type="checkbox" />
+        <label>Out of Stock</label>
+        <input type="checkbox" />
 
         {deleteSuccess && <p>Item deleted successfully!</p>}
         {deleteError && <p>Deleted: Reopen app to apply update</p>}

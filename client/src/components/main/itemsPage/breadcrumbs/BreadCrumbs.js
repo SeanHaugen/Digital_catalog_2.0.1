@@ -7,7 +7,7 @@ import Link from "@mui/joy/Link";
 function Breadcrumb({ productData }) {
   return (
     <div>
-      <Breadcrumbs separator={<KeyboardArrowRight />} aria-label="breadcrumbs">
+      {/* <Breadcrumbs separator={<KeyboardArrowRight />} aria-label="breadcrumbs">
         {[
           {
             label: productData.Category,
@@ -33,7 +33,7 @@ function Breadcrumb({ productData }) {
             {item.label}
           </Link>
         ))}
-      </Breadcrumbs>
+      </Breadcrumbs> */}
     </div>
   );
 }

@@ -17,7 +17,7 @@ function ItemTabs({ productData }) {
   return (
     <div>
       <Grid>
-        <Tabs aria-labe="Basic tabs" defaultValue={0}>
+        <Tabs aria-label="Basic tabs" defaultValue={0}>
           <TabList>
             <Tab>Details</Tab>
             <Tab>Shipping</Tab>
