@@ -27,7 +27,8 @@ function Promos({
     }, []);
   };
 
-  console.log();
+  const promoData = useFetchPromoData(setSelectedPromo);
+  console.log(promoData);
 
   return (
     <div>

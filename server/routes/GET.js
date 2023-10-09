@@ -209,9 +209,8 @@ router.get("/promoitems", async (req, res) => {
 
     res.json(promoItems);
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching promo items:", error); // Log the error for debugging
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
 module.exports = router;
