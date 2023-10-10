@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import axios from "axios";
 
+`http://localhost:4000`;
+
 export const useCategoryData = (setState) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = "http://ivory-firefly-hem.cyclic.app/category";
+        const apiUrl = "http://localhost:4000/category";
         const response = await axios.get(apiUrl);
         setState(response.data);
       } catch (error) {
@@ -21,7 +23,7 @@ export const useFetchSubCategoryData = (setState) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = "http://ivory-firefly-hem.cyclic.app/SubCategory";
+        const apiUrl = "http://localhost:4000/SubCategory";
         const response = await axios.get(apiUrl);
         setState(response.data);
       } catch (error) {
@@ -39,7 +41,7 @@ export const useFetchSubCategoryItemData = (setState, subCat) => {
       try {
         if (subCat) {
           const endpoint = `${subCat}`;
-          const apiUrl = `http://ivory-firefly-hem.cyclic.app/SubCategory/${endpoint}`;
+          const apiUrl = `http://localhost:4000/SubCategory/${endpoint}`;
 
           const response = await axios.get(apiUrl);
           setState(response.data);
@@ -60,7 +62,7 @@ export const useFetchCategoryData = (setState, category) => {
       try {
         if (category) {
           const endpoint = `${category}`;
-          const apiUrl = `http://ivory-firefly-hem.cyclic.app/category/${endpoint}`;
+          const apiUrl = `http://localhost:4000/category/${endpoint}`;
 
           const response = await axios.get(apiUrl);
           setState(response.data);
@@ -80,7 +82,7 @@ export const useFetchItemData = (setState, item) => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          `http://ivory-firefly-hem.cyclic.app/items?item=${item}`
+          `http://localhost:4000/items?item=${item}`
         );
         const itemData = response.data;
         setState(itemData);
@@ -98,7 +100,7 @@ export const useSearchData = (setState, search) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://ivory-firefly-hem.cyclic.app/search?q=${search}`
+          `http://localhost:4000/search?q=${search}`
         );
         setState(response.data);
       } catch (error) {
@@ -114,7 +116,7 @@ export const usePricingData = (setState, item) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://ivory-firefly-hem.cyclic.app/pricing/item_number/${item}`
+          `http://localhost:4000/pricing/item_number/${item}`
         );
         let itemPricing = response.data;
         setState(itemPricing);
@@ -131,7 +133,7 @@ export const useInternalInfo = (setState, item) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://ivory-firefly-hem.cyclic.app/info?item=${item}`
+          `http://localhost:4000/info?item=${item}`
         );
         let itemPricing = response.data;
         setState(itemPricing);
@@ -148,7 +150,7 @@ export const useFlatRateInfo = (setState, item) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://ivory-firefly-hem.cyclic.app/flatRates/${item}`
+          `http://localhost:4000/flatRates/${item}`
         );
         let rates = response.data;
         setState(rates);
@@ -164,7 +166,7 @@ export const useHandleUpdatePricing = (setState, item, row, cell, value) => {
   useEffect(() => {
     async function updatePricing(rowIndex, cellIndex, newValue) {
       try {
-        const url = `http://ivory-firefly-hem.cyclic/update/pricing/${item}`;
+        const url = `http://localhost:4000/update/pricing/${item}`;
 
         const data = {
           rowIndex,
@@ -189,7 +191,7 @@ export const useHandleEurofitInfo = (setState, item) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `https://ivory-firefly-hem.cyclic.app/eurofits?item=${item}`
+          `http://localhost:4000/eurofits?item=${item}`
         );
         let info = response.data;
         setState(info);
@@ -206,7 +208,7 @@ export const useHandleMediaInfo = (setState, item) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `https://ivory-firefly-hem.cyclic.app/mediaspecs?item=${item}`
+          `http://localhost:4000/mediaspecs?item=${item}`
         );
         let info = response.data;
         setState(info);
@@ -222,7 +224,7 @@ export const useDeleteItem = (item, onDeleteSuccess, onDeleteError) => {
   const deleteItem = async () => {
     try {
       const response = await axios.delete(
-        `https://ivory-firefly-hem.cyclic.app/delete/${item}`
+        `http://localhost:4000/delete/${item}`
       );
 
       // Check the status code to ensure the deletion was successful
