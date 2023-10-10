@@ -11,8 +11,6 @@ const postRoutes = require("./routes/POST");
 
 dotenv.config({ path: "./config.env" });
 
-const NODE_ENV = "development";
-const PORT = 4000;
 const DATABASE_PASSWORD = "DkD0ml96WSM62TAn";
 const DATABASE = `mongodb+srv://seanhaugen560:${DATABASE_PASSWORD}@cluster0.adhrbht.mongodb.net/products?retryWrites=true&w=majority`;
 
@@ -29,10 +27,10 @@ mongoose
     console.log("Connected to MongoDB!!");
   });
 
-const port = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
 const corsOptions = {
-  origin: "*",
+  origin: "https://localhost:3000",
   methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
   allowedHeaders:
     "Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Origin,Cache-Control,Content-Type,X-Token,X-Refresh-Token",
@@ -49,7 +47,7 @@ app.use("/put", putRoutes);
 app.use("/post", postRoutes);
 app.use("/delete", deleteRoutes);
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${port}`);
 });
 
