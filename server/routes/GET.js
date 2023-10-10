@@ -5,8 +5,7 @@ const InfoModel = require("../models/info");
 const Eurofit = require("../models/eurofit");
 const mediaModel = require("../models/media");
 const items = require("../models/item");
-const flatRateModel = require("../models/flatRate");
-const PromoItemModel = require("../models/promoitems"); // Import the appropriate model
+const PromoItemModel = require("../models/promoItems");
 
 router.get("/pricing/:criteria/:item", async (req, res) => {
   try {

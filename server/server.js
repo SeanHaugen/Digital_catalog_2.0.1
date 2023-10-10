@@ -30,7 +30,7 @@ mongoose
 const PORT = process.env.PORT || 4000;
 
 const corsOptions = {
-  origin: "https://localhost:3000",
+  origin: "*",
   methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
   allowedHeaders:
     "Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Origin,Cache-Control,Content-Type,X-Token,X-Refresh-Token",
@@ -48,7 +48,7 @@ app.use("/post", postRoutes);
 app.use("/delete", deleteRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${PORT}`);
 });
 
 //TO DO:
