@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import axios from "axios";
 
-`http://localhost:4000`;
+// `https://dull-pink-termite-slip.cyclic.app`;
 
 export const useCategoryData = (setState) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = "http://localhost:4000/category";
+        const apiUrl = "https://dull-pink-termite-slip.cyclic.app/category";
         const response = await axios.get(apiUrl);
         setState(response.data);
       } catch (error) {
@@ -23,7 +23,7 @@ export const useFetchSubCategoryData = (setState) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = "http://localhost:4000/SubCategory";
+        const apiUrl = "https://dull-pink-termite-slip.cyclic.app/SubCategory";
         const response = await axios.get(apiUrl);
         setState(response.data);
       } catch (error) {
@@ -41,7 +41,7 @@ export const useFetchSubCategoryItemData = (setState, subCat) => {
       try {
         if (subCat) {
           const endpoint = `${subCat}`;
-          const apiUrl = `http://localhost:4000/SubCategory/${endpoint}`;
+          const apiUrl = `https://dull-pink-termite-slip.cyclic.app/SubCategory/${endpoint}`;
 
           const response = await axios.get(apiUrl);
           setState(response.data);
@@ -62,7 +62,7 @@ export const useFetchCategoryData = (setState, category) => {
       try {
         if (category) {
           const endpoint = `${category}`;
-          const apiUrl = `http://localhost:4000/category/${endpoint}`;
+          const apiUrl = `https://dull-pink-termite-slip.cyclic.app/category/${endpoint}`;
 
           const response = await axios.get(apiUrl);
           setState(response.data);
@@ -82,7 +82,7 @@ export const useFetchItemData = (setState, item) => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/items?item=${item}`
+          `https://dull-pink-termite-slip.cyclic.app/items?item=${item}`
         );
         const itemData = response.data;
         setState(itemData);
@@ -100,7 +100,7 @@ export const useSearchData = (setState, search) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://localhost:4000/search?q=${search}`
+          `https://dull-pink-termite-slip.cyclic.app/search?q=${search}`
         );
         setState(response.data);
       } catch (error) {
@@ -116,7 +116,7 @@ export const usePricingData = (setState, item) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://localhost:4000/pricing/item_number/${item}`
+          `https://dull-pink-termite-slip.cyclic.app/pricing/item_number/${item}`
         );
         let itemPricing = response.data;
         setState(itemPricing);
@@ -133,7 +133,7 @@ export const useInternalInfo = (setState, item) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://localhost:4000/info?item=${item}`
+          `https://dull-pink-termite-slip.cyclic.app/info?item=${item}`
         );
         let itemPricing = response.data;
         setState(itemPricing);
@@ -150,7 +150,7 @@ export const useFlatRateInfo = (setState, item) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://localhost:4000/flatRates/${item}`
+          `https://dull-pink-termite-slip.cyclic.app/flatRates/${item}`
         );
         let rates = response.data;
         setState(rates);
@@ -166,7 +166,7 @@ export const useHandleUpdatePricing = (setState, item, row, cell, value) => {
   useEffect(() => {
     async function updatePricing(rowIndex, cellIndex, newValue) {
       try {
-        const url = `http://localhost:4000/update/pricing/${item}`;
+        const url = `https://dull-pink-termite-slip.cyclic.app/update/pricing/${item}`;
 
         const data = {
           rowIndex,
@@ -191,7 +191,7 @@ export const useHandleEurofitInfo = (setState, item) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://localhost:4000/eurofits?item=${item}`
+          `https://dull-pink-termite-slip.cyclic.app/eurofits?item=${item}`
         );
         let info = response.data;
         setState(info);
@@ -208,7 +208,7 @@ export const useHandleMediaInfo = (setState, item) => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `http://localhost:4000/mediaspecs?item=${item}`
+          `https://dull-pink-termite-slip.cyclic.app/mediaspecs?item=${item}`
         );
         let info = response.data;
         setState(info);
@@ -224,7 +224,7 @@ export const useDeleteItem = (item, onDeleteSuccess, onDeleteError) => {
   const deleteItem = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/delete/${item}`
+        `https://dull-pink-termite-slip.cyclic.app/delete/${item}`
       );
 
       // Check the status code to ensure the deletion was successful
