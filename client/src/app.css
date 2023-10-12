@@ -1,6 +1,6 @@
 .App {
-  background-color: rgb(223, 222, 215);
-  /* background-color: black; */
+  /* background-color: rgb(223, 222, 215); */
+  background-color: rgba(36, 66, 70, 0.781);
   min-height: 100vh;
   height: fit-content;
 }

@@ -19,7 +19,7 @@ function Form({
       };
 
       const response = await axios.put(
-        `http://ivory-firefly-hem.cyclic.app/update/${productData.Item_Number}`,
+        `https://dull-pink-termite-slip.cyclic.app/update/${productData.Item_Number}`,
         updatedData
       );
       console.log(response);

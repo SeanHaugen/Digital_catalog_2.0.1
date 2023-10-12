@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./app.css";
 import Main from "./components/main/main";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import DashBoard from "./components/header/dashboard/dashboard";
 import { useFetchSubCategoryItemData, useFetchItemData } from "./api/api";
 import Menu from "@mui/material/Menu";
