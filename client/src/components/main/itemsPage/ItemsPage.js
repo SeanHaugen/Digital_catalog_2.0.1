@@ -18,6 +18,7 @@ function ItemPage({ productData, handlePromoSelect, selectedPromo }) {
 
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
+  const [isPromo, setIsPromo] = useState(false);
 
   const handleDeleteSuccess = () => {
     setDeleteSuccess(true);
@@ -27,6 +28,10 @@ function ItemPage({ productData, handlePromoSelect, selectedPromo }) {
   const handleDeleteError = (error) => {
     setDeleteSuccess(false);
     setDeleteError(error);
+  };
+
+  const handlePromoCheckboxChange = () => {
+    setIsPromo(!isPromo);
   };
 
   return (
@@ -71,12 +76,15 @@ function ItemPage({ productData, handlePromoSelect, selectedPromo }) {
           onDeleteError={handleDeleteError}
         />
         {/* <label>Promo Item</label> */}
-        <button type="button" onClick={() => handlePromoSelect(productData)}>
-          add to promo page
-        </button>
-        <label>Inventory Low</label>
+        <lable>Promo Item</lable>
+        <input
+          type="checkbox"
+          checked={isPromo}
+          onChange={handlePromoCheckboxChange}
+        />
+        <label>, Inventory Low</label>
         <input type="checkbox" />
-        <label>Out of Stock</label>
+        <label>, Out of Stock</label>
         <input type="checkbox" />
 
         {deleteSuccess && <p>Item deleted successfully!</p>}

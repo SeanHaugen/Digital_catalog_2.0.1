@@ -54,19 +54,18 @@ function Promos({ setSelectedPromo, selectedPromo, setProduct }) {
       <h2>Q4 Promos</h2>
       <ul>
         {selectedPromo.map((item) => (
-          <li key={item.id}>
-            {/* Display relevant information from the item */}
-            Name: {item.Name}, Item Number: {item.Item_Number}
-            <button onClick={() => onDeletePromoItem(item.id)}>Delete</button>
-            {/* Add a link to the item page */}
-            {console.log(item.Item_Number)}
+          <p key={item.id} className="promo">
             <NavLink
               to={`/category/subcategory/${item.Item_Number}`}
               onClick={() => setProduct(item.Item_Number)}
             >
-              Go to Item Page
+              {/* Display relevant information from the item */}
+              {item.Name}: {item.Item_Number}
+              <button onClick={() => onDeletePromoItem(item.id)}>Delete</button>
+              {/* Add a link to the item page */}
+              {console.log(item.Item_Number)}
             </NavLink>
-          </li>
+          </p>
         ))}
       </ul>
     </div>
