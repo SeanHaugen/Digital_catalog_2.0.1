@@ -7,18 +7,12 @@ import FindImage from "./findImage/FindImage";
 import Description from "./description/Description";
 import Breadcrumb from "./breadcrumbs/BreadCrumbs";
 import ItemTabs from "./tabs/ItemTabs";
+import StockButtons from "./stockbuttons/Stockbuttons";
 import DeleteButton from "./Delete/DeleteButton.js";
 
 function ItemPage({ productData, handlePromoSelect, selectedPromo }) {
-  // const [copiedText, setCopiedText] = useState("");
-  // const copyText = () => {
-  //   copiedText.select();
-  //   navigator.clipboard.writeText(copyText.value);
-  // };
-
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
-  const [isPromo, setIsPromo] = useState(false);
 
   const handleDeleteSuccess = () => {
     setDeleteSuccess(true);
@@ -30,9 +24,8 @@ function ItemPage({ productData, handlePromoSelect, selectedPromo }) {
     setDeleteError(error);
   };
 
-  const handlePromoCheckboxChange = () => {
-    setIsPromo(!isPromo);
-  };
+  console.log(productData.Low_Stock);
+  console.log(productData.OOS);
 
   return (
     <div>
@@ -69,6 +62,11 @@ function ItemPage({ productData, handlePromoSelect, selectedPromo }) {
         <ItemTabs productData={productData} />
       </Grid>
       <div>
+        <StockButtons
+          handlePromoSelect={handlePromoSelect}
+          selectedPromo={selectedPromo}
+          productData={productData}
+        />
         <h2>Delete Product Item</h2>
         <DeleteButton
           itemNumber={productData.Item_Number} // Replace with your actual item number
@@ -76,16 +74,6 @@ function ItemPage({ productData, handlePromoSelect, selectedPromo }) {
           onDeleteError={handleDeleteError}
         />
         {/* <label>Promo Item</label> */}
-        <lable>Promo Item</lable>
-        <input
-          type="checkbox"
-          checked={isPromo}
-          onChange={handlePromoCheckboxChange}
-        />
-        <label>, Inventory Low</label>
-        <input type="checkbox" />
-        <label>, Out of Stock</label>
-        <input type="checkbox" />
 
         {deleteSuccess && <p>Item deleted successfully!</p>}
         {deleteError && <p>Deleted: Reopen app to apply update</p>}

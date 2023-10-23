@@ -1,9 +1,11 @@
 import * as React from "react";
 import { useState } from "react";
 import { useHandleMediaInfo } from "../../../../api/api";
+import { Item } from "../../../../helper/Item";
 
-function MediaSpecs({ productData }) {
+function MediaSpecs({ productData, materialsArray, showMaterials }) {
   const [mediaInfo, setMediaInfo] = useState([]);
+
   useHandleMediaInfo(setMediaInfo, productData.Materials);
   let renderMediaSpecs = (mediaObject) => {
     return Object.entries(mediaObject).map(([key, value], index) => (
@@ -16,11 +18,28 @@ function MediaSpecs({ productData }) {
     ));
   };
 
+  console.log(mediaInfo);
+
+  console.log(materialsArray);
+
+  const isTypeInShowMaterials = (type) => {
+    return materialsArray.some((material) => material.includes(type));
+  };
+
   return (
     <div>
-      {mediaInfo.map((mediaSpecs, index) => {
-        return <div key={index}>{renderMediaSpecs(mediaSpecs)};</div>;
-      })}
+      <Item>
+        {mediaInfo.map((mediaSpecs, index) => {
+          const type = mediaSpecs.Type;
+          const isTypeMatching = isTypeInShowMaterials(type);
+          return (
+            <div key={index}>
+              {renderMediaSpecs(mediaSpecs)}
+              {isTypeMatching && <p>Match found in media Array</p>}
+            </div>
+          );
+        })}
+      </Item>
     </div>
   );
 }

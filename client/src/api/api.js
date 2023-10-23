@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 // `https://dull-pink-termite-slip.cyclic.app`;
@@ -240,4 +240,45 @@ export const useDeleteItem = (item, onDeleteSuccess, onDeleteError) => {
   };
 
   return deleteItem;
+};
+
+export const fetchLowStockValue = async (itemNumber) => {
+  try {
+    const response = await axios.get(
+      `https://dull-pink-termite-slip.cyclic.app/get-lowStock/${itemNumber}`
+    );
+
+    if (response.status === 200) {
+      return response.data.Low_Stock || false; // Set a default value if null
+    } else {
+      console.error(
+        `Failed to fetch Low_Stock value. Status code: ${response.status}`
+      );
+      return false; // Set a default value if there is an error
+    }
+  } catch (error) {
+    console.error(error);
+    return false; // Set a default value if there is an error
+  }
+};
+
+export const fetchOOSValue = async (itemNumber) => {
+  try {
+    const response = await axios.get(
+      `https://dull-pink-termite-slip.cyclic.app/get-oos/${itemNumber}`
+    );
+
+    if (response.status === 200) {
+      return response.data.OOS;
+    } else {
+      // Handle other status codes if needed
+      console.error(
+        `Failed to fetch oos value. Status code: ${response.status}`
+      );
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };

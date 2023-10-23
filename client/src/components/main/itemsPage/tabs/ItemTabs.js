@@ -8,12 +8,25 @@ import TabPanel from "@mui/joy/TabPanel";
 import { Item } from "../../../../helper/Item";
 import InternalInfo from "./InternalInfo";
 import FlatRateShipping from "../flat_rate_shipping/FlatRate";
-import ColorBox from "../color_grid/ColorBox";
+import ColorBox from "./color_grid/ColorBox";
 import MediaSpecs from "./MediaSpecs";
 import AdditionalInfo from "./AdditionalInfo";
 import Details from "./Details";
 
 function ItemTabs({ productData }) {
+  console.log(typeof productData.Materials);
+  const materialsArray = productData.Materials?.split(/\s*,\s*/) || [];
+  console.log(materialsArray);
+
+  const showMaterials = () => {
+    return (
+      <ul>
+        {materialsArray.map((item, index) => (
+          <li key={index}>{item.trim()}</li>
+        ))}
+      </ul>
+    );
+  };
   return (
     <div>
       <Grid>
@@ -23,11 +36,15 @@ function ItemTabs({ productData }) {
             <Tab>Shipping</Tab>
             <Tab>colors</Tab>
             <Tab>Internal Info</Tab>
-            <Tab>Additional Info</Tab>
+            <Tab>Customer Service Info</Tab>
             <Tab>Media Specs</Tab>
           </TabList>
           <TabPanel value={0}>
-            <Details productData={productData} />
+            <Details
+              productData={productData}
+              materialsArray={materialsArray}
+              showMaterials={showMaterials}
+            />
           </TabPanel>
           <TabPanel value={1}>
             <Item>
@@ -46,7 +63,11 @@ function ItemTabs({ productData }) {
             <AdditionalInfo productData={productData} />
           </TabPanel>
           <TabPanel value={5}>
-            <MediaSpecs productData={productData} />
+            <MediaSpecs
+              productData={productData}
+              materialsArray={materialsArray}
+              showMaterials={showMaterials}
+            />
           </TabPanel>
         </Tabs>
       </Grid>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Card from "@mui/joy/Card";
+import "./main.css";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -25,7 +26,6 @@ function Main({
   searchData,
 }) {
   // console.log(searchData);
-
   const [selectedPromo, setSelectedPromo] = useState([]);
 
   const handlePromoSelect = async (productData) => {
@@ -55,6 +55,7 @@ function Main({
     <React.Fragment>
       <Card
         variant="outlined"
+        id="card"
         sx={(theme) => ({
           width: "95%",
           marginLeft: 10,
@@ -64,6 +65,7 @@ function Main({
           gridColumn: "span 2",
           flexDirection: "column",
           flexWrap: "wrap",
+
           // resize: "vertical",
           // overflow: "scroll",
           gap: "clamp(0px, (100% - 360px + 32px) * 999, 16px)",

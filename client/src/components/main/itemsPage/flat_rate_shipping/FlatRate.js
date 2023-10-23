@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useFlatRateInfo } from "../../../../api/api";
-import { Item } from "../../../../helper/Item";
 
 function FlatRateShipping({ productData }) {
   const [itemRates, setItemRates] = useState([]);
@@ -11,7 +10,9 @@ function FlatRateShipping({ productData }) {
     if (itemRates !== undefined && itemRates.length > 0) {
       return (
         <div className="box">
-          <h1>Flat Rate</h1>
+          <h1>
+            <b>Flat Rate</b>
+          </h1>
           <h4>Qty 1</h4>
           {itemRates.map((items, index) => (
             <div key={index}>
@@ -31,9 +32,19 @@ function FlatRateShipping({ productData }) {
     <div>
       <div>
         {renderFlatRate()}
-        <Item>Package Size: {productData.Package_Size}</Item>
-        <Item>Shipping Weight: {productData.Package_Weight}</Item>
-        <Item>Dimensional Weight: NA</Item>
+
+        <b>Packaging Information</b>
+        <ul>
+          <li>
+            <b>Package Size:</b> {productData.Package_Size}
+          </li>
+          <li>
+            <b>Shipping Weight:</b> {productData.Package_Weight}
+          </li>
+          <li>
+            <b>Dimensional Weight:</b> NA
+          </li>
+        </ul>
       </div>
     </div>
   );

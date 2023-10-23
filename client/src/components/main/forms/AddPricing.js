@@ -41,7 +41,7 @@ const AddPricingForm = () => {
 
     try {
       await axios.post(
-        "https://ivory-firefly-hem.cyclic.app/pricingAdd",
+        "https://dull-pink-termite-slip.cyclic.app/pricingAdd",
         formData
       );
 

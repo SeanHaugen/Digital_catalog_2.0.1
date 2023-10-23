@@ -1,11 +1,10 @@
-import * as React from "react";
-import { useState } from "react";
-
-import Form from "../../forms/Form";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Item } from "../../../../helper/Item";
 
 function Description({ productData }) {
   console.log(productData.Description);
+
   const [editing, setEditing] = useState(false);
   const [editDescription, setEditDescription] = useState(
     productData.Description
@@ -24,36 +23,53 @@ function Description({ productData }) {
   const handleDescriptionChange = (e) => {
     setEditDescription(e.target.value);
   };
+
+  const handleUpdate = async () => {
+    try {
+      const response = await axios.put(
+        `https://dull-pink-termite-slip.cyclic.app/update/${productData.Item_Number}`,
+        { Description: editDescription }
+      );
+
+      if (response.status === 200) {
+        console.log("Description updated");
+        description = editDescription;
+        toggleEditing();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <Item>
+    <div>
       {editing ? (
-        <textarea
-          type="text"
-          value={editDescription}
-          onChange={handleDescriptionChange}
-          rows={4}
-          cols={50}
-        />
+        <div>
+          <textarea
+            type="text"
+            value={editDescription}
+            onChange={handleDescriptionChange}
+            rows={4}
+            cols={50}
+          />
+          <button onClick={handleUpdate}>Update Description</button>
+          <button onClick={toggleEditing}>End Editing</button>
+        </div>
       ) : (
-        <ul>
-          {descriptionBullets.map((point, index) => {
-            return (
-              <li key={index} style={{ fontSize: "16px" }}>
-                {point}
-              </li>
-            );
-          })}
-        </ul>
+        <div>
+          <button onClick={toggleEditing}>Edit Description</button>
+          <ul>
+            {descriptionBullets.map((point, index) => {
+              return (
+                <li key={index} style={{ fontSize: "16px" }}>
+                  {point}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       )}
-      <Form
-        editing={editing}
-        toggleEditing={toggleEditing}
-        productData={productData}
-        editDescription={editDescription}
-        setEditDescription={setEditDescription}
-        handleDescriptionChange={handleDescriptionChange}
-      />
-    </Item>
+    </div>
   );
 }
 

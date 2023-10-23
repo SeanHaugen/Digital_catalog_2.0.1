@@ -32,7 +32,10 @@ function AddNew() {
     e.preventDefault();
 
     try {
-      await axios.post("https://ivory-firefly-hem.cyclic.app/add", formData); // Assuming your React app is running on the same domain as the server
+      await axios.post(
+        "https://dull-pink-termite-slip.cyclic.app/add",
+        formData
+      ); // Assuming your React app is running on the same domain as the server
 
       // Clear the form or show a success message
       setFormData({

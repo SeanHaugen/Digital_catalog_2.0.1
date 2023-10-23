@@ -9,6 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 
 function CategoriesPage({ category, setSubCategory }) {
   const [productsCategory, setProductsCategory] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useFetchCategoryData(setProductsCategory, category);
   // console.log(productsCategory);
