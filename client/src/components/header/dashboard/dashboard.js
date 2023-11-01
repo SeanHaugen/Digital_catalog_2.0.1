@@ -25,6 +25,7 @@ import { SearchIconWrapper } from "../search/SearchIconWrapper";
 import { Drawer, DrawerHeader } from "./Drawer";
 import { StyledInputBase } from "../input/StyledInputBase";
 import { AppBar } from "../appBar/AppBar";
+import LoginModal from "../login/LoginModal";
 
 import { useCategoryData, useSearchData } from "../../../api/api";
 import Navigation from "../../navigation/BackForward";
@@ -39,6 +40,7 @@ export default function DashBoard({
   const [open, setOpen] = useState(true);
   const [categoryData, setCategoryData] = useState([]);
   const [searchEntered, setSearchEntered] = useState(false);
+
   const navigate = useNavigate();
 
   useCategoryData(setCategoryData);
@@ -111,6 +113,7 @@ export default function DashBoard({
             <NavLink to="/addProduct">
               <button>Add new product</button>
             </NavLink>
+            <LoginModal />
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

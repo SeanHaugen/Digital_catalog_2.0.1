@@ -1,6 +1,19 @@
 .App {
   /* background-color: rgb(223, 222, 215); */
-  background-color: rgba(36, 66, 70, 0.781);
-  min-height: 100vh;
-  height: fit-content;
+  /* background-color: rgba(36, 66, 70, 0.781); */
+  /* background: rgba(44, 163, 184, 0.438); */
+  background-image: linear-gradient(
+      rgba(112, 197, 231, 0.753),
+      rgba(114, 114, 74, 0.733)
+    ),
+    url("./frontpage_images/headerImage.jpg");
+  background-size: cover;
+  height: 100vh;
+  overflow: scroll;
+
+  /* height: fit-content; */
+}
+
+.login {
+  display: flex;
 }

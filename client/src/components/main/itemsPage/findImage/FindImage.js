@@ -11,7 +11,7 @@ function FindImage({ productData, category, subCategory }) {
       <figure>
         <img
           className="item_image"
-          src={imagePath}
+          src={`https://placehold.co/600x400/png`}
           alt="Tradeshow display image"
           style={{
             maxWidth: "350px",
@@ -20,6 +20,34 @@ function FindImage({ productData, category, subCategory }) {
             height: "auto",
           }}
         />
+        <div
+          style={{
+            display: "flex",
+            margin: "5px",
+          }}
+        >
+          <img
+            src={`https://placehold.co/100x100/png`}
+            style={{
+              display: "flex",
+              margin: "5px",
+            }}
+          />
+          <img
+            src={`https://placehold.co/100x100/png`}
+            style={{
+              display: "flex",
+              margin: "5px",
+            }}
+          />
+          <img
+            src={`https://placehold.co/100x100/png`}
+            style={{
+              display: "flex",
+              margin: "5px",
+            }}
+          />
+        </div>
       </figure>
     </div>
   );

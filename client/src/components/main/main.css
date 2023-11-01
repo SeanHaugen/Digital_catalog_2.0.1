@@ -1,4 +1,10 @@
 #card {
-  background: rgba(235, 233, 224, 0.753);
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  background-color: rgba(235, 233, 224, 0.877);
   /* color: white; */
+}
+
+.main {
+  width: 95%;
 }

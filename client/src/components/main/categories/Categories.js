@@ -15,22 +15,51 @@ function CategoriesPage({ category, setSubCategory }) {
   // console.log(productsCategory);
 
   return (
-    <div>
-      <h3>{category}</h3>
-      {productsCategory.map((subCat, index) => {
-        return (
-          <div key={index}>
-            <ListItemButton
-              component={NavLink}
-              to={`/${category}/${subCat}`}
-              onClick={() => setSubCategory(subCat)}
-            >
-              <ListItemText primary={subCat}>{subCat}</ListItemText>
-            </ListItemButton>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <h3
+        style={{
+          marginTop: "3em",
+        }}
+      >
+        {category}
+      </h3>
+      <div
+        style={{
+          marginTop: "3em",
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "1em",
+          textAlign: "center",
+        }}
+      >
+        {productsCategory.map((subCat, index) => {
+          return (
+            <div key={index}>
+              <ListItemButton
+                component={NavLink}
+                to={`/${category}/${subCat}`}
+                onClick={() => setSubCategory(subCat)}
+              >
+                <div>
+                  <img
+                    src={`https://placehold.co/200x200/png`}
+                    alt={subCat}
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+
+                  <ListItemText
+                    primary={subCat}
+                    style={{ textAlign: "center" }}
+                  >
+                    {subCat}
+                  </ListItemText>
+                </div>
+              </ListItemButton>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
 

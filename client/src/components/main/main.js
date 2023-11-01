@@ -14,8 +14,6 @@ import FormPage from "./forms/FormPage";
 import Promos from "./promoPage/Promos";
 // import FavoriteList from "./favorites/Favorites";
 
-// import { PromoItemModel as promos } from "../../../../server/models/promoItems";
-
 function Main({
   setSubCategory,
   category,
@@ -53,113 +51,118 @@ function Main({
 
   return (
     <React.Fragment>
-      <Card
-        variant="outlined"
-        id="card"
-        sx={(theme) => ({
-          width: "95%",
-          marginLeft: 10,
-          marginRight: 10,
-          // height: "fitContent",
+      <div
+        style={{
           display: "flex",
-          gridColumn: "span 2",
-          flexDirection: "column",
-          flexWrap: "wrap",
-
-          // resize: "vertical",
-          // overflow: "scroll",
-          gap: "clamp(0px, (100% - 360px + 32px) * 999, 16px)",
-        })}
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <Routes>
-          <Route
-            path="/"
-            exact
-            element={
-              <FrontPage
-                category={category}
-                subCategory={subCategory}
-                setSubCategory={setSubCategory}
+        <Card
+          variant="outlined"
+          id="card"
+          sx={(theme) => ({
+            width: "95%",
+            height: "fitContent",
+            display: "flex",
+            justifyContent: "center",
+            gridColumn: "span 2",
+            flexDirection: "column",
+            flexWrap: "wrap",
+            gap: "clamp(0px, (100% - 360px + 32px) * 999, 16px)",
+          })}
+        >
+          <div className="main">
+            <Routes>
+              <Route
+                path="/"
+                exact
+                element={
+                  <FrontPage
+                    category={category}
+                    subCategory={subCategory}
+                    setSubCategory={setSubCategory}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/:category"
-            element={
-              <CategoriesPage
-                category={category}
-                setSubCategory={setSubCategory}
+              <Route
+                path="/:category"
+                element={
+                  <CategoriesPage
+                    category={category}
+                    setSubCategory={setSubCategory}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/:category/:subCategories"
-            element={
-              <SubCategoriesPage
-                category={category}
-                subCategory={subCategory}
-                item={item}
-                setProduct={setProduct}
+              <Route
+                path="/:category/:subCategories"
+                element={
+                  <SubCategoriesPage
+                    category={category}
+                    subCategory={subCategory}
+                    item={item}
+                    setProduct={setProduct}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/:category/:subCategories/:itemsPage"
-            element={
-              <ItemPage
-                productData={productData}
-                selectedPromo={selectedPromo}
-                handlePromoSelect={handlePromoSelect}
+              <Route
+                path="/:category/:subCategories/:itemsPage"
+                element={
+                  <ItemPage
+                    productData={productData}
+                    selectedPromo={selectedPromo}
+                    handlePromoSelect={handlePromoSelect}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/search"
-            element={
-              <SearchPage
-                searchData={searchData}
-                setProduct={setProduct}
-                category={category}
-                subCategory={subCategory}
-                item={item}
-                productData={productData}
+              <Route
+                path="/search"
+                element={
+                  <SearchPage
+                    searchData={searchData}
+                    setProduct={setProduct}
+                    category={category}
+                    subCategory={subCategory}
+                    item={item}
+                    productData={productData}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/addProduct"
-            element={
-              <FormPage
-                searchData={searchData}
-                setProduct={setProduct}
-                category={category}
-                subCategory={subCategory}
-                item={item}
-                productData={productData}
-                selectedPromo={selectedPromo}
-                setSelectedPromo={setSelectedPromo}
+              <Route
+                path="/addProduct"
+                element={
+                  <FormPage
+                    searchData={searchData}
+                    setProduct={setProduct}
+                    category={category}
+                    subCategory={subCategory}
+                    item={item}
+                    productData={productData}
+                    selectedPromo={selectedPromo}
+                    setSelectedPromo={setSelectedPromo}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/Promos"
-            element={
-              <Promos
-                searchData={searchData}
-                setProduct={setProduct}
-                category={category}
-                subCategory={subCategory}
-                item={item}
-                productData={productData}
-                selectedPromo={selectedPromo}
-                setSelectedPromo={setSelectedPromo}
+              <Route
+                path="/Promos"
+                element={
+                  <Promos
+                    searchData={searchData}
+                    setProduct={setProduct}
+                    category={category}
+                    subCategory={subCategory}
+                    item={item}
+                    productData={productData}
+                    selectedPromo={selectedPromo}
+                    setSelectedPromo={setSelectedPromo}
+                  />
+                }
               />
-            }
-          />
-        </Routes>
-
-        {/* </Container> */}
-      </Card>
+            </Routes>
+          </div>
+          {/* </Container> */}
+        </Card>
+      </div>
       {/* </Box> */}
       {/* </Sheet> */}
     </React.Fragment>

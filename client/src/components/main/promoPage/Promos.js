@@ -50,7 +50,7 @@ function Promos({ setSelectedPromo, selectedPromo, setProduct }) {
   //Edit the Q4 promo name so that it can be edited
   return (
     <div>
-      <h1>Promos Page</h1>
+      <h1>Promos</h1>
       <h2>Q4 Promos</h2>
       <ul>
         {selectedPromo.map((item) => (

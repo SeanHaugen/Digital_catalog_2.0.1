@@ -28,6 +28,7 @@ function FrontPage({ category, setSubCategory }) {
                   width: "100%",
                   height: "100%",
                   objectFit: "contain",
+                  marginTop: "1em",
                 }}
               />
             </NavLink>

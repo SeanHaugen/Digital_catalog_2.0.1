@@ -9,24 +9,48 @@ function SubCategoryPage({ category, subCategory, item, setProduct }) {
   // console.log(item);
 
   return (
-    <div>
-      <h3>{subCategory}</h3>
-      {item.map((i, index) => {
-        return (
-          <div key={index}>
-            <ListItemButton
-              component={NavLink}
-              to={`/${category}/${subCategory}/${i.Name}`}
-              onClick={() => setProduct(i.Item_Number)}
-            >
-              <ListItemText primary={i.Name} secondary={i.Item_Number}>
-                {i.Name} - {i.Item_Number}
-              </ListItemText>
-            </ListItemButton>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <h3
+        style={{
+          marginTop: "3em",
+        }}
+      >
+        {subCategory}
+      </h3>
+
+      <div
+        style={{
+          marginTop: "3em",
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "1em",
+          textAlign: "center",
+        }}
+      >
+        {item.map((i, index) => {
+          return (
+            <div key={index}>
+              <ListItemButton
+                component={NavLink}
+                to={`/${category}/${subCategory}/${i.Name}`}
+                onClick={() => setProduct(i.Item_Number)}
+              >
+                <div>
+                  <img
+                    src={`https://placehold.co/200x200/png`}
+                    alt="item"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                  <ListItemText primary={i.Name} secondary={i.Item_Number}>
+                    {i.Name} - {i.Item_Number}
+                  </ListItemText>
+                </div>
+              </ListItemButton>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
 export default SubCategoryPage;

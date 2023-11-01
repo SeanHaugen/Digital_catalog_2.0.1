@@ -19,6 +19,8 @@ function App() {
   const [query, setQuery] = useState("");
   const [contextMenu, setContextMenu] = useState(null);
 
+  const [authToken, setAuthToken] = useState("");
+
   useFetchSubCategoryItemData(setItem, subCategory);
   useFetchItemData(setProductData, product);
 
@@ -52,8 +54,8 @@ function App() {
         style={{
           cursor: "context-menu",
           display: "flex",
-          flexDirection: "row wrap",
-          // flexFlow: "column",
+          // flexDirection: "row wrap",
+          // flexFlow: "row wrap",
           marginTop: "4em",
         }}
       >
@@ -64,16 +66,17 @@ function App() {
           setQuery={setQuery}
           query={query}
         />
-        <Main
-          category={category}
-          setSubCategory={setSubCategory}
-          subCategory={subCategory}
-          item={item}
-          setProduct={setProduct}
-          productData={productData}
-          searchData={searchData}
-        />
-
+        <div className="main-container">
+          <Main
+            category={category}
+            setSubCategory={setSubCategory}
+            subCategory={subCategory}
+            item={item}
+            setProduct={setProduct}
+            productData={productData}
+            searchData={searchData}
+          />
+        </div>
         <Menu
           open={contextMenu !== null}
           onClose={handleClose}
