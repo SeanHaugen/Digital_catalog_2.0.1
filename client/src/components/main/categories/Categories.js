@@ -9,11 +9,15 @@ import ListItemText from "@mui/material/ListItemText";
 
 function CategoriesPage({ category, setSubCategory }) {
   const [productsCategory, setProductsCategory] = useState([]);
+  const [toggleImage, setToggleImage] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
   useFetchCategoryData(setProductsCategory, category);
   // console.log(productsCategory);
 
+  const toggleImagehandler = () => {
+    setToggleImage(!toggleImage);
+  };
   return (
     <>
       <h3
@@ -23,6 +27,8 @@ function CategoriesPage({ category, setSubCategory }) {
       >
         {category}
       </h3>
+      <label>toggle images</label>
+      <input type="checkbox" onClick={toggleImagehandler} />
       <div
         style={{
           marginTop: "3em",
@@ -40,20 +46,28 @@ function CategoriesPage({ category, setSubCategory }) {
                 to={`/${category}/${subCat}`}
                 onClick={() => setSubCategory(subCat)}
               >
-                <div>
-                  <img
-                    src={`https://placehold.co/200x200/png`}
-                    alt={subCat}
-                    style={{ maxWidth: "100%", height: "auto" }}
-                  />
-
+                {toggleImage ? (
+                  <div>
+                    <img
+                      src={`https://placehold.co/200x200/png`}
+                      alt={subCat}
+                      style={{ maxWidth: "100%", height: "auto" }}
+                    />
+                    <ListItemText
+                      primary={subCat}
+                      style={{ textAlign: "center" }}
+                    >
+                      {subCat}
+                    </ListItemText>
+                  </div>
+                ) : (
                   <ListItemText
                     primary={subCat}
                     style={{ textAlign: "center" }}
                   >
                     {subCat}
                   </ListItemText>
-                </div>
+                )}
               </ListItemButton>
             </div>
           );

@@ -58,7 +58,7 @@ function LoginModal() {
           color="neutral"
           onClick={() => setOpen(true)}
         >
-          Open modal
+          Login
         </Button>
         <Modal
           aria-labelledby="modal-title"

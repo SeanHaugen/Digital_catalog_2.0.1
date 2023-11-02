@@ -203,12 +203,12 @@ export const useHandleEurofitInfo = (setState, item) => {
   }, [item, setState]);
 };
 
-export const useHandleMediaInfo = (setState, item) => {
+export const useHandleMediaInfo = (setState, materials) => {
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          `https://dull-pink-termite-slip.cyclic.app/mediaspecs?item=${item}`
+          `https://dull-pink-termite-slip.cyclic.app/mediaspecs?item=${materials}`
         );
         let info = response.data;
         setState(info);
@@ -217,7 +217,7 @@ export const useHandleMediaInfo = (setState, item) => {
       }
     }
     fetchData();
-  }, [item, setState]);
+  }, [materials, setState]);
 };
 
 export const useDeleteItem = (item, onDeleteSuccess, onDeleteError) => {
