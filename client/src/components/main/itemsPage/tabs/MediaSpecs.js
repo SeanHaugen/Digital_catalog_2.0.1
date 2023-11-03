@@ -1,44 +1,74 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHandleMediaInfo } from "../../../../api/api";
+import axios from "axios";
 import { Item } from "../../../../helper/Item";
 
 function MediaSpecs({ productData, materialsArray, showMaterials }) {
   const [mediaInfo, setMediaInfo] = useState([]);
+  const [matchingMedia, setMatchingMedia] = useState(null);
+  const [selectedType, setSelectedType] = useState("");
+  // useHandleMediaInfo(setMediaInfo, productData.Materials);
+  // let renderMediaSpecs = (mediaObject) => {
+  //   return Object.entries(mediaObject).map(([key, value], index) => (
+  //     <ul key={index}>
+  //       <li>
+  //         <b>{key}</b>
+  //         {value}
+  //       </li>
+  //     </ul>
+  //   ));
+  // };
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          "https://dull-pink-termite-slip.cyclic.app/specsForMedia"
+        );
 
-  useHandleMediaInfo(setMediaInfo, productData.Materials);
-  let renderMediaSpecs = (mediaObject) => {
-    return Object.entries(mediaObject).map(([key, value], index) => (
-      <ul key={index}>
-        <li>
-          <b>{key}</b>
-          {value}
-        </li>
-      </ul>
-    ));
-  };
+        setMediaInfo(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
 
-  console.log(mediaInfo);
+  const matchingTypes = mediaInfo
+    .filter((mediaSpecs) =>
+      materialsArray.some((material) => material.includes(mediaSpecs.Type))
+    )
+    .map((mediaSpecs) => mediaSpecs.Type);
 
-  console.log(materialsArray);
-
-  const isTypeInShowMaterials = (type) => {
-    return materialsArray.some((material) => material.includes(type));
-  };
+  useEffect(() => {
+    if (matchingTypes.length > 0) {
+      setSelectedType(matchingTypes[0]);
+    }
+  }, [matchingTypes]);
 
   return (
     <div>
       <Item>
-        {mediaInfo.map((mediaSpecs, index) => {
-          const type = mediaSpecs.Type;
-          const isTypeMatching = isTypeInShowMaterials(type);
-          return (
+        {matchingTypes.length > 0 ? (
+          matchingTypes.map((type, index) => (
             <div key={index}>
-              {renderMediaSpecs(mediaSpecs)}
-              {isTypeMatching && <p>Match found in media Array</p>}
+              <h3>{type}</h3>
+              {mediaInfo
+                .filter((mediaSpecs) => mediaSpecs.Type === type)
+                .map((mediaSpecs, subIndex) => (
+                  <ul key={subIndex}>
+                    {Object.entries(mediaSpecs).map(([key, value]) => (
+                      <li>
+                        <b>{key}</b>: {value}
+                      </li>
+                    ))}
+                  </ul>
+                ))}
             </div>
-          );
-        })}
+          ))
+        ) : (
+          <p>No matching media found.</p>
+        )}
       </Item>
     </div>
   );
