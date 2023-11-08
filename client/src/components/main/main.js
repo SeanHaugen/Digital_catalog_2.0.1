@@ -110,8 +110,11 @@ function Main({
                 element={
                   <ItemPage
                     productData={productData}
+                    category={category}
+                    subCategory={subCategory}
                     selectedPromo={selectedPromo}
                     handlePromoSelect={handlePromoSelect}
+                    setProduct={setProduct}
                   />
                 }
               />

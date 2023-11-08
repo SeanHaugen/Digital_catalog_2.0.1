@@ -8,7 +8,6 @@ function AdditionalInfo({ productData }) {
   const [eurofitInfo, setEurofitInfo] = useState([]);
   useHandleEurofitInfo(setEurofitInfo, productData.Item_Number);
   let eurofitObj = eurofitInfo;
-  console.log(eurofitObj);
   let eurofitArray = Object.entries(eurofitObj).map(([key, value], index) => (
     <ul key={index}>
       <li>{value}</li>

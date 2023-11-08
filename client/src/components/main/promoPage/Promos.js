@@ -3,6 +3,8 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+
 import ListItemText from "@mui/material/ListItemText";
 
 function Promos({ setSelectedPromo, selectedPromo, setProduct }) {
@@ -54,7 +56,7 @@ function Promos({ setSelectedPromo, selectedPromo, setProduct }) {
       <h2>Q4 Promos</h2>
       <ul>
         {selectedPromo.map((item) => (
-          <p key={item.id} className="promo">
+          <ListItemButton key={item.id} className="promo">
             <NavLink
               to={`/category/subcategory/${item.Item_Number}`}
               onClick={() => setProduct(item.Item_Number)}
@@ -64,8 +66,15 @@ function Promos({ setSelectedPromo, selectedPromo, setProduct }) {
               <button onClick={() => onDeletePromoItem(item.id)}>Delete</button>
               {/* Add a link to the item page */}
               {console.log(item.Item_Number)}
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              />
             </NavLink>
-          </p>
+          </ListItemButton>
         ))}
       </ul>
     </div>

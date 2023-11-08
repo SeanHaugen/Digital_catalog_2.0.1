@@ -38,15 +38,9 @@ function StockButtons({
       // Send a PUT request to your server to toggle Low_Stock
       try {
         axios.put(
-          `https://dull-pink-termite-slip.cyclic.app/toggle-lowStock/${productData.Item_Number}`,
-          {
-            Alt: altInput,
-          }
+          `https://dull-pink-termite-slip.cyclic.app/toggle-lowStock/${productData.Item_Number}`
         );
         if (response.status === 200) {
-          console.log("Alternative options updated");
-          setAltOption([...altOption, altInput]);
-          setAltInput("");
           onUpdate(); // Call the onUpdate function with appropriate arguments
         }
       } catch (error) {
@@ -54,6 +48,25 @@ function StockButtons({
       }
     } else {
       alert("Fetching the initial value... Please wait.");
+    }
+  };
+
+  console.log(altInput);
+  const handleAlternateOptions = async () => {
+    try {
+      const response = await axios.put(
+        `https://dull-pink-termite-slip.cyclic.app/add-alt-item/${productData.Item_Number}`,
+        { newAltString: altInput }
+      );
+
+      if (response.status === 200) {
+        console.log("Alternative options updated");
+        const updatedAltOption = [...altOption, altInput]; // Create a new array with the updated data
+        setAltOption(updatedAltOption); // Update the state
+        setAltInput(""); // Clear the input field
+      }
+    } catch (error) {
+      console.error("Error updating alternative options:", error);
     }
   };
 
@@ -65,29 +78,75 @@ function StockButtons({
       // Send a PUT request to your server to toggle Out_of_Stock
       try {
         axios.put(
-          `https://dull-pink-termite-slip.cyclic.app/toggle-oos/${productData.Item_Number}`,
-          { Date: dateInput }
+          `https://dull-pink-termite-slip.cyclic.app/toggle-oos/${productData.Item_Number}`
         );
         if (response.status === 200) {
-          console.log("Date added successfully");
-          setInStockDate([...inStockDate, dateInput]);
-          setDateInput("");
           onUpdate(); // Call the onUpdate function with appropriate arguments
         }
       } catch (error) {
-        console.error("Error adding date:", error);
+        console.error("Error setting stock out", error);
       }
     } else {
       alert("Fetching the initial value... Please wait.");
     }
   };
 
-  console.log(isLowStock);
+  const handleInStockDate = async () => {
+    try {
+      const response = await axios.put(
+        `https://dull-pink-termite-slip.cyclic.app/update-date/${productData.Item_Number}`,
+        { newDate: dateInput }
+      );
+
+      if (response.status === 200) {
+        console.log("Date added successfully");
+        setInStockDate([...inStockDate, dateInput]);
+        setDateInput("");
+      }
+    } catch (error) {
+      console.error("Error adding date: ", error);
+    }
+  };
+
+  const handleDeleteDate = async () => {
+    try {
+      const response = await axios.delete(
+        `https://dull-pink-termite-slip.cyclic.app/delete-date/${productData.Item_Number}`
+      );
+
+      if (response.status === 200) {
+        // The date field has been deleted successfully
+        console.log("Date deleted successfully");
+        // You can update your UI or perform any other actions
+      }
+    } catch (error) {
+      console.error("Error deleting date: ", error);
+    }
+  };
+
+  const handleDeleteAltOption = async (itemNumber, altStringToRemove) => {
+    try {
+      const response = await axios.delete(
+        `https://dull-pink-termite-slip.cyclic.app/remove-alt-item/${itemNumber}`,
+        { data: { altStringToRemove } }
+      );
+
+      if (response.status === 200) {
+        // The alt string has been deleted successfully
+        console.log("Alt string deleted successfully");
+        // You can update your UI or perform any other actions
+      }
+    } catch (error) {
+      console.error("Error deleting alt string: ", error);
+    }
+  };
+
+  console.log(productData.Alt);
 
   return (
     <div id="stock-buttons">
-      <label>Promo Item</label>
-      <input type="checkbox" />
+      {/* <label>Promo Item</label> */}
+      {/* <input type="checkbox" /> */}
       <div>
         <label>Missing components</label>
         <input
@@ -95,8 +154,14 @@ function StockButtons({
           checked={isLowStock === true}
           onChange={handleLowStockCheckboxChange}
         />
+
         <div>
-          <form onSubmit={handleLowStockCheckboxChange}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleAlternateOptions();
+            }}
+          >
             <label>Alternative options: </label>
             <input
               type="text"
@@ -105,10 +170,21 @@ function StockButtons({
             />
             <button type="submit">Submit</button>
             <ul>
-              {" "}
-              {altOption.map((option, index) => (
-                <li key={index}>{option}</li>
-              ))}
+              {productData.Alt
+                ? productData.Alt.map((option, index) => (
+                    <div>
+                      <li key={index}>{option}</li>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleDeleteAltOption(productData.Item_Number, option)
+                        }
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ))
+                : null}
             </ul>
           </form>
         </div>
@@ -121,7 +197,7 @@ function StockButtons({
         onChange={handleOutOfStockCheckboxChange}
       />
       <div>
-        <form onSubmit={handleOutOfStockCheckboxChange}>
+        <form onSubmit={handleInStockDate}>
           <label>Estimated In Stock Date: </label>
           <input
             type="date"
@@ -130,9 +206,11 @@ function StockButtons({
           />
           <button type="submit">Submit</button>
           <ul>
-            {inStockDate.map((date, index) => (
-              <li key={index}>{date}</li>
-            ))}
+            {productData.Date}
+
+            <button type="button" onClick={handleDeleteDate}>
+              Delete Date
+            </button>
           </ul>
         </form>
       </div>

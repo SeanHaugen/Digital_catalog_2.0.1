@@ -10,7 +10,14 @@ import ItemTabs from "./tabs/ItemTabs";
 import StockButtons from "./stockbuttons/Stockbuttons";
 import DeleteButton from "./Delete/DeleteButton.js";
 
-function ItemPage({ productData, handlePromoSelect, selectedPromo }) {
+function ItemPage({
+  productData,
+  handlePromoSelect,
+  selectedPromo,
+  subCategory,
+  category,
+  setProduct,
+}) {
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
 
@@ -37,6 +44,16 @@ function ItemPage({ productData, handlePromoSelect, selectedPromo }) {
       return <h1>{productData.Name}</h1>;
     }
   };
+
+  const leadTime = () => {
+    if (productData.Lead_Times > 1) {
+      return productData.Lead_Times - 1;
+    } else {
+      return 1;
+    }
+  };
+
+  console.log(subCategory, category);
 
   return (
     <div
@@ -66,14 +83,19 @@ function ItemPage({ productData, handlePromoSelect, selectedPromo }) {
       </Grid>
       <Grid sx={{ flexGrow: 1 }} container spacing={0} margin={"5px"}>
         <Item>
-          Setup: ${productData.SetupChg}
+          Setup: ${productData.SetupChg} G, $16 net
           <div>
-            <b> Lead Time: {productData.Lead_Times} Business Days</b>
+            Lead Time: <b> {leadTime()} Business Days</b>
           </div>
         </Item>
       </Grid>
       <Grid xs={6} md={5}>
-        <ItemTabs productData={productData} />
+        <ItemTabs
+          productData={productData}
+          category={category}
+          subCategory={subCategory}
+          setProduct={setProduct}
+        />
       </Grid>
       <div>
         <StockButtons

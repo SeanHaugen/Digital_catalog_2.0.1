@@ -12,8 +12,9 @@ import ColorBox from "./color_grid/ColorBox";
 import MediaSpecs from "./MediaSpecs";
 import AdditionalInfo from "./AdditionalInfo";
 import Details from "./Details";
+import RelatedItems from "./RelatedItems";
 
-function ItemTabs({ productData }) {
+function ItemTabs({ productData, category, subCategory, setProduct }) {
   console.log(typeof productData.Materials);
   const materialsArray = productData.Materials?.split(/\s*,\s*/) || [];
   console.log(materialsArray);
@@ -38,6 +39,7 @@ function ItemTabs({ productData }) {
             <Tab>Internal Info</Tab>
             <Tab>Customer Service Info</Tab>
             <Tab>Media Specs</Tab>
+            <Tab>Suggested Items</Tab>
           </TabList>
           <TabPanel value={0}>
             <Details
@@ -67,6 +69,14 @@ function ItemTabs({ productData }) {
               productData={productData}
               materialsArray={materialsArray}
               showMaterials={showMaterials}
+            />
+          </TabPanel>
+          <TabPanel value={6}>
+            <RelatedItems
+              productData={productData}
+              category={category}
+              subCategory={subCategory}
+              setProduct={setProduct}
             />
           </TabPanel>
         </Tabs>

@@ -8,6 +8,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 // import Typography from "@mui/material/Typography";
 import BottomNav from "./components/footer/BottomNav";
+import CopyToClipboardButton from "./helper/CopyToClipboard";
+import NewWindowButton from "./helper/NewWindow";
 
 function App() {
   const [category, setCategory] = useState("");
@@ -87,12 +89,9 @@ function App() {
               : undefined
           }
         >
-          <MenuItem>Open New</MenuItem>
-          <MenuItem onClick={handleClose}>Copy</MenuItem>
-          <MenuItem onClick={handleClose}>Print</MenuItem>
+          <CopyToClipboardButton onClick={handleClose} />
+          <NewWindowButton onClick={handleClose} />
           <MenuItem onClick={handleClose}>Highlight</MenuItem>
-          <MenuItem onClick={handleClose}>Add To PDF</MenuItem>
-          <MenuItem onClick={handleClose}>Email</MenuItem>
         </Menu>
       </div>
       <BottomNav productData={productData} />
