@@ -8,31 +8,16 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import RecentlyViewed from "./recents/RecentlyViewed";
 import { useLocation, useNavigate } from "react-router";
 
-export default function BottomNav({ productData }) {
+export default function BottomNav({ productData, setProduct }) {
   const [value, setValue] = React.useState(0);
   const [openRecent, setOpenRecent] = useState(false);
   const [recentPages, setRecentPages] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = ({ productData }) => {
     setOpenRecent(!openRecent);
   };
-
-  // useEffect(() => {
-  //   const pathSegments = history.pathname.split("/");
-  //   const isDesiredPathFormat =
-  //     pathSegments.length === 4 &&
-  //     pathSegments[0] === "" &&
-  //     pathSegments[3] !== "";
-
-  //   if (isDesiredPathFormat) {
-  //     setRecentPages((prevPages) => [
-  //       history.pathname,
-  //       ...prevPages.slice(0, 4),
-  //     ]);
-  //   }
-  // }, [history]);
 
   useEffect(() => {
     const currentItemNumber = location.pathname.split("/").pop();
@@ -65,7 +50,13 @@ export default function BottomNav({ productData }) {
           ></BottomNavigationAction>
           <BottomNavigationAction icon={<FavoriteIcon />} />
         </BottomNavigation>
-        {openRecent && <RecentlyViewed recentPages={recentPages} />}
+        {openRecent && (
+          <RecentlyViewed
+            recentPages={recentPages}
+            productData={productData}
+            setProduct={setProduct}
+          />
+        )}
       </Box>
     </div>
   );

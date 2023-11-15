@@ -94,7 +94,7 @@ function App() {
           <MenuItem onClick={handleClose}>Highlight</MenuItem>
         </Menu>
       </div>
-      <BottomNav productData={productData} />
+      <BottomNav productData={productData} setProduct={setProduct} />
     </Router>
   );
 }

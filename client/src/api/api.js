@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 
 // `https://dull-pink-termite-slip.cyclic.app`;
@@ -77,7 +78,9 @@ export const useFetchCategoryData = (setState, category) => {
   }, [category, setState]);
 };
 
-export const useFetchItemData = (setState, item) => {
+export const useFetchRecentItemData = (setState, item) => {
+  const { addRecentlyViewedItem } = useRecentlyViewed();
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -86,13 +89,38 @@ export const useFetchItemData = (setState, item) => {
         );
         const itemData = response.data;
         setState(itemData);
+        addRecentlyViewedItem(itemData); // Add the item to recently viewed list
       } catch (err) {
         console.error(err);
       }
     };
 
     fetchProducts();
-  }, [item, setState]);
+  }, [item, setState, addRecentlyViewedItem]);
+};
+
+export const useFetchItemData = (setState, item) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(
+          `https://dull-pink-termite-slip.cyclic.app/items?item=${item}`
+        );
+        const itemData = response.data;
+        setState(itemData);
+        dispatch({
+          type: "ADD_RECENTLY_VIEWED_ITEM",
+          payload: itemData,
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchProducts();
+  }, [item, setState, dispatch]);
 };
 
 export const useSearchData = (setState, search) => {

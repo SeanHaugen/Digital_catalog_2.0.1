@@ -1,51 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, NavLink } from "react-router-dom";
+// src/components/RecentlyViewed.js
+import React from "react";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 
-const RecentlyViewedPages = () => {
-  const [recentPages, setRecentPages] = useState([]);
-  const location = useLocation();
-
-  const cleanUpPath = (path) => {
-    if (!path || path === "/") {
-      return "Home";
-    }
-
-    const itemName = decodeURIComponent(path).split("/").pop();
-    return itemName.replace(/[^\w\s]/gi, " ");
-  };
-
-  useEffect(() => {
-    const currentItemName = cleanUpPath(location.pathname);
-
-    setRecentPages((prevHistoryList) => {
-      const updatedPages = [
-        currentItemName,
-        ...prevHistoryList.filter((page) => page !== currentItemName),
-      ].slice(0, 5);
-
-      localStorage.setItem("recentPages", JSON.stringify(updatedPages));
-      return updatedPages;
-    });
-  }, [location.pathname]);
+const RecentlyViewed = ({ recentlyViewedItems, setProduct }) => {
+  console.log("Recently Viewed Items:", recentlyViewedItems);
 
   return (
     <div>
-      <h2>Recently Viewed Pages</h2>
+      <h2>Recently Viewed</h2>
       <ul>
-        {recentPages.map((page, index) => (
-          <ListItemButton
-            key={index}
-            component={NavLink}
-            to={`/category/subcategory/${page.Name}`}
-          >
-            {page}
-          </ListItemButton>
+        {recentlyViewedItems.map((item, index) => (
+          <div>
+            <ListItemButton
+              key={index}
+              component={NavLink}
+              to={`/category/subcategory/${item.Item_Number}`}
+              onClick={() => setProduct(item.Item_Number)}
+            >
+              {item.Name}: {item.Item_Number}
+            </ListItemButton>
+          </div>
         ))}
       </ul>
     </div>
   );
 };
 
-export default RecentlyViewedPages;
+const mapStateToProps = (state) => ({
+  recentlyViewedItems: state,
+});
+
+export default connect(mapStateToProps)(RecentlyViewed);
