@@ -86,8 +86,6 @@ function StockButtons({
       } catch (error) {
         console.error("Error setting stock out", error);
       }
-    } else {
-      alert("Fetching the initial value... Please wait.");
     }
   };
 

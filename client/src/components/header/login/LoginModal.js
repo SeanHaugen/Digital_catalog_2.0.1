@@ -55,7 +55,7 @@ function LoginModal() {
       <React.Fragment>
         <Button
           variant="outlined"
-          color="neutral"
+          color="primary"
           onClick={() => setOpen(true)}
         >
           Login

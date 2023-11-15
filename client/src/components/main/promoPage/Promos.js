@@ -16,14 +16,14 @@ function Promos({ setSelectedPromo, selectedPromo, setProduct, productData }) {
       async function fetchData() {
         try {
           const response = await axios.get(
-            "https://dull-pink-termite-slip.cyclic.app/promo-items" // Replace with the actual URL for fetching data
+            "https://dull-pink-termite-slip.cyclic.app/promo-items"
           );
           setState(response.data);
-          setLoading(false); // Set loading to false when data is fetched
+          setLoading(false);
         } catch (error) {
           console.error(error);
-          setError(error); // Set the error state in case of an error
-          setLoading(false); // Set loading to false to handle errors
+          setError(error);
+          setLoading(false);
         }
       }
 
@@ -35,7 +35,6 @@ function Promos({ setSelectedPromo, selectedPromo, setProduct, productData }) {
 
   const onDeletePromoItem = async () => {
     try {
-      // Make an Axios DELETE request to your server to delete the promo item
       const response = await axios.delete(
         `https://dull-pink-termite-slip.cyclic.app/delete/promo-item/${productData.Item_Number}`
       );

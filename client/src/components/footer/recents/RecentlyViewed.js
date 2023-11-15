@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 
 const RecentlyViewed = ({ recentlyViewedItems, setProduct }) => {
   console.log("Recently Viewed Items:", recentlyViewedItems);

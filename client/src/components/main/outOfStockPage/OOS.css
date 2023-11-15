@@ -1,0 +1,11 @@
+.product-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Adjust the column width as needed */
+  gap: 10px; /* Adjust the gap between items as needed */
+}
+
+.product-item {
+  border: 1px solid #ddd; /* Optional: Add borders or styling to each item */
+  padding: 10px; /* Optional: Adjust padding for each item */
+}

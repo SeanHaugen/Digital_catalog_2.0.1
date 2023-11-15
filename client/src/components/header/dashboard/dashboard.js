@@ -11,6 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import Button from "@mui/joy/Button";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -111,8 +112,17 @@ export default function DashBoard({
             <Navigation className="nav_buttons" />
 
             <NavLink to="/addProduct">
-              <button>Add new product</button>
+              <Button variant="outlined" color="primary">
+                Add new product
+              </Button>
             </NavLink>
+
+            <NavLink to="/StockOutList">
+              <Button variant="outlined" color="primary">
+                Stock Out List
+              </Button>
+            </NavLink>
+
             <LoginModal />
           </Toolbar>
         </AppBar>
