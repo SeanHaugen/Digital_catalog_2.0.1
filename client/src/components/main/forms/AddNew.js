@@ -194,7 +194,7 @@ function AddNew() {
         value={formData.Origin}
         onChange={handleChange}
       />
-      <label>
+      {/* <label>
         Promo Item:
         <input
           type="checkbox"
@@ -202,7 +202,7 @@ function AddNew() {
           checked={formData.IsPromoItem}
           onChange={handleChange}
         />
-      </label>
+      </label> */}
       <button type="submit">Add Item</button>
     </form>
   );

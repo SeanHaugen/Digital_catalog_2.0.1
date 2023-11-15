@@ -7,7 +7,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 
 import ListItemText from "@mui/material/ListItemText";
 
-function Promos({ setSelectedPromo, selectedPromo, setProduct }) {
+function Promos({ setSelectedPromo, selectedPromo, setProduct, productData }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -33,18 +33,27 @@ function Promos({ setSelectedPromo, selectedPromo, setProduct }) {
 
   const promoItems = useFetchPromoData(setSelectedPromo);
 
-  const onDeletePromoItem = async (itemId) => {
+  const onDeletePromoItem = async () => {
     try {
-      // Find the item in the promos collection and delete it
-      await selectedPromo.deleteOne({ Item_Number: itemId });
-
-      setSelectedPromo((prevSelectedPromo) =>
-        prevSelectedPromo.filter(
-          (selectedItem) => selectedItem.Item_Number !== itemId
-        )
+      // Make an Axios DELETE request to your server to delete the promo item
+      const response = await axios.delete(
+        `https://dull-pink-termite-slip.cyclic.app/delete/promo-item/${productData.Item_Number}`
       );
+
+      if (response.status === 200) {
+        // If the delete request was successful, update the selectedPromo state
+        setSelectedPromo((prevSelectedPromo) =>
+          prevSelectedPromo.filter(
+            (selectedItem) =>
+              selectedItem.Item_Number !== productData.Item_Number
+          )
+        );
+      } else {
+        // Handle the case where the server request fails
+        console.error("Error deleting promo item: Request failed");
+      }
     } catch (error) {
-      // Handle any errors here
+      // Handle any other errors
       console.error("Error deleting promo item:", error);
     }
   };
@@ -54,16 +63,17 @@ function Promos({ setSelectedPromo, selectedPromo, setProduct }) {
     <div>
       <h1>Promos</h1>
       <h2>Q4 Promos</h2>
+      <p>Promo Item Pricing begins at CPP1CS </p>
       <ul>
         {selectedPromo.map((item) => (
-          <ListItemButton key={item.id} className="promo">
-            <NavLink
+          <div key={item.id} className="promo">
+            <ListItemButton
+              component={NavLink}
               to={`/category/subcategory/${item.Item_Number}`}
               onClick={() => setProduct(item.Item_Number)}
             >
               {/* Display relevant information from the item */}
               {item.Name}: {item.Item_Number}
-              <button onClick={() => onDeletePromoItem(item.id)}>Delete</button>
               {/* Add a link to the item page */}
               {console.log(item.Item_Number)}
               <ListItemIcon
@@ -73,8 +83,9 @@ function Promos({ setSelectedPromo, selectedPromo, setProduct }) {
                   justifyContent: "center",
                 }}
               />
-            </NavLink>
-          </ListItemButton>
+            </ListItemButton>
+            <button onClick={() => onDeletePromoItem()}>Delete</button>
+          </div>
         ))}
       </ul>
     </div>

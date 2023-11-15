@@ -42,13 +42,6 @@ export default function BottomNav({ productData }) {
     ]);
   }, [location.pathname]);
 
-  const goBack = () => {
-    if (recentPages.length > 1) {
-      const previousItemNumber = recentPages[recentPages.length - 2];
-      navigate(`/items/${previousItemNumber}`);
-    }
-  };
-
   return (
     <div
       style={{
@@ -56,10 +49,9 @@ export default function BottomNav({ productData }) {
         justifyContent: "center",
         alignItems: "center",
         marginTop: "10px",
-        backgroundColor: "black",
       }}
     >
-      <Box sx={{ width: 500 }} style={{ backgroundColor: "black" }}>
+      <Box sx={{ width: 500 }}>
         <BottomNavigation
           showLabels
           value={value}

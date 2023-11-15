@@ -9,6 +9,7 @@ import Breadcrumb from "./breadcrumbs/BreadCrumbs";
 import ItemTabs from "./tabs/ItemTabs";
 import StockButtons from "./stockbuttons/Stockbuttons";
 import DeleteButton from "./Delete/DeleteButton.js";
+import PromoButton from "../promoPage/PromoButton.js";
 
 function ItemPage({
   productData,
@@ -98,6 +99,7 @@ function ItemPage({
         />
       </Grid>
       <div>
+        <PromoButton productData={productData} />
         <StockButtons
           handlePromoSelect={handlePromoSelect}
           selectedPromo={selectedPromo}

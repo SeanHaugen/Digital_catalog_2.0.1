@@ -12,6 +12,7 @@ import ItemPage from "./itemsPage/ItemsPage";
 import SearchPage from "./searchPage/SearchPage";
 import FormPage from "./forms/FormPage";
 import Promos from "./promoPage/Promos";
+import StockOutList from "./outOfStockPage/OutOfStock";
 // import FavoriteList from "./favorites/Favorites";
 
 function Main({
@@ -143,6 +144,19 @@ function Main({
                     productData={productData}
                     selectedPromo={selectedPromo}
                     setSelectedPromo={setSelectedPromo}
+                  />
+                }
+              />
+              <Route
+                path="/StockOutList"
+                element={
+                  <StockOutList
+                    searchData={searchData}
+                    setProduct={setProduct}
+                    category={category}
+                    subCategory={subCategory}
+                    item={item}
+                    productData={productData}
                   />
                 }
               />
