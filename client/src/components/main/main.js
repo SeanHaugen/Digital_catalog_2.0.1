@@ -92,6 +92,8 @@ function Main({
                   <CategoriesPage
                     category={category}
                     setSubCategory={setSubCategory}
+                    productData={productData}
+                    item={item}
                   />
                 }
               />
@@ -103,6 +105,7 @@ function Main({
                     subCategory={subCategory}
                     item={item}
                     setProduct={setProduct}
+                    productData={productData}
                   />
                 }
               />

@@ -5,13 +5,22 @@ import ListItemButton from "@mui/material/ListItemButton";
 
 import ListItemText from "@mui/material/ListItemText";
 
-function SubCategoryPage({ category, subCategory, item, setProduct }) {
+function SubCategoryPage({
+  productData,
+  category,
+  subCategory,
+  item,
+  setProduct,
+}) {
   // console.log(item);
   const [toggleImage, setToggleImage] = useState(true);
+  // const imageName = `${productData.Item_Number}`;
+  // const imageUrl = `https://www.showdowndisplays.com/cdn/Resources/Primary/${imageName}_0_Preview.jpg`;
 
   const toggleImagehandler = () => {
     setToggleImage(!toggleImage);
   };
+  console.log(productData.Item_Number);
 
   return (
     <>
@@ -45,7 +54,7 @@ function SubCategoryPage({ category, subCategory, item, setProduct }) {
                 {toggleImage ? (
                   <div>
                     <img
-                      src={`https://placehold.co/200x200/png`}
+                      src={`https://www.showdowndisplays.com/cdn/Resources/Primary/${i.Item_Number}_0_Preview.jpg`}
                       alt="item"
                       style={{ maxWidth: "100%", height: "auto" }}
                     />

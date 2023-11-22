@@ -7,10 +7,14 @@ import ListItemButton from "@mui/material/ListItemButton";
 
 import ListItemText from "@mui/material/ListItemText";
 
-function CategoriesPage({ category, setSubCategory }) {
+function CategoriesPage({ item, category, setSubCategory }) {
   const [productsCategory, setProductsCategory] = useState([]);
   const [toggleImage, setToggleImage] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+
+  // const imageName = `${productData.Item_Number}`;
+  // const imageUrl = `https://www.showdowndisplays.com/cdn/Resources/Subcategory/${imageName}_subcat.jpg`;
+  //https://www.showdowndisplays.com/cdn/Resources/Subcategory/262254_subcat.jpg
 
   useFetchCategoryData(setProductsCategory, category);
   // console.log(productsCategory);
@@ -18,6 +22,7 @@ function CategoriesPage({ category, setSubCategory }) {
   const toggleImagehandler = () => {
     setToggleImage(!toggleImage);
   };
+
   return (
     <>
       <h3
@@ -48,11 +53,11 @@ function CategoriesPage({ category, setSubCategory }) {
               >
                 {toggleImage ? (
                   <div>
-                    <img
-                      src={`https://placehold.co/200x200/png`}
+                    {/* <img
+                      src={imageUrl}
                       alt={subCat}
                       style={{ maxWidth: "100%", height: "auto" }}
-                    />
+                    /> */}
                     <ListItemText
                       primary={subCat}
                       style={{ textAlign: "center" }}

@@ -23,19 +23,19 @@ const RelatedItems = ({ productData, subCategory, category, setProduct }) => {
     .filter((item) => {
       // Check if the item does not match the productData and contains "Hardware" in its Keywords
       return (
-        (item.Name !== productData.Name ||
-          item.Item_Number !== productData.Item_Number) &&
-        item.Keywords.includes("Hardware")
+        item.Name !== productData.Name ||
+        item.Item_Number !== productData.Item_Number
+        // item.Keywords.includes("Hardware")
       );
     })
     .slice(0, 4);
+  //future versions: make suggestions for "Kits", "Hardware", and "graphics"
   //future versions: make suggestions for "Kits", "Hardware", and "graphics"
   const filteredHardware = relatedItems
     .filter(
       (item) =>
         (item.Name !== productData.Name ||
-          item.Item_Number !== productData.Item_Number ||
-          item.Keywords !== productData.Keywords) &&
+          item.Item_Number !== productData.Item_Number) &&
         productKeywordsArray.includes("Hardware")
     )
     .slice(0, 4);
@@ -47,6 +47,31 @@ const RelatedItems = ({ productData, subCategory, category, setProduct }) => {
       <ul>
         <b>Suggested Items</b>
         {filteredItems.map((item, index) => (
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? "initial" : "center",
+              px: 2.5,
+            }}
+            key={index}
+            component={NavLink}
+            to={`/category/subcategory/${item.Name}`}
+            onClick={() => setProduct(item.Item_Number)}
+          >
+            {item.Name} - {item.Item_Number}
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : "auto",
+                justifyContent: "center",
+              }}
+            />
+          </ListItemButton>
+
+          // You can display any relevant information from the related items here
+        ))}
+        {/* <b>Suggested hardware</b> */}
+        {filteredHardware.map((item, index) => (
           <ListItemButton
             sx={{
               minHeight: 48,
