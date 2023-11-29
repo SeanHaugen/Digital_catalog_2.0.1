@@ -63,7 +63,7 @@ function AdditionalInfo({ productData }) {
 
   return (
     <div>
-      <Item>
+      <Item style={{ backgroundColor: "lightgray" }}>
         <p>
           This tab is meant for all of the "tribal" knowledge that accumulates
           with our products.{" "}

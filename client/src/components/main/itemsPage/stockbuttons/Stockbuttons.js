@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
 // import { useUpdateLowStock } from "../../../../api/api";
 import { useUpdateOOS } from "../../../../api/api";
 import { fetchLowStockValue } from "../../../../api/api";
@@ -30,21 +32,23 @@ function StockButtons({
     });
   }, [productData.Item_Number]);
 
-  const handleLowStockCheckboxChange = () => {
+  const handleLowStockCheckboxChange = async () => {
     if (isLowStock !== null) {
       const newIsLowStock = !isLowStock;
       setIsLowStock(newIsLowStock);
 
       // Send a PUT request to your server to toggle Low_Stock
       try {
-        axios.put(
+        const response = await axios.put(
           `https://dull-pink-termite-slip.cyclic.app/toggle-lowStock/${productData.Item_Number}`
         );
         if (response.status === 200) {
-          onUpdate(); // Call the onUpdate function with appropriate arguments
+          // Make sure to call the onUpdate function if needed
+          onUpdate && onUpdate();
         }
       } catch (error) {
         console.error("Error updating alternative options:", error);
+        // Handle the error
       }
     } else {
       alert("Fetching the initial value... Please wait.");
@@ -70,15 +74,16 @@ function StockButtons({
     }
   };
 
-  const handleOutOfStockCheckboxChange = () => {
+  const handleOutOfStockCheckboxChange = async () => {
     if (isOutOfStock !== null) {
       const newIsOutOfStock = !isOutOfStock;
       setIsOutOfStock(newIsOutOfStock);
 
       // Send a PUT request to your server to toggle Out_of_Stock
       try {
-        axios.put(
+        const response = await axios.put(
           `https://dull-pink-termite-slip.cyclic.app/toggle-oos/${productData.Item_Number}`
+          // { date: dateInput, option: altInput }
         );
         if (response.status === 200) {
           onUpdate(); // Call the onUpdate function with appropriate arguments
@@ -145,9 +150,11 @@ function StockButtons({
     <div id="stock-buttons">
       {/* <label>Promo Item</label> */}
       {/* <input type="checkbox" /> */}
+      <hr />
+      <h3>Stock info</h3>
       <div>
         <label>Missing components</label>
-        <input
+        <Checkbox
           type="checkbox"
           checked={isLowStock === true}
           onChange={handleLowStockCheckboxChange}
@@ -166,20 +173,22 @@ function StockButtons({
               value={altInput}
               onChange={(e) => setAltInput(e.target.value)}
             />
-            <button type="submit">Submit</button>
+            <Button type="submit">Submit</Button>
             <ul>
               {productData.Alt
                 ? productData.Alt.map((option, index) => (
                     <div>
                       <li key={index}>{option}</li>
-                      <button
+                      <Button
                         type="button"
+                        variant="contained"
+                        color="error"
                         onClick={() =>
                           handleDeleteAltOption(productData.Item_Number, option)
                         }
                       >
                         Delete
-                      </button>
+                      </Button>
                     </div>
                   ))
                 : null}
@@ -189,7 +198,7 @@ function StockButtons({
       </div>
 
       <label> Out of Stock</label>
-      <input
+      <Checkbox
         type="checkbox"
         checked={isOutOfStock === true}
         onChange={handleOutOfStockCheckboxChange}
@@ -202,15 +211,23 @@ function StockButtons({
             value={dateInput}
             onChange={(e) => setDateInput(e.target.value)}
           />
-          <button type="submit">Submit</button>
+          <Button variant="contained" color="success" type="submit">
+            Submit
+          </Button>
           <ul>
             {productData.Date}
 
-            <button type="button" onClick={handleDeleteDate}>
-              Delete Date
-            </button>
+            <Button
+              type="button"
+              variant="contained"
+              color="error"
+              onClick={handleDeleteDate}
+            >
+              Remove OOS Date
+            </Button>
           </ul>
         </form>
+        <hr />
       </div>
     </div>
   );

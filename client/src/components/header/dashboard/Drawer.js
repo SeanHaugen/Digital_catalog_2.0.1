@@ -12,14 +12,21 @@ export const Drawer = styled(MuiDrawer, {
   whiteSpace: "nowrap",
   boxSizing: "border-box",
 
-  ...(open && {
-    ...openedMixin(theme),
-    "& .MuiDrawer-paper": openedMixin(theme),
-  }),
-  ...(!open && {
-    ...closedMixin(theme),
-    "& .MuiDrawer-paper": closedMixin(theme),
-  }),
+  // ...(open && {
+  //   ...openedMixin(theme),
+  //   "& .MuiDrawer-paper": openedMixin(theme),
+  // }),
+  // ...(!open && {
+  //   ...closedMixin(theme),
+  //   "& .MuiDrawer-paper": closedMixin(theme),
+  // }),
+  "& .MuiDrawer-paper": {
+    ...(open ? openedMixin(theme) : closedMixin(theme)),
+    // Additional styles for the content inside the drawer
+    backgroundColor: "lightgray", // Change background color
+    color: "white !important", // Change text color
+    // Add any other styles you need
+  },
 }));
 
 export const DrawerHeader = styled("div")(({ theme }) => ({

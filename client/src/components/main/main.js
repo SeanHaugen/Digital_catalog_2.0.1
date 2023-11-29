@@ -52,137 +52,146 @@ function Main({
 
   return (
     <React.Fragment>
-      <div
+      {/* <div
+        className="main-content-wrapper"
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
+      > */}
+      {/* <div
+        variant="outlined"
+        id="card"
+        sx={(theme) => ({
+          width: "95%",
+          height: "fitContent",
+          display: "flex",
+          justifyContent: "center",
+          gridColumn: "span 2",
+          flexDirection: "column",
+          flexWrap: "wrap",
+          gap: "clamp(0px, (100% - 360px + 32px) * 999, 16px)",
+        })}
+      > */}
+      <div
+        className="main"
+        style={{
+          width: "100%",
+          objectFit: "contain",
+          // marginLeft: drawerOpen ? "240px" : "0", // Adjust the width of the drawer as needed
+          // transition: "margin-left 0.3s ease", // Add a transition for smooth animation
+        }}
       >
-        <Card
-          variant="outlined"
-          id="card"
-          sx={(theme) => ({
-            width: "95%",
-            height: "fitContent",
-            display: "flex",
-            justifyContent: "center",
-            gridColumn: "span 2",
-            flexDirection: "column",
-            flexWrap: "wrap",
-            gap: "clamp(0px, (100% - 360px + 32px) * 999, 16px)",
-          })}
-        >
-          <div className="main">
-            <Routes>
-              <Route
-                path="/"
-                exact
-                element={
-                  <FrontPage
-                    category={category}
-                    subCategory={subCategory}
-                    setSubCategory={setSubCategory}
-                  />
-                }
+        <Routes>
+          <Route
+            path="/"
+            exact
+            element={
+              <FrontPage
+                category={category}
+                subCategory={subCategory}
+                setSubCategory={setSubCategory}
               />
-              <Route
-                path="/:category"
-                element={
-                  <CategoriesPage
-                    category={category}
-                    setSubCategory={setSubCategory}
-                    productData={productData}
-                    item={item}
-                  />
-                }
+            }
+          />
+          <Route
+            path="/:category"
+            element={
+              <CategoriesPage
+                category={category}
+                setSubCategory={setSubCategory}
+                productData={productData}
+                item={item}
               />
-              <Route
-                path="/:category/:subCategories"
-                element={
-                  <SubCategoriesPage
-                    category={category}
-                    subCategory={subCategory}
-                    item={item}
-                    setProduct={setProduct}
-                    productData={productData}
-                  />
-                }
+            }
+          />
+          <Route
+            path="/:category/:subCategories"
+            element={
+              <SubCategoriesPage
+                category={category}
+                subCategory={subCategory}
+                item={item}
+                setProduct={setProduct}
+                productData={productData}
               />
-              <Route
-                path="/:category/:subCategories/:itemsPage"
-                element={
-                  <ItemPage
-                    productData={productData}
-                    category={category}
-                    subCategory={subCategory}
-                    selectedPromo={selectedPromo}
-                    handlePromoSelect={handlePromoSelect}
-                    setProduct={setProduct}
-                  />
-                }
+            }
+          />
+          <Route
+            path="/:category/:subCategories/:itemsPage"
+            element={
+              <ItemPage
+                productData={productData}
+                category={category}
+                subCategory={subCategory}
+                selectedPromo={selectedPromo}
+                handlePromoSelect={handlePromoSelect}
+                setProduct={setProduct}
               />
-              <Route
-                path="/search"
-                element={
-                  <SearchPage
-                    searchData={searchData}
-                    setProduct={setProduct}
-                    category={category}
-                    subCategory={subCategory}
-                    item={item}
-                    productData={productData}
-                  />
-                }
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <SearchPage
+                searchData={searchData}
+                setProduct={setProduct}
+                category={category}
+                subCategory={subCategory}
+                item={item}
+                productData={productData}
               />
-              <Route
-                path="/addProduct"
-                element={
-                  <FormPage
-                    searchData={searchData}
-                    setProduct={setProduct}
-                    category={category}
-                    subCategory={subCategory}
-                    item={item}
-                    productData={productData}
-                    selectedPromo={selectedPromo}
-                    setSelectedPromo={setSelectedPromo}
-                  />
-                }
+            }
+          />
+          <Route
+            path="/addProduct"
+            element={
+              <FormPage
+                searchData={searchData}
+                setProduct={setProduct}
+                category={category}
+                subCategory={subCategory}
+                item={item}
+                productData={productData}
+                selectedPromo={selectedPromo}
+                setSelectedPromo={setSelectedPromo}
               />
-              <Route
-                path="/StockOutList"
-                element={
-                  <StockOutList
-                    searchData={searchData}
-                    setProduct={setProduct}
-                    category={category}
-                    subCategory={subCategory}
-                    item={item}
-                    productData={productData}
-                  />
-                }
+            }
+          />
+          <Route
+            path="/StockOutList"
+            element={
+              <StockOutList
+                searchData={searchData}
+                setProduct={setProduct}
+                category={category}
+                subCategory={subCategory}
+                item={item}
+                productData={productData}
               />
-              <Route
-                path="/Promos"
-                element={
-                  <Promos
-                    searchData={searchData}
-                    setProduct={setProduct}
-                    category={category}
-                    subCategory={subCategory}
-                    item={item}
-                    productData={productData}
-                    selectedPromo={selectedPromo}
-                    setSelectedPromo={setSelectedPromo}
-                  />
-                }
+            }
+          />
+          <Route
+            path="/Promos"
+            element={
+              <Promos
+                searchData={searchData}
+                setProduct={setProduct}
+                category={category}
+                subCategory={subCategory}
+                item={item}
+                productData={productData}
+                selectedPromo={selectedPromo}
+                setSelectedPromo={setSelectedPromo}
               />
-            </Routes>
-          </div>
-          {/* </Container> */}
-        </Card>
+            }
+          />
+        </Routes>
       </div>
+      {/* </Container> */}
+      {/* </div> */}
+      {/* </div> */}
       {/* </Box> */}
       {/* </Sheet> */}
     </React.Fragment>

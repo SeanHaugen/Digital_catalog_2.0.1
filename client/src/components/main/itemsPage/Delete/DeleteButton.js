@@ -1,5 +1,6 @@
 import React from "react";
 import { useDeleteItem } from "../../../../api/api";
+import Button from "@mui/material/Button";
 
 const DeleteButton = ({ itemNumber, onDeleteSuccess, onDeleteError }) => {
   const handleDelete = useDeleteItem(
@@ -13,7 +14,13 @@ const DeleteButton = ({ itemNumber, onDeleteSuccess, onDeleteError }) => {
     handleDelete();
   };
 
-  return <button onClick={handleClick}>Delete</button>;
+  return (
+    <div>
+      <Button variant="contained" color="error" onClick={handleClick}>
+        Delete Item
+      </Button>
+    </div>
+  );
 };
 
 export default DeleteButton;

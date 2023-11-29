@@ -32,8 +32,8 @@ function CategoriesPage({ item, category, setSubCategory }) {
       >
         {category}
       </h3>
-      <label>toggle images</label>
-      <input type="checkbox" onClick={toggleImagehandler} />
+      {/* <label>toggle images</label> */}
+      {/* <input type="checkbox" onClick={toggleImagehandler} /> */}
       <div
         style={{
           marginTop: "3em",

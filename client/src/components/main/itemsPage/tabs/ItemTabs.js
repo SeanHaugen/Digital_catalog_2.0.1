@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Tabs from "@mui/joy/Tabs";
 import TabList from "@mui/joy/TabList";
@@ -15,6 +16,12 @@ import Details from "./Details";
 import RelatedItems from "./RelatedItems";
 
 function ItemTabs({ productData, category, subCategory, setProduct }) {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   console.log(typeof productData.Materials);
   const materialsArray = productData.Materials?.split(/\s*,\s*/) || [];
   console.log(materialsArray);
@@ -31,15 +38,76 @@ function ItemTabs({ productData, category, subCategory, setProduct }) {
   return (
     <div>
       <Grid>
-        <Tabs aria-label="Basic tabs" defaultValue={0}>
-          <TabList>
-            <Tab>Details</Tab>
-            <Tab>Shipping</Tab>
-            <Tab>colors</Tab>
-            <Tab>Internal Info</Tab>
-            <Tab>Customer Service Info</Tab>
-            <Tab>Media Specs</Tab>
-            <Tab>Suggested Items</Tab>
+        <Tabs
+          aria-label="Basic tabs"
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+        >
+          <TabList style={{}}>
+            <Tab
+              style={{
+                backgroundColor: value === 0 ? "white" : "gray",
+                margin: "3px",
+                borderRadius: "10px 10px 0 0px",
+              }}
+            >
+              Details
+            </Tab>
+            <Tab
+              style={{
+                backgroundColor: value === 1 ? "white" : "gray",
+                margin: "3px",
+                borderRadius: "10px 10px 0 0px",
+              }}
+            >
+              Shipping
+            </Tab>
+            <Tab
+              style={{
+                backgroundColor: value === 2 ? "white" : "gray",
+                margin: "3px",
+                borderRadius: "10px 10px 0 0px",
+              }}
+            >
+              colors
+            </Tab>
+            <Tab
+              style={{
+                backgroundColor: value === 3 ? "white" : "gray",
+                margin: "3px",
+                borderRadius: "10px 10px 0 0px",
+              }}
+            >
+              Internal Info
+            </Tab>
+            <Tab
+              style={{
+                backgroundColor: value === 4 ? "white" : "gray",
+                margin: "3px",
+                borderRadius: "10px 10px 0 0px",
+              }}
+            >
+              Customer Service Info
+            </Tab>
+            <Tab
+              style={{
+                backgroundColor: value === 5 ? "white" : "gray",
+                margin: "3px",
+                borderRadius: "10px 10px 0 0px",
+              }}
+            >
+              Media Specs
+            </Tab>
+            <Tab
+              style={{
+                backgroundColor: value === 6 ? "white" : "gray",
+                margin: "3px",
+                borderRadius: "10px 10px 0 0px",
+              }}
+            >
+              Suggested Items
+            </Tab>
           </TabList>
           <TabPanel value={0}>
             <Details
@@ -49,12 +117,12 @@ function ItemTabs({ productData, category, subCategory, setProduct }) {
             />
           </TabPanel>
           <TabPanel value={1}>
-            <Item>
+            <Item style={{ backgroundColor: "lightgray" }}>
               <FlatRateShipping productData={productData} />
             </Item>
           </TabPanel>
           <TabPanel value={2}>
-            <Item>
+            <Item style={{ backgroundColor: "lightgray" }}>
               <ColorBox productData={productData} />
             </Item>
           </TabPanel>

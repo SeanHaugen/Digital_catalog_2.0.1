@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Button from "@mui/material/Button";
 
 function PromoButton({ productData }) {
   const handleAddPromo = async () => {
@@ -29,10 +30,15 @@ function PromoButton({ productData }) {
 
   return (
     <div>
-      <label>Add as Promo</label>
-      <button type="checkbox" onClick={handleAddPromo}>
-        Add
-      </button>
+      <label></label>
+      <Button
+        variant="contained"
+        color="success"
+        type="checkbox"
+        onClick={handleAddPromo}
+      >
+        Add as Promo
+      </Button>
     </div>
   );
 }

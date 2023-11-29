@@ -57,16 +57,21 @@ function Description({ productData }) {
         </div>
       ) : (
         <div>
-          <button onClick={toggleEditing}>Edit Description</button>
           <ul>
-            {descriptionBullets.map((point, index) => {
-              return (
-                <li key={index} style={{ fontSize: "16px" }}>
-                  {point}
-                </li>
-              );
-            })}
+            {descriptionBullets.map((point, index) => (
+              <li
+                key={index}
+                style={{
+                  fontSize: "16px",
+                  fontStyle: index === 0 ? "italic" : "normal",
+                  listStyleType: index === 0 ? "none" : "disc",
+                }}
+              >
+                {point}
+              </li>
+            ))}
           </ul>
+          <button onClick={toggleEditing}>Edit Description</button>
         </div>
       )}
     </div>

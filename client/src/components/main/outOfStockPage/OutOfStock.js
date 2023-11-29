@@ -3,6 +3,7 @@ import axios from "axios";
 import "./OOS.css";
 import { NavLink } from "react-router-dom";
 import ListItemButton from "@mui/material/ListItemButton";
+import Checkbox from "@mui/material/Checkbox";
 
 function StockOutList({ productData, setProduct }) {
   const [outOfStockProducts, setOutOfStockProducts] = useState([]);
@@ -42,6 +43,11 @@ function StockOutList({ productData, setProduct }) {
               to={`/category/subcategory/${product.Item_Number}`}
               onClick={() => setProduct(product.Item_Number)}
             >
+              <img
+                src={`https://www.showdowndisplays.com/cdn/Resources/Primary/${product.Item_Number}_0_Preview.jpg`}
+                alt="item"
+                style={{ maxWidth: "10%", height: "auto" }}
+              />
               <div className="product-name">{product.Name}</div>
               <div className="product-number">{product.Item_Number}</div>
             </ListItemButton>

@@ -20,6 +20,7 @@ function App() {
   const [searchData, setSearchData] = useState([]);
   const [query, setQuery] = useState("");
   const [contextMenu, setContextMenu] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const [authToken, setAuthToken] = useState("");
 
@@ -27,7 +28,7 @@ function App() {
   useFetchItemData(setProductData, product);
 
   // console.log(searchData);
-  // console.log(product);
+  console.log(productData);
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -48,18 +49,25 @@ function App() {
     setContextMenu(null);
   };
 
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  };
+
   return (
     <Router>
       <div
         className="App"
         onContextMenu={handleContextMenu}
-        style={{
-          cursor: "context-menu",
-          display: "flex",
-          // flexDirection: "row wrap",
-          // flexFlow: "row wrap",
-          marginTop: "4em",
-        }}
+        // style={{
+        //   cursor: "context-menu",
+        //   display: "flex",
+        //   flexFlow: "row no-wrap",
+        //   marginTop: "4em",
+        // }}
       >
         <DashBoard
           setCategory={setCategory}
@@ -67,6 +75,9 @@ function App() {
           setSearchData={setSearchData}
           setQuery={setQuery}
           query={query}
+          handleDrawerOpen={handleDrawerOpen}
+          handleDrawerClose={handleDrawerClose}
+          drawerOpen={drawerOpen}
         />
         <div className="main-container">
           <Main
@@ -77,6 +88,7 @@ function App() {
             setProduct={setProduct}
             productData={productData}
             searchData={searchData}
+            // drawerOpen={drawerOpen}
           />
         </div>
         <Menu

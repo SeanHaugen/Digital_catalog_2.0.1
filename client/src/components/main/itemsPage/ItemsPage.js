@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Item } from "../../../helper/Item";
 import PricingTable from "./pricing/Pricing";
 import FindImage from "./findImage/FindImage";
@@ -19,6 +20,8 @@ function ItemPage({
   category,
   setProduct,
 }) {
+  console.log(productData.Name);
+
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
 
@@ -54,7 +57,29 @@ function ItemPage({
     }
   };
 
-  console.log(subCategory, category);
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopyToClipboard = (textToCopy) => {
+    // Create a new textarea element and set its value to the text you want to copy
+    const textarea = document.createElement("textarea");
+    textarea.value = textToCopy;
+    document.body.appendChild(textarea);
+
+    // Select and copy the text to the clipboard
+    textarea.select();
+    document.execCommand("copy");
+
+    // Remove the temporary textarea
+    document.body.removeChild(textarea);
+
+    // Update the state to indicate that the text has been copied
+    setIsCopied(true);
+
+    // Reset the "Copied" message after a short delay
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
+  };
 
   return (
     <div
@@ -65,7 +90,40 @@ function ItemPage({
     >
       <Breadcrumb productData={productData} />
       {stockStyling()}
-      <h2>{productData.Item_Number}</h2>
+      <button
+        style={{
+          backgroundColor: "transparent",
+          border: "none",
+          color: "black",
+          cursor: "pointer",
+        }}
+        onClick={() => handleCopyToClipboard(productData.Name)}
+      >
+        <ContentCopyIcon></ContentCopyIcon>
+        {isCopied ? "Copied!" : "Copy to Clipboard"}
+      </button>
+      <hr
+        class="rounded"
+        stye={{
+          borderTop: "8px solid #bbb",
+          borderRadius: "5px",
+        }}
+      ></hr>
+      <h2>
+        Item # {productData.Item_Number}{" "}
+        <button
+          style={{
+            backgroundColor: "transparent",
+            border: "none",
+            color: "black",
+            cursor: "pointer",
+          }}
+          onClick={() => handleCopyToClipboard(productData.Item_Number)}
+        >
+          <ContentCopyIcon></ContentCopyIcon>
+          {isCopied ? "Copied!" : "Copy to Clipboard"}
+        </button>
+      </h2>
 
       <Grid sx={{ flexGrow: 1 }} container spacing={2}>
         <Grid xs={6} md={5} margin="5px" justifyContent="center">
@@ -98,7 +156,20 @@ function ItemPage({
           setProduct={setProduct}
         />
       </Grid>
-      <div>
+      <div
+        style={{
+          border: "1px solid black",
+          borderRadius: "10px",
+          padding: "10px",
+          display: "flex",
+          flexFlow: "column",
+          // display: "grid",
+          // gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", // Adjust the values as needed
+          // gridGap: "10px", // Adjust the gap between grid items
+        }}
+      >
+        <h3>Admin Workspace</h3>
+        <hr />
         <PromoButton productData={productData} />
         <StockButtons
           handlePromoSelect={handlePromoSelect}
@@ -109,7 +180,7 @@ function ItemPage({
           isOutOfStock={isOutOfStock}
           setIsOutOfStock={setIsOutOfStock}
         />
-        <h2>Delete Product Item</h2>
+
         <DeleteButton
           itemNumber={productData.Item_Number} // Replace with your actual item number
           onDeleteSuccess={handleDeleteSuccess}

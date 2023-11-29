@@ -70,7 +70,19 @@ function Promos({ setSelectedPromo, selectedPromo, setProduct, productData }) {
               component={NavLink}
               to={`/category/subcategory/${item.Item_Number}`}
               onClick={() => setProduct(item.Item_Number)}
+              style={{
+                marginTop: "3em",
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: "1em",
+                textAlign: "center",
+              }}
             >
+              <img
+                src={`https://www.showdowndisplays.com/cdn/Resources/Primary/${item.Item_Number}_0_Preview.jpg`}
+                alt="item"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
               {/* Display relevant information from the item */}
               {item.Name}: {item.Item_Number}
               {/* Add a link to the item page */}

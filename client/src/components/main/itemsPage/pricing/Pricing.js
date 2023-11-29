@@ -31,7 +31,7 @@ function PricingTable({ productData }) {
     <TableContainer component={Paper}>
       <Table>
         <TableHead>
-          <TableRow>
+          <TableRow style={{ backgroundColor: "lightblue" }}>
             <TableCell>Price Type</TableCell>
             <TableCell>Qty 1</TableCell>
             <TableCell>QTY 2-5</TableCell>
@@ -42,7 +42,12 @@ function PricingTable({ productData }) {
         <TableBody>
           {priceData !== null ? (
             priceData.slice(0, 5).map((rowData, rowIndex) => (
-              <TableRow key={rowIndex}>
+              <TableRow
+                key={rowIndex}
+                sx={{
+                  backgroundColor: rowIndex % 2 === 0 ? "white" : "lightblue", // Alternating colors
+                }}
+              >
                 {rowData.map((cellData, cellIndex) => (
                   <TableCell key={cellIndex}>
                     {rowIndex === selectedElement.rowIndex &&

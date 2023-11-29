@@ -36,6 +36,10 @@ export default function DashBoard({
   setSearchData,
   query,
   setQuery,
+  // handleDrawerOpen,
+  // handleDrawerClose,
+  // drawerOpen,
+  // setDrawerOpen,
 }) {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
@@ -58,11 +62,10 @@ export default function DashBoard({
 
   const handleCategoryClick = (cat) => {
     setCategory(cat);
-    setOpen(true);
   };
 
   const handleClickAway = () => {
-    setOpen(true);
+    setDrawerOpen(true);
   };
 
   const handleSearch = (e) => {
@@ -168,15 +171,18 @@ export default function DashBoard({
                       <ArrowDropDownCircleOutlinedIcon />
                     )}
                   </ListItemIcon>
-                  <ListItemText primary={cat} sx={{ opacity: open ? 1 : 0 }} />
+                  <ListItemText
+                    primary={cat}
+                    sx={{
+                      opacity: open ? 1 : 0,
+                      color: "black", // Set link text color to white
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <DrawerHeader />
-        </Box>
       </Box>
     </div>
   );
