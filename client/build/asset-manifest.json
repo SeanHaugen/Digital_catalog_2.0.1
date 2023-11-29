@@ -1,20 +1,19 @@
 {
   "files": {
-    "main.css": "./static/css/main.9d928e24.css",
-    "main.js": "./static/js/main.d75f871c.js",
+    "main.css": "./static/css/main.c3a2e5a7.css",
+    "main.js": "./static/js/main.dd491e03.js",
     "static/media/banner.jpg": "./static/media/banner.948a5f1a8ef1f0aa74f1.jpg",
     "static/media/cb84cb63-bdb0-4c50-af78-5fc0fb0e0e15.jpg": "./static/media/cb84cb63-bdb0-4c50-af78-5fc0fb0e0e15.b277156b970b04cc0653.jpg",
-    "static/media/headerImage.jpg": "./static/media/headerImage.e6b23c9f008f9bd42c8a.jpg",
     "static/media/Q4.jpg": "./static/media/Q4.af7288588a5ea845be6a.jpg",
     "static/media/enviro_products.jpg": "./static/media/enviro_products.ceda8dd75c05fb272e0f.jpg",
     "static/media/outDoor_products.jpg": "./static/media/outDoor_products.b50e29abc6a19e289c1c.jpg",
     "static/media/sd-logo.png": "./static/media/sd-logo.1b096ea5103bdf5ef4fd.png",
     "index.html": "./index.html",
-    "main.9d928e24.css.map": "./static/css/main.9d928e24.css.map",
-    "main.d75f871c.js.map": "./static/js/main.d75f871c.js.map"
+    "main.c3a2e5a7.css.map": "./static/css/main.c3a2e5a7.css.map",
+    "main.dd491e03.js.map": "./static/js/main.dd491e03.js.map"
   },
   "entrypoints": [
-    "static/css/main.9d928e24.css",
-    "static/js/main.d75f871c.js"
+    "static/css/main.c3a2e5a7.css",
+    "static/js/main.dd491e03.js"
   ]
 }

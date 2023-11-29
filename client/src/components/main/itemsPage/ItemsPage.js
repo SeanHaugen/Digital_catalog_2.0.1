@@ -1,7 +1,9 @@
 import * as React from "react";
+import axios from "axios";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import Checkbox from "@mui/material/Checkbox";
 import { Item } from "../../../helper/Item";
 import PricingTable from "./pricing/Pricing";
 import FindImage from "./findImage/FindImage";
@@ -39,10 +41,10 @@ function ItemPage({
   };
 
   const stockStyling = () => {
-    if (isLowStock) {
+    if (isLowStock === true) {
       return <h1 style={{ backgroundColor: "yellow" }}>{productData.Name}</h1>;
     }
-    if (isOutOfStock) {
+    if (productData.OOS === true) {
       return <h1 style={{ backgroundColor: "red" }}>{productData.Name}</h1>;
     } else {
       return <h1>{productData.Name}</h1>;

@@ -3,14 +3,12 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 // import { useUpdateLowStock } from "../../../../api/api";
-import { useUpdateOOS } from "../../../../api/api";
+// import { useUpdateOOS } from "../../../../api/api";
 import { fetchLowStockValue } from "../../../../api/api";
 import { fetchOOSValue } from "../../../../api/api";
 
 function StockButtons({
   productData,
-  handlePromoSelect,
-  selectedPromo,
   isLowStock,
   setIsLowStock,
   isOutOfStock,
@@ -27,6 +25,13 @@ function StockButtons({
       setIsLowStock(value);
     });
 
+    // fetchOOSValue(productData.Item_Number).then((value) => {
+    //   setIsOutOfStock(value);
+    // });
+  }, [productData.Item_Number]);
+
+  useEffect(() => {
+    console.log("Fetching initial value...");
     fetchOOSValue(productData.Item_Number).then((value) => {
       setIsOutOfStock(value);
     });
@@ -44,18 +49,33 @@ function StockButtons({
         );
         if (response.status === 200) {
           // Make sure to call the onUpdate function if needed
-          onUpdate && onUpdate();
+          // onUpdate && onUpdate();
+          setIsLowStock(response.data.Low_Stock);
         }
       } catch (error) {
         console.error("Error updating alternative options:", error);
         // Handle the error
       }
-    } else {
-      alert("Fetching the initial value... Please wait.");
     }
   };
 
-  console.log(altInput);
+  const handleToggleOutOfStock = async () => {
+    try {
+      // Replace 'yourItemNumber' with the actual item number or retrieve it dynamically
+      const itemNumber = productData.Item_Number;
+
+      const response = await axios.put(
+        `https://dull-pink-termite-slip.cyclic.app/toggle-oos/${itemNumber}`
+      );
+
+      setIsOutOfStock(response.data.OOS);
+    } catch (error) {
+      console.error("Error toggling out-of-stock status:", error);
+    }
+  };
+
+  console.log(isLowStock);
+
   const handleAlternateOptions = async () => {
     try {
       const response = await axios.put(
@@ -71,26 +91,6 @@ function StockButtons({
       }
     } catch (error) {
       console.error("Error updating alternative options:", error);
-    }
-  };
-
-  const handleOutOfStockCheckboxChange = async () => {
-    if (isOutOfStock !== null) {
-      const newIsOutOfStock = !isOutOfStock;
-      setIsOutOfStock(newIsOutOfStock);
-
-      // Send a PUT request to your server to toggle Out_of_Stock
-      try {
-        const response = await axios.put(
-          `https://dull-pink-termite-slip.cyclic.app/toggle-oos/${productData.Item_Number}`
-          // { date: dateInput, option: altInput }
-        );
-        if (response.status === 200) {
-          onUpdate(); // Call the onUpdate function with appropriate arguments
-        }
-      } catch (error) {
-        console.error("Error setting stock out", error);
-      }
     }
   };
 
@@ -148,8 +148,6 @@ function StockButtons({
 
   return (
     <div id="stock-buttons">
-      {/* <label>Promo Item</label> */}
-      {/* <input type="checkbox" /> */}
       <hr />
       <h3>Stock info</h3>
       <div>
@@ -201,8 +199,10 @@ function StockButtons({
       <Checkbox
         type="checkbox"
         checked={isOutOfStock === true}
-        onChange={handleOutOfStockCheckboxChange}
+        onChange={handleToggleOutOfStock}
       />
+      {/* <button onClick={handleToggleOutOfStock}>Toggle Out of Stock</button> */}
+
       <div>
         <form onSubmit={handleInStockDate}>
           <label>Estimated In Stock Date: </label>
@@ -215,16 +215,18 @@ function StockButtons({
             Submit
           </Button>
           <ul>
-            {productData.Date}
+            {productData.Date && <li>{productData.Date}</li>}
 
-            <Button
-              type="button"
-              variant="contained"
-              color="error"
-              onClick={handleDeleteDate}
-            >
-              Remove OOS Date
-            </Button>
+            {productData.Date && (
+              <Button
+                type="button"
+                variant="contained"
+                color="error"
+                onClick={handleDeleteDate}
+              >
+                Remove OOS Date
+              </Button>
+            )}
           </ul>
         </form>
         <hr />

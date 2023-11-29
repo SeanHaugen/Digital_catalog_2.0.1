@@ -297,16 +297,15 @@ export const fetchOOSValue = async (itemNumber) => {
     );
 
     if (response.status === 200) {
-      return response.data.OOS;
+      return response.data.OOS || false; // Set a default value if null
     } else {
-      // Handle other status codes if needed
       console.error(
-        `Failed to fetch oos value. Status code: ${response.status}`
+        `Failed to fetch Low_Stock value. Status code: ${response.status}`
       );
-      return null;
+      return false; // Set a default value if there is an error
     }
   } catch (error) {
     console.error(error);
-    return null;
+    return false; // Set a default value if there is an error
   }
 };

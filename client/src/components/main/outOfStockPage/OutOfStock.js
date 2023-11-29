@@ -13,7 +13,7 @@ function StockOutList({ productData, setProduct }) {
       async function fetchData() {
         try {
           const response = await axios.get(
-            "https://dull-pink-termite-slip.cyclic.app/items/oos" // Replace with the actual URL for fetching data
+            "https://dull-pink-termite-slip.cyclic.app/items/oos"
           );
           setState(response.data);
           setLoading(false); // Set loading to false when data is fetched
