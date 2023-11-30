@@ -58,7 +58,7 @@ const NoteTaker = ({ username, currentPage }) => {
   return (
     <div>
       <h2>*currently notes appear for all Items* </h2>
-      <p>Will be updating so notes will be discrete for each page</p>
+      <p>Will be updating so notes will be discrete for each item</p>
       <ul>
         {userNotes.map((userNote, index) => (
           <li key={index}>{userNote}</li>
