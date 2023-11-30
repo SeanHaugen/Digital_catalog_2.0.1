@@ -36,6 +36,8 @@ export default function DashBoard({
   setSearchData,
   query,
   setQuery,
+  username,
+  setUsername,
   // handleDrawerOpen,
   // handleDrawerClose,
   // drawerOpen,
@@ -126,7 +128,7 @@ export default function DashBoard({
               </Button>
             </NavLink>
 
-            <LoginModal />
+            <LoginModal username={username} setUsername={setUsername} />
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

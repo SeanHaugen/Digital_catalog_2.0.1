@@ -6,9 +6,8 @@ import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import axios from "axios";
 
-function LoginModal() {
+function LoginModal({ onLogin, username, setUsername }) {
   const [open, setOpen] = React.useState(false);
-  const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [successMessage, setSuccessMessage] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");

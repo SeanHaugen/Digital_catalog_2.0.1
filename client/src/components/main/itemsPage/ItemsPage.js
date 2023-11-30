@@ -21,6 +21,7 @@ function ItemPage({
   subCategory,
   category,
   setProduct,
+  username,
 }) {
   console.log(productData.Name);
 
@@ -41,10 +42,10 @@ function ItemPage({
   };
 
   const stockStyling = () => {
-    if (isLowStock === true) {
+    if (isLowStock) {
       return <h1 style={{ backgroundColor: "yellow" }}>{productData.Name}</h1>;
     }
-    if (productData.OOS === true) {
+    if (isOutOfStock) {
       return <h1 style={{ backgroundColor: "red" }}>{productData.Name}</h1>;
     } else {
       return <h1>{productData.Name}</h1>;
@@ -156,6 +157,7 @@ function ItemPage({
           category={category}
           subCategory={subCategory}
           setProduct={setProduct}
+          username={username}
         />
       </Grid>
       <div

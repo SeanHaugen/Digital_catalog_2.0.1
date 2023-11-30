@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./app.css";
 import Main from "./components/main/main";
 import { HashRouter as Router } from "react-router-dom";
@@ -6,6 +6,7 @@ import DashBoard from "./components/header/dashboard/dashboard";
 import { useFetchSubCategoryItemData, useFetchItemData } from "./api/api";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+
 // import Typography from "@mui/material/Typography";
 import BottomNav from "./components/footer/BottomNav";
 import CopyToClipboardButton from "./helper/CopyToClipboard";
@@ -21,14 +22,14 @@ function App() {
   const [query, setQuery] = useState("");
   const [contextMenu, setContextMenu] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
-
+  const [username, setUsername] = React.useState("");
   const [authToken, setAuthToken] = useState("");
 
   useFetchSubCategoryItemData(setItem, subCategory);
   useFetchItemData(setProductData, product);
 
-  // console.log(searchData);
-  console.log(productData);
+  console.log(username);
+  // console.log(productData);
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -78,6 +79,8 @@ function App() {
           handleDrawerOpen={handleDrawerOpen}
           handleDrawerClose={handleDrawerClose}
           drawerOpen={drawerOpen}
+          username={username}
+          setUsername={setUsername}
         />
         <div className="main-container">
           <Main
@@ -88,6 +91,7 @@ function App() {
             setProduct={setProduct}
             productData={productData}
             searchData={searchData}
+            username={username}
             // drawerOpen={drawerOpen}
           />
         </div>

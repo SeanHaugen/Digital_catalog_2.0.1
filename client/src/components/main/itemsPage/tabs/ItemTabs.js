@@ -14,8 +14,15 @@ import MediaSpecs from "./MediaSpecs";
 import AdditionalInfo from "./AdditionalInfo";
 import Details from "./Details";
 import RelatedItems from "./RelatedItems";
+import NoteTaker from "./NoteTaker";
 
-function ItemTabs({ productData, category, subCategory, setProduct }) {
+function ItemTabs({
+  productData,
+  category,
+  subCategory,
+  setProduct,
+  username,
+}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -108,6 +115,15 @@ function ItemTabs({ productData, category, subCategory, setProduct }) {
             >
               Suggested Items
             </Tab>
+            <Tab
+              style={{
+                backgroundColor: value === 7 ? "white" : "gray",
+                margin: "3px",
+                borderRadius: "10px 10px 0 0px",
+              }}
+            >
+              Notes
+            </Tab>
           </TabList>
           <TabPanel value={0}>
             <Details
@@ -146,6 +162,9 @@ function ItemTabs({ productData, category, subCategory, setProduct }) {
               subCategory={subCategory}
               setProduct={setProduct}
             />
+          </TabPanel>
+          <TabPanel value={7}>
+            <NoteTaker username={username} />
           </TabPanel>
         </Tabs>
       </Grid>

@@ -23,8 +23,9 @@ function Main({
   setProduct,
   productData,
   searchData,
+  username,
 }) {
-  // console.log(searchData);
+  console.log(username);
   const [selectedPromo, setSelectedPromo] = useState([]);
 
   const handlePromoSelect = async (productData) => {
@@ -128,6 +129,7 @@ function Main({
                 selectedPromo={selectedPromo}
                 handlePromoSelect={handlePromoSelect}
                 setProduct={setProduct}
+                username={username}
               />
             }
           />
