@@ -1,9 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.c3a2e5a7.css",
-    "main.js": "./static/js/main.522c0865.js",
-    "static/js/858.d8db50c0.chunk.js": "./static/js/858.d8db50c0.chunk.js",
-    "static/js/324.626009aa.chunk.js": "./static/js/324.626009aa.chunk.js",
+    "main.css": "./static/css/main.2d902989.css",
+    "main.js": "./static/js/main.b85209bb.js",
     "static/media/banner.jpg": "./static/media/banner.948a5f1a8ef1f0aa74f1.jpg",
     "static/media/cb84cb63-bdb0-4c50-af78-5fc0fb0e0e15.jpg": "./static/media/cb84cb63-bdb0-4c50-af78-5fc0fb0e0e15.b277156b970b04cc0653.jpg",
     "static/media/Q4.jpg": "./static/media/Q4.af7288588a5ea845be6a.jpg",
@@ -11,13 +9,11 @@
     "static/media/outDoor_products.jpg": "./static/media/outDoor_products.b50e29abc6a19e289c1c.jpg",
     "static/media/sd-logo.png": "./static/media/sd-logo.1b096ea5103bdf5ef4fd.png",
     "index.html": "./index.html",
-    "main.c3a2e5a7.css.map": "./static/css/main.c3a2e5a7.css.map",
-    "main.522c0865.js.map": "./static/js/main.522c0865.js.map",
-    "858.d8db50c0.chunk.js.map": "./static/js/858.d8db50c0.chunk.js.map",
-    "324.626009aa.chunk.js.map": "./static/js/324.626009aa.chunk.js.map"
+    "main.2d902989.css.map": "./static/css/main.2d902989.css.map",
+    "main.b85209bb.js.map": "./static/js/main.b85209bb.js.map"
   },
   "entrypoints": [
-    "static/css/main.c3a2e5a7.css",
-    "static/js/main.522c0865.js"
+    "static/css/main.2d902989.css",
+    "static/js/main.b85209bb.js"
   ]
 }

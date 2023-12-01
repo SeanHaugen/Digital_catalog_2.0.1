@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import "./navigation.css";
 
 function Navigation({ productData }) {
   let navigate = useNavigate();
@@ -16,11 +17,15 @@ function Navigation({ productData }) {
 
   return (
     <div>
-      <div>
-        <button onClick={goBack}>
+      <div className="navigation-container">
+        <button
+          className="nav-button"
+          onClick={goBack}
+          style={{ marginRight: "10px" }}
+        >
           <ArrowBackIosIcon />
         </button>
-        <button onClick={goForward}>
+        <button className="nav-button" onClick={goForward}>
           <ArrowForwardIosIcon />
         </button>
       </div>

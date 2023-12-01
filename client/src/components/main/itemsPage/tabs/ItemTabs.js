@@ -133,12 +133,12 @@ function ItemTabs({
             />
           </TabPanel>
           <TabPanel value={1}>
-            <Item style={{ backgroundColor: "lightgray" }}>
+            <Item style={{ backgroundColor: "#7B919C" }}>
               <FlatRateShipping productData={productData} />
             </Item>
           </TabPanel>
           <TabPanel value={2}>
-            <Item style={{ backgroundColor: "lightgray" }}>
+            <Item style={{ backgroundColor: "#7B919C" }}>
               <ColorBox productData={productData} />
             </Item>
           </TabPanel>

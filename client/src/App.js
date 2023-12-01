@@ -82,7 +82,13 @@ function App() {
           username={username}
           setUsername={setUsername}
         />
-        <div className="main-container">
+        <div
+          className="main-container"
+          style={{
+            marginLeft: "200px", // Adjust margin based on drawer state
+            transition: "margin-left 0.3s ease", // Add transition for smooth animation
+          }}
+        >
           <Main
             category={category}
             setSubCategory={setSubCategory}

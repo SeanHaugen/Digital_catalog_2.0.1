@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Item } from "../../../../helper/Item";
+import Button from "@mui/material/Button";
+import Textarea from "@mui/joy/Textarea";
 
 function Description({ productData }) {
   const [editing, setEditing] = useState(false);
@@ -35,21 +37,27 @@ function Description({ productData }) {
     <div>
       {editing ? (
         <div>
-          <textarea
+          <Textarea
             value={editDescription}
             onChange={handleDescriptionChange}
             rows={10} // Adjust the number of rows as needed
             cols={50}
           />
-          <button onClick={handleUpdate}>Update Description</button>
-          <button onClick={toggleEditing}>End Editing</button>
+          <Button variant="contained" onClick={handleUpdate}>
+            Update Description
+          </Button>
+          <Button variant="contained" onClick={toggleEditing}>
+            End Editing
+          </Button>
         </div>
       ) : (
         <div>
           <pre style={{ whiteSpace: "pre-wrap", fontSize: "16px" }}>
             {productData.Description}
           </pre>
-          <button onClick={toggleEditing}>Edit Description</button>
+          <Button variant="contained" onClick={toggleEditing}>
+            Edit Description
+          </Button>
         </div>
       )}
     </div>

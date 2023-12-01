@@ -28,10 +28,10 @@ function PricingTable({ productData }) {
   usePricingData(setPriceData, productData.Item_Number);
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} style={{ margin: "10px" }}>
       <Table>
         <TableHead>
-          <TableRow style={{ backgroundColor: "lightblue" }}>
+          <TableRow style={{ backgroundColor: "#7B919C" }}>
             <TableCell>Price Type</TableCell>
             <TableCell>Qty 1</TableCell>
             <TableCell>QTY 2-5</TableCell>
@@ -45,7 +45,7 @@ function PricingTable({ productData }) {
               <TableRow
                 key={rowIndex}
                 sx={{
-                  backgroundColor: rowIndex % 2 === 0 ? "white" : "lightblue", // Alternating colors
+                  backgroundColor: rowIndex % 2 === 0 ? "white" : "#7B919C", // Alternating colors
                 }}
               >
                 {rowData.map((cellData, cellIndex) => (

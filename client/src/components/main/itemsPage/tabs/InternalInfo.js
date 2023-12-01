@@ -9,7 +9,7 @@ function InternalInfo({ productData }) {
 
   return (
     <div>
-      <Item style={{ backgroundColor: "lightgray" }}>
+      <Item style={{ backgroundColor: "#7B919C" }}>
         {internalInfo.Internal_Info !== undefined ? (
           internalInfo.Internal_Info.map((info, index) => (
             <div key={index}>{info}</div>

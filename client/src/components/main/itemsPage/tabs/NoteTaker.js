@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UserNotes from "./NotesDisplay";
+import { Item } from "../../../../helper/Item";
 
 const NoteTaker = ({ username, currentPage }) => {
   const [note, setNote] = useState("");
@@ -56,7 +57,7 @@ const NoteTaker = ({ username, currentPage }) => {
     }
   };
   return (
-    <div>
+    <Item style={{ backgroundColor: "#7B919C" }}>
       <h2>*currently notes appear for all Items* </h2>
       <p>Will be updating so notes will be discrete for each item</p>
       <ul>
@@ -75,7 +76,7 @@ const NoteTaker = ({ username, currentPage }) => {
       <button onClick={saveNote}>Save Note</button>
 
       <UserNotes username={username} />
-    </div>
+    </Item>
   );
 };
 

@@ -1,10 +1,23 @@
 import * as React from "react";
-import Button from "@mui/joy/Button";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
+import { styled } from "@mui/system";
+import { Button } from "@mui/material";
 import Sheet from "@mui/joy/Sheet";
 import axios from "axios";
+
+const CustomButton = styled(Button)(({ theme }) => ({
+  color: "#fff",
+  margin: "2px",
+  borderRadius: "4px",
+  backgroundColor: "#7B919C", // Update with your desired color
+  "&:hover": {
+    backgroundColor: "#4F6B77", // Update with a darker shade or a different color for hover
+  },
+  // position: "relative",
+  // bottom: -1,
+}));
 
 function LoginModal({ onLogin, username, setUsername }) {
   const [open, setOpen] = React.useState(false);
@@ -52,13 +65,9 @@ function LoginModal({ onLogin, username, setUsername }) {
   return (
     <>
       <React.Fragment>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => setOpen(true)}
-        >
+        <CustomButton variant="contained" onClick={() => setOpen(true)}>
           Login
-        </Button>
+        </CustomButton>
         <Modal
           aria-labelledby="modal-title"
           aria-describedby="modal-desc"

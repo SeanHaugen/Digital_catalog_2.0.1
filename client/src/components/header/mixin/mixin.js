@@ -1,4 +1,4 @@
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 export const openedMixin = (theme) => ({
   width: drawerWidth,

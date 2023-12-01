@@ -48,7 +48,7 @@ function MediaSpecs({ productData, materialsArray, showMaterials }) {
 
   return (
     <div>
-      <Item style={{ backgroundColor: "lightgray" }}>
+      <Item style={{ backgroundColor: "#7B919C" }}>
         {matchingTypes.length > 0 ? (
           matchingTypes.map((type, index) => (
             <div key={index}>
