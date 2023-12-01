@@ -4,7 +4,7 @@ import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Button from "@mui/material/Button";
-import html2pdf from "html2pdf.js";
+// eslint-disable-next-line
 import Checkbox from "@mui/material/Checkbox";
 import { Item } from "../../../helper/Item";
 import PricingTable from "./pricing/Pricing";
@@ -84,11 +84,6 @@ function ItemPage({
     setTimeout(() => {
       setIsCopied(false);
     }, 2000);
-  };
-
-  const generatePDF = () => {
-    const element = document.getElementById("pdf-content"); // Replace "pdf-content" with the ID of the container you want to convert to PDF
-    html2pdf(element);
   };
 
   return (
@@ -195,7 +190,6 @@ function ItemPage({
                 setIsOutOfStock={setIsOutOfStock}
               />
 
-              <Button onClick={generatePDF}>Generate PDF</Button>
               <hr />
 
               <DeleteButton
