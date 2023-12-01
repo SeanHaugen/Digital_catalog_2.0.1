@@ -5,12 +5,15 @@ import { NavLink } from "react-router-dom";
 
 import ListItemButton from "@mui/material/ListItemButton";
 
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import FormControl from "@mui/material/FormControl";
+
 const RecentlyViewed = ({ recentlyViewedItems, setProduct }) => {
-  console.log("Recently Viewed Items:", recentlyViewedItems);
+  // console.log("Recently Viewed Items:", recentlyViewedItems);
 
   return (
     <div>
-      <h2>Recently Viewed</h2>
       <ul>
         {recentlyViewedItems.map((item, index) => (
           <div>

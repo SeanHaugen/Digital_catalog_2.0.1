@@ -17,6 +17,7 @@ const CustomButton = styled(Button)(({ theme }) => ({
   },
   // position: "relative",
   // bottom: -1,
+  minHeight: "initial",
 }));
 
 function LoginModal({ onLogin, username, setUsername }) {

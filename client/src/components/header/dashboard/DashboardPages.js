@@ -4,6 +4,7 @@ import { styled } from "@mui/system";
 import { Button } from "@mui/material";
 import LoginModal from "../login/LoginModal";
 import Navigation from "../../navigation/BackForward";
+import BottomNav from "../../footer/BottomNav";
 
 const CustomButton = styled(Button)(({ theme }) => ({
   color: "#fff",
@@ -16,10 +17,9 @@ const CustomButton = styled(Button)(({ theme }) => ({
   minHeight: "36px",
 }));
 
-const LowerBar = ({ username, setUsername }) => {
+const LowerBar = ({ username, setUsername, productData, setProduct }) => {
   return (
     <div
-      className="lower-bar"
       style={{
         display: "block",
         justifyContent: "center",
@@ -27,32 +27,42 @@ const LowerBar = ({ username, setUsername }) => {
         marginLeft: "12em",
       }}
     >
-      <NavLink to="/addProduct">
-        <CustomButton
-          variant="contained"
-          style={{
-            // backgroundColor: "#7B919C",
-            marginLeft: "50px",
-            marginRight: "5px",
-          }}
-        >
-          Add new product
-        </CustomButton>
-      </NavLink>
+      <div
+        className="lower-bar"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
+        <NavLink to="/addProduct">
+          <CustomButton
+            variant="contained"
+            style={{
+              // backgroundColor: "#7B919C",
+              marginLeft: "50px",
+              marginRight: "5px",
+            }}
+          >
+            Add new product
+          </CustomButton>
+        </NavLink>
 
-      <NavLink to="/StockOutList">
-        <CustomButton
-          variant="contained"
-          style={{
-            // backgroundColor: "#7B919C",
-            marginRight: "5px",
-          }}
-        >
-          Stock Out List
-        </CustomButton>
-      </NavLink>
+        <NavLink to="/StockOutList">
+          <CustomButton
+            variant="contained"
+            style={{
+              // backgroundColor: "#7B919C",
+              marginRight: "5px",
+            }}
+          >
+            Stock Out List
+          </CustomButton>
+        </NavLink>
+        <BottomNav productData={productData} setProduct={setProduct} />
 
-      <LoginModal username={username} setUsername={setUsername} />
+        <LoginModal username={username} setUsername={setUsername} />
+      </div>
       <Navigation className="nav_buttons" />
     </div>
   );

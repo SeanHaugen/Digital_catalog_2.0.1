@@ -62,6 +62,8 @@ export default function DashBoard({
   setQuery,
   username,
   setUsername,
+  productData,
+  setProduct,
 }) {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
@@ -155,6 +157,8 @@ export default function DashBoard({
         className="lowBar"
         username={username}
         setUsername={setUsername}
+        productData={productData}
+        setProduct={setProduct}
       />
     </div>
   );

@@ -81,6 +81,8 @@ function App() {
           drawerOpen={drawerOpen}
           username={username}
           setUsername={setUsername}
+          productData={productData}
+          setProduct={setProduct}
         />
         <div
           className="main-container"
@@ -116,7 +118,6 @@ function App() {
           <MenuItem onClick={handleClose}>Highlight</MenuItem>
         </Menu>
       </div>
-      <BottomNav productData={productData} setProduct={setProduct} />
     </Router>
   );
 }
