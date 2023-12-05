@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UserNotes from "./NotesDisplay";
+import Button from "@mui/material/Button";
+import Textarea from "@mui/joy/Textarea";
+
 import { Item } from "../../../../helper/Item";
 
 const NoteTaker = ({ username, currentPage }) => {
@@ -65,7 +68,7 @@ const NoteTaker = ({ username, currentPage }) => {
           <li key={index}>{userNote}</li>
         ))}
       </ul>
-      <textarea
+      <Textarea
         rows="4"
         cols="50"
         placeholder="Write your note here..."
@@ -73,7 +76,9 @@ const NoteTaker = ({ username, currentPage }) => {
         onChange={handleNoteChange}
       />
 
-      <button onClick={saveNote}>Save Note</button>
+      <Button variant="contained" color="success" onClick={saveNote}>
+        Save Note
+      </Button>
 
       <UserNotes username={username} />
     </Item>

@@ -151,7 +151,7 @@ function StockButtons({
       <hr />
       <h3>Stock info</h3>
       <div>
-        <label>Missing components</label>
+        <label>Missing components/variants</label>
         <Checkbox
           type="checkbox"
           checked={isLowStock === true}
@@ -164,34 +164,7 @@ function StockButtons({
               e.preventDefault();
               handleAlternateOptions();
             }}
-          >
-            <label>Alternative options: </label>
-            <input
-              type="text"
-              value={altInput}
-              onChange={(e) => setAltInput(e.target.value)}
-            />
-            <Button type="submit">Submit</Button>
-            <ul>
-              {productData.Alt
-                ? productData.Alt.map((option, index) => (
-                    <div>
-                      <li key={index}>{option}</li>
-                      <Button
-                        type="button"
-                        variant="contained"
-                        color="error"
-                        onClick={() =>
-                          handleDeleteAltOption(productData.Item_Number, option)
-                        }
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  ))
-                : null}
-            </ul>
-          </form>
+          ></form>
         </div>
       </div>
 
@@ -215,7 +188,7 @@ function StockButtons({
             Submit
           </Button>
           <ul>
-            {productData.Date && <li>{productData.Date}</li>}
+            {productData.Date && <li>{productData.Date.slice(0, 10)}</li>}
 
             {productData.Date && (
               <Button
@@ -227,6 +200,38 @@ function StockButtons({
                 Remove OOS Date
               </Button>
             )}
+          </ul>
+        </form>
+        <form>
+          <label>
+            <h2>Alternative options/Notes: </h2>
+          </label>
+          <input
+            type="text"
+            value={altInput}
+            onChange={(e) => setAltInput(e.target.value)}
+          />
+          <Button variant="contained" color="success" type="submit">
+            Submit
+          </Button>
+          <ul>
+            {productData.Alt
+              ? productData.Alt.map((option, index) => (
+                  <div>
+                    <li key={index}>{option}</li>
+                    <Button
+                      type="button"
+                      variant="contained"
+                      color="error"
+                      onClick={() =>
+                        handleDeleteAltOption(productData.Item_Number, option)
+                      }
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                ))
+              : null}
           </ul>
         </form>
         <hr />

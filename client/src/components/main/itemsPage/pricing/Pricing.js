@@ -72,9 +72,9 @@ function PricingTable({ productData }) {
               <TableCell colSpan={6}>Loading...</TableCell>
             </TableRow>
           )}
-          <EditPricing productData={productData} />
         </TableBody>
       </Table>
+      <EditPricing productData={productData} />
     </TableContainer>
   );
 }

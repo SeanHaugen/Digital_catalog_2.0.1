@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Tabs from "@mui/joy/Tabs";
 import TabList from "@mui/joy/TabList";
@@ -15,6 +15,8 @@ import AdditionalInfo from "./AdditionalInfo";
 import Details from "./Details";
 import RelatedItems from "./RelatedItems";
 import NoteTaker from "./NoteTaker";
+import ComparisonEmbed from "./ComparisonEmbed";
+import GraphicInfo from "./GraphicInfo";
 
 function ItemTabs({
   productData,
@@ -24,15 +26,16 @@ function ItemTabs({
   username,
 }) {
   const [value, setValue] = React.useState(0);
+  const [finishingStyle, setFinishingStyle] = useState("");
+  const [compChart, setComparisonChart] = useState("");
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  useEffect(() => {
+    setFinishingStyle(productData.Category);
+    setComparisonChart(productData.Category);
+  }, [productData.Category]);
 
-  console.log(typeof productData.Materials);
+  console.log(compChart);
   const materialsArray = productData.Materials?.split(/\s*,\s*/) || [];
-  console.log(materialsArray);
-
   const showMaterials = () => {
     return (
       <ul>
@@ -42,6 +45,11 @@ function ItemTabs({
       </ul>
     );
   };
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <div>
       <Grid>
@@ -124,6 +132,24 @@ function ItemTabs({
             >
               Notes
             </Tab>
+            <Tab
+              style={{
+                backgroundColor: value === 7 ? "white" : "gray",
+                margin: "3px",
+                borderRadius: "10px 10px 0 0px",
+              }}
+            >
+              Comparison Charts/Guides
+            </Tab>
+            <Tab
+              style={{
+                backgroundColor: value === 7 ? "white" : "gray",
+                margin: "3px",
+                borderRadius: "10px 10px 0 0px",
+              }}
+            >
+              Graphic Info
+            </Tab>
           </TabList>
           <TabPanel value={0}>
             <Details
@@ -165,6 +191,22 @@ function ItemTabs({
           </TabPanel>
           <TabPanel value={7}>
             <NoteTaker username={username} />
+          </TabPanel>
+          <TabPanel value={8}>
+            <ComparisonEmbed
+              compChart={compChart}
+              productData={productData}
+              category={category}
+              subCategory={subCategory}
+            />
+          </TabPanel>
+          <TabPanel value={9}>
+            <GraphicInfo
+              finishingStyle={finishingStyle}
+              productData={productData}
+              category={category}
+              subCategory={subCategory}
+            />
           </TabPanel>
         </Tabs>
       </Grid>

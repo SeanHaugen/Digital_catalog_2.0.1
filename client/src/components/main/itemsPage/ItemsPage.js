@@ -177,7 +177,7 @@ function ItemPage({
                 // gridGap: "10px", // Adjust the gap between grid items
               }}
             >
-              <h3>Admin Workspace</h3>
+              <h1>Stock & Promo stuff</h1>
               <hr />
               <PromoButton productData={productData} />
               <StockButtons

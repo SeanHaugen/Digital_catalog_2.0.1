@@ -19,6 +19,8 @@ function Main({
   setSubCategory,
   category,
   subCategory,
+  setProductsCategory,
+  productsCategory,
   item,
   setProduct,
   productData,
@@ -104,6 +106,8 @@ function Main({
                 setSubCategory={setSubCategory}
                 productData={productData}
                 item={item}
+                setProductsCategory={setProductsCategory}
+                productsCategory={productsCategory}
               />
             }
           />

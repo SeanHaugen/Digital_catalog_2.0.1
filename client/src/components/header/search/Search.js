@@ -1,16 +1,12 @@
 import { styled, alpha } from "@mui/material/styles";
 
-export const Search = styled("div")(({ theme }) => ({
+export const Search = styled("div")({
   position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  borderRadius: "10px",
+  backgroundColor: "#E5B01B",
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: "#f0f0f0",
   },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
+  marginLeft: "3em",
+  width: "40%",
+});

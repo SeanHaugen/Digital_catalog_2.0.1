@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "@mui/material/Button";
 import { Item } from "../../../../helper/Item";
 
 const UserNotes = ({ username }) => {
@@ -44,7 +45,13 @@ const UserNotes = ({ username }) => {
         {userNotes.map((userNote, index) => (
           <li key={index}>
             {userNote}
-            <button onClick={() => handleDeleteNote(userNote)}>Delete</button>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => handleDeleteNote(userNote)}
+            >
+              Delete
+            </Button>
           </li>
         ))}
       </ul>

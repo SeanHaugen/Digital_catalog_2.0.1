@@ -15,6 +15,7 @@ import NewWindowButton from "./helper/NewWindow";
 function App() {
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
+  const [productsCategory, setProductsCategory] = useState([]);
   const [item, setItem] = useState([]);
   const [product, setProduct] = useState([]);
   const [productData, setProductData] = useState([]);
@@ -73,6 +74,8 @@ function App() {
         <DashBoard
           setCategory={setCategory}
           setSubCategory={setSubCategory}
+          setProductsCategory={setProductsCategory}
+          subCategory={subCategory}
           setSearchData={setSearchData}
           setQuery={setQuery}
           query={query}
@@ -83,6 +86,8 @@ function App() {
           setUsername={setUsername}
           productData={productData}
           setProduct={setProduct}
+          category={category}
+          productsCategory={productsCategory}
         />
         <div
           className="main-container"
@@ -94,12 +99,15 @@ function App() {
           <Main
             category={category}
             setSubCategory={setSubCategory}
+            setProductsCategory={setProductsCategory}
+            productsCategory={productsCategory}
             subCategory={subCategory}
             item={item}
             setProduct={setProduct}
             productData={productData}
             searchData={searchData}
             username={username}
+
             // drawerOpen={drawerOpen}
           />
         </div>

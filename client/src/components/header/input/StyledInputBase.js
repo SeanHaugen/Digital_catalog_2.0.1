@@ -1,17 +1,11 @@
 import { styled } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
 
-export const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
+export const StyledInputBase = styled("input")({
+  marginLeft: "2em",
+  flex: 1,
+  padding: "8px",
+  width: "100%",
+  border: "none",
+  outline: "none",
+  borderRadius: "0px 10px 10px 0px",
+});

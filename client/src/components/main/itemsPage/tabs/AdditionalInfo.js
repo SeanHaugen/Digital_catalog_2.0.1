@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import axios from "axios";
+import Button from "@mui/joy/Button";
 import { useHandleEurofitInfo } from "../../../../api/api";
 import { Item } from "../../../../helper/Item";
 
@@ -83,15 +84,15 @@ function AdditionalInfo({ productData }) {
               onChange={(e) => setInput(e.target.value)}
             />
           </label>
-          <button type="submit">
+          <Button color="success" type="submit">
             {isUpdating
               ? "Update Additional Info"
               : "Add Additional Info & remove old info"}
-          </button>
+          </Button>
         </form>
-        <button onClick={() => setIsUpdating(!isUpdating)}>
+        <Button onClick={() => setIsUpdating(!isUpdating)}>
           {isUpdating ? "Switch to Add Mode" : "Switch to Update Mode"}
-        </button>
+        </Button>
       </Item>
     </div>
   );

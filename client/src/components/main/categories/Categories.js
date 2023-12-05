@@ -7,14 +7,16 @@ import ListItemButton from "@mui/material/ListItemButton";
 
 import ListItemText from "@mui/material/ListItemText";
 
-function CategoriesPage({ item, category, setSubCategory }) {
-  const [productsCategory, setProductsCategory] = useState([]);
+function CategoriesPage({
+  item,
+  category,
+  setSubCategory,
+  setProductsCategory,
+  productsCategory,
+}) {
+  // const [productsCategory, setProductsCategory] = useState([]);
   const [toggleImage, setToggleImage] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-
-  // const imageName = `${productData.Item_Number}`;
-  // const imageUrl = `https://www.showdowndisplays.com/cdn/Resources/Subcategory/${imageName}_subcat.jpg`;
-  //https://www.showdowndisplays.com/cdn/Resources/Subcategory/262254_subcat.jpg
 
   useFetchCategoryData(setProductsCategory, category);
   // console.log(productsCategory);
@@ -32,8 +34,7 @@ function CategoriesPage({ item, category, setSubCategory }) {
       >
         {category}
       </h3>
-      {/* <label>toggle images</label> */}
-      {/* <input type="checkbox" onClick={toggleImagehandler} /> */}
+
       <div
         style={{
           marginTop: "3em",
@@ -53,11 +54,6 @@ function CategoriesPage({ item, category, setSubCategory }) {
               >
                 {toggleImage ? (
                   <div>
-                    {/* <img
-                      src={imageUrl}
-                      alt={subCat}
-                      style={{ maxWidth: "100%", height: "auto" }}
-                    /> */}
                     <ListItemText
                       primary={subCat}
                       style={{ textAlign: "center" }}
