@@ -27,6 +27,26 @@ function PricingTable({ productData }) {
 
   usePricingData(setPriceData, productData.Item_Number);
 
+  // const useFetchPromoData = (setState) => {
+  //   useEffect(() => {
+  //     async function fetchData() {
+  //       try {
+  //         const response = await axios.get(
+  //           "https://dull-pink-termite-slip.cyclic.app/promo-items"
+  //         );
+  //         setState(response.data);
+  //         setLoading(false);
+  //       } catch (error) {
+  //         console.error(error);
+  //         setError(error);
+  //         setLoading(false);
+  //       }
+  //     }
+
+  //     fetchData();
+  //   }, []);
+  // };
+
   return (
     <TableContainer component={Paper} style={{ margin: "10px" }}>
       <Table>

@@ -21,7 +21,7 @@ import welded_vinyl_2 from "../../../../Resources/FinishingStyles/welded_vinyl_2
 function GraphicInfo({ finishingStyle, category }) {
   const [value, setValue] = React.useState(0);
 
-  console.log(finishingStyle);
+  // console.log(finishingStyle);
 
   const handleFinishingStyle = () => {
     if (finishingStyle === "Banners - Vinyl") {

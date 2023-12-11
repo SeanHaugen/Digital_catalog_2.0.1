@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 // import Grid from "@mui/material/Unstable_Grid2";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -19,10 +20,114 @@ function FrontPage({ category, setSubCategory }) {
 
   return (
     <Box>
+      <Grid>
+        <Paper>
+          <header>
+            <h1>Product guide</h1>
+            {/* <p>When I started here it baffled me that we essentially look at the same information any savvy customer sees and getting any additional information required flipping through paper manuals. I knew there was a better way to be doing things</p> */}
+            <h2>Why?</h2>
+            <p>
+              This project was born out of a desire to put all of the aggregated
+              information about a product in one place without having to check
+              sharepoint, a paper manual, NAV or the copious amounts of "tribal
+              knowledge" we've accumulated.
+            </p>
+            <h2>Ownership</h2>
+            <p>
+              This is for US! The QA's can add any information or resources to
+              make your jobs easier
+            </p>
+            <p>
+              Let me or a QA know if there is any information or links you want
+              added on an item.
+            </p>
+            <p>
+              For example if you have had to email product questions and they
+              let you know some obscure piece of info let me know. We want that
+              added for everyone
+            </p>
+            <p>
+              This resource allows us to add up to date with the most accurate
+              information on an item
+            </p>
+            <h2>User Experience</h2>
+            <p>
+              Any suggestions or ideas to help improve the overall user
+              experience is wanted.
+            </p>
+            <p></p>
+            <h2>Updates</h2>
+            <p>
+              I will be periodically updating the app however it currently does
+              not support automatic updates. You will need to re-download the
+              app to apply the updates. I would recommend re-downloading once a
+              week on monday mornings when your starting everything up. There
+              may also be more immediate updates which i will let you know via
+              email.{" "}
+            </p>
+            <h2>Future plans</h2>
+            <p>Plans for future additions to this app</p>
+            <ul>
+              <li>Allow users to Save Items in a "Favorites" list</li>
+              <li>
+                Implement a Fedex freight calculator where all that is needed is
+                a zip code
+              </li>
+              <li>Allow users to edit their individual layout</li>
+              <li>
+                Add dedicated sidebar or Tab for the hardware and replacement
+                graphics of relevant items
+              </li>
+              <li>
+                Self promo and Canada Flat rate calculations done automatically
+              </li>
+              <li>
+                Revamping related items to be more useful. For example the
+                related items should show the related, hardware, graphic, or kit
+                for the item your looking at.
+              </li>
+              <li>
+                Adding a pop open sidebar for subcategories when hovering over
+                that category
+              </li>
+            </ul>
+            <h2>Wishlist</h2>
+            These are things that I'm hoping we can implement however due to
+            limitations in my position they may not be possible
+            <ul>
+              <li>Pricing up to qty 100</li>
+              <li>Inventory linked to item pages</li>
+              <li>Matching cases to items</li>
+            </ul>
+            <h2>Work in progress</h2>
+            <p>
+              Rome wasn't built in a day. Not everything we envision is going to
+              be immediately available. I'm going to be looking for more and
+              better ways to make this the best resource as possible, so there
+              will be some growing pains. I'd just ask for your patience for
+              with any issues that pop up.{" "}
+            </p>
+            <h3>Bugs</h3>
+            <p>
+              There are many bugs you might encounter. If you find one please
+              let me know and I'll address it as soon as possible.
+            </p>
+          </header>
+        </Paper>
+        <Paper>
+          <h1>Change Log</h1>
+          <ul>
+            <li>Added Change Log</li>
+            <li>Updated buttons</li>
+            <li>Added Comparison Charts</li>
+            <li>Added new user registration</li>
+          </ul>
+        </Paper>
+      </Grid>
       {/* Grid container */}
-      <Grid container spacing={3}>
+      <div container>
         {/* Grid item with image and link */}
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Paper>
             <NavLink to={"/Promos"}>
               <img
@@ -36,35 +141,38 @@ function FrontPage({ category, setSubCategory }) {
               />
             </NavLink>
           </Paper>
-        </Grid>
+        </Grid> */}
 
         {/* Grid item with banner and link */}
-        <Grid item xs={12}>
-          <Paper>
-            <NavLink
-              onClick={() => {
-                if (
-                  window.confirm(
-                    "You are leaving the app, once you leave you will need to reopen the app"
-                  )
-                ) {
-                  window.location.href =
-                    "https://www.showdowndisplays.com/Category/BuildYourOwn";
-                }
-              }}
+        <Grid item>
+          <div>
+            <Typography
+              variant="body1"
+              style={{ display: "flex", marginTop: ".5em" }}
             >
-              <img
-                className="placeholder"
-                src={banner}
-                alt="Outdoor products"
-                style={{
-                  width: "100%",
-                  objectFit: "contain",
-                }}
-              />
-            </NavLink>
-            <Typography variant="body1">
-              <button>
+              <Button variant="contained" color="success">
+                <NavLink
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "You are leaving the app, once you leave you will need to reopen the app"
+                      )
+                    ) {
+                      window.location.href =
+                        "https://www.showdowndisplays.com/category/buildyourown";
+                    }
+                  }}
+                  style={{ color: "white" }}
+                >
+                  Custom Master Document
+                </NavLink>
+              </Button>
+            </Typography>
+            <Typography
+              variant="body1"
+              style={{ display: "flex", marginTop: ".5em" }}
+            >
+              <Button variant="contained" color="success">
                 <NavLink
                   onClick={() => {
                     if (
@@ -76,37 +184,83 @@ function FrontPage({ category, setSubCategory }) {
                         "https://signzoneinc.sharepoint.com/:w:/s/ShowdownNorthAmerica/EQOUvm8yNl5Nu6DixOSoYcsBaAcSDDg1ldyu5ZphDRNiWQ?e=4%3AUhGPBl&at=9";
                     }
                   }}
+                  style={{ color: "white" }}
                 >
-                  custom info
+                  Custom Master Document
                 </NavLink>
-              </button>
+              </Button>
             </Typography>
-          </Paper>
+            <Typography
+              variant="body1"
+              style={{ display: "flex", marginTop: ".5em" }}
+            >
+              <Button variant="contained" color="success">
+                <NavLink style={{ color: "white" }}>
+                  Outdoor products page coming soon
+                </NavLink>
+              </Button>
+            </Typography>
+          </div>
         </Grid>
+      </div>
+    </Box>
+  );
+}
 
-        {/* Repeat the pattern for other grid items */}
-        {/* Grid item with Aluminum Prints */}
-        <Grid item xs={12} md={6}>
-          <Paper>
-            <NavLink
+export default FrontPage;
+
+{
+  /* <iframe
+              src="https://signzoneinc.sharepoint.com/sites/CustomerServiceDatabase"
+              width="1500"
+              height="800"
+              style={{
+                marginTop: "2em",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            ></iframe>
+
+
+        {/* Repeat the pattern for other grid items */
+}
+{
+  /* Grid item with Aluminum Prints */
+}
+{
+  /* <Grid item xs={12} md={6}>
+          <Paper> */
+}
+{
+  /* <NavLink
               to={`/Decor/Aluminum Prints`}
               onClick={() => setSubCategory("Aluminum Prints")}
-            >
-              <img
-                className="placeholder"
-                src={frontPageImg1}
-                alt="Aluminum Prints"
-                style={{
-                  width: "100%",
-                  objectFit: "contain",
-                }}
-              />
-            </NavLink>
-          </Paper>
-        </Grid>
+            > */
+}
+{
+  /* <img
+              className="placeholder"
+              src={frontPageImg1}
+              alt="Aluminum Prints"
+              style={{
+                width: "100%",
+                objectFit: "contain",
+              }}
+            /> */
+}
+{
+  /* </NavLink> */
+}
+{
+  /* </Paper>
+        </Grid> */
+}
 
-        {/* Grid item with Outdoor Products */}
-        <Grid item xs={12} md={6}>
+{
+  /* Grid item with Outdoor Products */
+}
+{
+  /* <Grid item xs={12} md={6}>
           <Paper>
             <a href="">
               <img
@@ -120,10 +274,14 @@ function FrontPage({ category, setSubCategory }) {
               />
             </a>
           </Paper>
-        </Grid>
+        </Grid> */
+}
 
-        {/* Grid item with Enviro Products */}
-        <Grid item xs={12}>
+{
+  /* Grid item with Enviro Products */
+}
+{
+  /* <Grid item xs={12}>
           <Paper>
             <img
               className="placeholder"
@@ -135,10 +293,5 @@ function FrontPage({ category, setSubCategory }) {
               }}
             />
           </Paper>
-        </Grid>
-      </Grid>
-    </Box>
-  );
+        </Grid> */
 }
-
-export default FrontPage;

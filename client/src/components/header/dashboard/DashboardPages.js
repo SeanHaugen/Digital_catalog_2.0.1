@@ -44,7 +44,7 @@ const LowerBar = ({ username, setUsername, productData, setProduct }) => {
               marginRight: "5px",
             }}
           >
-            Add new product
+            Add products
           </CustomButton>
         </NavLink>
 
@@ -60,6 +60,28 @@ const LowerBar = ({ username, setUsername, productData, setProduct }) => {
           </CustomButton>
         </NavLink>
         <BottomNav productData={productData} setProduct={setProduct} />
+        <NavLink to={"/Promos"}>
+          <CustomButton
+            variant="contained"
+            style={{
+              // backgroundColor: "#7B919C",
+              marginRight: "5px",
+            }}
+          >
+            Promos
+          </CustomButton>
+        </NavLink>
+        <NavLink to={"/NewProducts"}>
+          <CustomButton
+            variant="contained"
+            style={{
+              // backgroundColor: "#7B919C",
+              marginRight: "5px",
+            }}
+          >
+            New Items
+          </CustomButton>
+        </NavLink>
 
         <LoginModal username={username} setUsername={setUsername} />
       </div>

@@ -13,6 +13,7 @@ import SearchPage from "./searchPage/SearchPage";
 import FormPage from "./forms/FormPage";
 import Promos from "./promoPage/Promos";
 import StockOutList from "./outOfStockPage/OutOfStock";
+import NewProducts from "./newProductsPage/NewProducts";
 // import FavoriteList from "./favorites/Favorites";
 
 function Main({
@@ -55,35 +56,11 @@ function Main({
 
   return (
     <React.Fragment>
-      {/* <div
-        className="main-content-wrapper"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      > */}
-      {/* <div
-        variant="outlined"
-        id="card"
-        sx={(theme) => ({
-          width: "95%",
-          height: "fitContent",
-          display: "flex",
-          justifyContent: "center",
-          gridColumn: "span 2",
-          flexDirection: "column",
-          flexWrap: "wrap",
-          gap: "clamp(0px, (100% - 360px + 32px) * 999, 16px)",
-        })}
-      > */}
       <div
         className="main"
         style={{
           width: "100%",
           objectFit: "contain",
-          // marginLeft: drawerOpen ? "240px" : "0", // Adjust the width of the drawer as needed
-          // transition: "margin-left 0.3s ease", // Add a transition for smooth animation
         }}
       >
         <Routes>
@@ -193,13 +170,23 @@ function Main({
               />
             }
           />
+          <Route
+            path="/NewProducts"
+            element={
+              <NewProducts
+                searchData={searchData}
+                setProduct={setProduct}
+                category={category}
+                subCategory={subCategory}
+                item={item}
+                productData={productData}
+                selectedPromo={selectedPromo}
+                setSelectedPromo={setSelectedPromo}
+              />
+            }
+          />
         </Routes>
       </div>
-      {/* </Container> */}
-      {/* </div> */}
-      {/* </div> */}
-      {/* </Box> */}
-      {/* </Sheet> */}
     </React.Fragment>
   );
 }

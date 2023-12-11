@@ -5,7 +5,7 @@ import { Item } from "../../../../helper/Item";
 function Details({ productData, showMaterials }) {
   return (
     <div>
-      <Item style={{ backgroundColor: "#7B919C" }}>
+      <Item>
         <b>Product Dimensions:</b>
         <ul>
           <li>

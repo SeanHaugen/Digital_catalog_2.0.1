@@ -48,8 +48,9 @@ function StockOutList({ productData, setProduct }) {
                 alt="item"
                 style={{ maxWidth: "10%", height: "auto" }}
               />
-              <div className="product-name">{product.Name}</div>
-              <div className="product-number">{product.Item_Number}</div>
+              <div className="product-name">
+                {product.Name}: {product.Item_Number}
+              </div>
             </ListItemButton>
           </div>
         ))}

@@ -1,5 +1,4 @@
 .color {
-  display: grid;
+  display: flex;
   max-width: 30em;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }

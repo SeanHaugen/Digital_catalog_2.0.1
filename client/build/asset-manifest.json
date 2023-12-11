@@ -1,19 +1,32 @@
 {
   "files": {
-    "main.css": "./static/css/main.b27e4d00.css",
-    "main.js": "./static/js/main.b7b2c960.js",
+    "main.css": "./static/css/main.243a6c7e.css",
+    "main.js": "./static/js/main.e95a0d2f.js",
     "static/media/banner.jpg": "./static/media/banner.948a5f1a8ef1f0aa74f1.jpg",
     "static/media/cb84cb63-bdb0-4c50-af78-5fc0fb0e0e15.jpg": "./static/media/cb84cb63-bdb0-4c50-af78-5fc0fb0e0e15.b277156b970b04cc0653.jpg",
     "static/media/Q4.jpg": "./static/media/Q4.af7288588a5ea845be6a.jpg",
     "static/media/enviro_products.jpg": "./static/media/enviro_products.ceda8dd75c05fb272e0f.jpg",
     "static/media/outDoor_products.jpg": "./static/media/outDoor_products.b50e29abc6a19e289c1c.jpg",
+    "static/media/sewn_finishing_1.jpg": "./static/media/sewn_finishing_1.3e1dae911ee838624525.jpg",
+    "static/media/Vinyl_finishing_2.jpg": "./static/media/Vinyl_finishing_2.edef2ba8131845b957ee.jpg",
+    "static/media/Vinyl_finishing_1.jpg": "./static/media/Vinyl_finishing_1.0401ec92916aaa12d519.jpg",
+    "static/media/BannerComp.png": "./static/media/BannerComp.d3ffe840faf6e4a938b0.png",
+    "static/media/TentComp.png": "./static/media/TentComp.1d84b90dad92a925bec7.png",
+    "static/media/popupComp.png": "./static/media/popupComp.71be2d4ed8e30ee53fb6.png",
+    "static/media/colors.png": "./static/media/colors.f1d6154c29eb3a6a6793.png",
+    "static/media/welded_vinyl_1.jpg": "./static/media/welded_vinyl_1.ff52ed066489785da961.jpg",
+    "static/media/SignageComp.png": "./static/media/SignageComp.5690a0ec3e8663b5b638.png",
+    "static/media/welded_vinyl_2.jpg": "./static/media/welded_vinyl_2.675898561c1f0d6c5e78.jpg",
+    "static/media/TablethrowComp.png": "./static/media/TablethrowComp.f902534f5ab05b15722d.png",
+    "static/media/SailSignComp.png": "./static/media/SailSignComp.17f5ef10167f9124a71f.png",
+    "static/media/RetractorComp.png": "./static/media/RetractorComp.2320dfc56861cd18420c.png",
     "static/media/sd-logo.png": "./static/media/sd-logo.1b096ea5103bdf5ef4fd.png",
     "index.html": "./index.html",
-    "main.b27e4d00.css.map": "./static/css/main.b27e4d00.css.map",
-    "main.b7b2c960.js.map": "./static/js/main.b7b2c960.js.map"
+    "main.243a6c7e.css.map": "./static/css/main.243a6c7e.css.map",
+    "main.e95a0d2f.js.map": "./static/js/main.e95a0d2f.js.map"
   },
   "entrypoints": [
-    "static/css/main.b27e4d00.css",
-    "static/js/main.b7b2c960.js"
+    "static/css/main.243a6c7e.css",
+    "static/js/main.e95a0d2f.js"
   ]
 }

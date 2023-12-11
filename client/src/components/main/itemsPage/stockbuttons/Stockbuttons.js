@@ -6,6 +6,7 @@ import Checkbox from "@mui/material/Checkbox";
 // import { useUpdateOOS } from "../../../../api/api";
 import { fetchLowStockValue } from "../../../../api/api";
 import { fetchOOSValue } from "../../../../api/api";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function StockButtons({
   productData,
@@ -18,6 +19,7 @@ function StockButtons({
   const [altInput, setAltInput] = useState("");
   const [inStockDate, setInStockDate] = useState([]);
   const [altOption, setAltOption] = useState([]);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     console.log("Fetching initial value...");
@@ -80,17 +82,19 @@ function StockButtons({
     try {
       const response = await axios.put(
         `https://dull-pink-termite-slip.cyclic.app/add-alt-item/${productData.Item_Number}`,
-        { newAltString: altInput }
+        { Alt: altInput }
       );
 
       if (response.status === 200) {
         console.log("Alternative options updated");
-        const updatedAltOption = [...altOption, altInput]; // Create a new array with the updated data
-        setAltOption(updatedAltOption); // Update the state
-        setAltInput(""); // Clear the input field
+        const updatedAltOption = [...altOption, altInput];
+        setAltOption(updatedAltOption);
+        setAltInput("");
+        setMessage("Info added successfully");
       }
     } catch (error) {
       console.error("Error updating alternative options:", error);
+      setMessage("Error updating alternative options");
     }
   };
 
@@ -187,53 +191,56 @@ function StockButtons({
           <Button variant="contained" color="success" type="submit">
             Submit
           </Button>
-          <ul>
+          <ul style={{ display: "flex" }}>
             {productData.Date && <li>{productData.Date.slice(0, 10)}</li>}
 
             {productData.Date && (
-              <Button
+              <DeleteIcon
                 type="button"
                 variant="contained"
                 color="error"
                 onClick={handleDeleteDate}
-              >
-                Remove OOS Date
-              </Button>
+              ></DeleteIcon>
             )}
           </ul>
         </form>
-        <form>
-          <label>
-            <h2>Alternative options/Notes: </h2>
-          </label>
-          <input
-            type="text"
-            value={altInput}
-            onChange={(e) => setAltInput(e.target.value)}
-          />
-          <Button variant="contained" color="success" type="submit">
-            Submit
-          </Button>
+
+        <div>
+          <form onSubmit={handleAlternateOptions}>
+            <label>
+              <h2>Alternative options/Notes: </h2>
+            </label>
+            <input
+              type="text"
+              value={altInput}
+              onChange={(e) => setAltInput(e.target.value)}
+            />
+            <Button variant="contained" color="success" type="submit">
+              Submit
+            </Button>
+          </form>
+
+          {/* Render success or error message */}
+          {message && <p>{message}</p>}
+
           <ul>
             {productData.Alt
               ? productData.Alt.map((option, index) => (
-                  <div>
-                    <li key={index}>{option}</li>
-                    <Button
+                  <div style={{ display: "flex" }} key={index}>
+                    <li>{option}</li>
+                    <DeleteIcon
                       type="button"
                       variant="contained"
                       color="error"
                       onClick={() =>
                         handleDeleteAltOption(productData.Item_Number, option)
                       }
-                    >
-                      Delete
-                    </Button>
+                    ></DeleteIcon>
                   </div>
                 ))
               : null}
           </ul>
-        </form>
+        </div>
         <hr />
       </div>
     </div>

@@ -64,10 +64,10 @@ function AdditionalInfo({ productData }) {
 
   return (
     <div>
-      <Item style={{ backgroundColor: "#7B919C" }}>
+      <Item>
         <p>
           This tab is meant for all of the "tribal" knowledge that accumulates
-          with our products.{" "}
+          with our products.
         </p>
         <p>
           If there is a piece of information that you find out about a product

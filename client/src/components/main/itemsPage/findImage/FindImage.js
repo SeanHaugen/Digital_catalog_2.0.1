@@ -4,12 +4,7 @@ import axios from "axios";
 function FindImage({ productData, category, subCategory }) {
   const imageName = `${productData.Item_Number}`;
   const imageUrl = `https://www.showdowndisplays.com/cdn/Resources/Primary/${imageName}_0_Preview.jpg`;
-  //https://www.showdowndisplays.com/cdn/Resources/Primary/${i.Item_Number}_0_Preview.jpg
-  const thumbnailUrl = `https://www.showdowndisplays.com/cdn/Resources/Primary/${imageName}_0_SmallThumbnail.jpg`;
-  const SmallThumbnail = `https://www.showdowndisplays.com/cdn/Resources/Primary/${imageName}_0_SmallThumbnail.jpg`;
-  const inUseThumNail = `https://www.showdowndisplays.com/cdn/Resources/Alternate/${imageName}_Inuse2_SmallThumbnail.jpg`;
-  //https://www.showdowndisplays.com/cdn/Resources/Alternate/109002_Inuse2_SmallThumbnail.jpg
-  //https://www.showdowndisplays.com/cdn/Resources/Primary/108241_0_SmallThumbnail.jpg
+  const imageUrl2 = `https://www.showdowndisplays.com/cdn/Resources/Primary/${imageName}_primary_Preview.jpg`;
 
   const [loading, setLoading] = useState(true);
 
@@ -49,6 +44,11 @@ function FindImage({ productData, category, subCategory }) {
         <div>
           <img
             src={imageUrl}
+            alt={imageName}
+            style={{ width: "100%", height: "auto" }}
+          />
+          <img
+            src={imageUrl2}
             alt={imageName}
             style={{ width: "100%", height: "auto" }}
           />

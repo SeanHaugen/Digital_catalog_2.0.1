@@ -60,7 +60,7 @@ const NoteTaker = ({ username, currentPage }) => {
     }
   };
   return (
-    <Item style={{ backgroundColor: "#7B919C" }}>
+    <Item>
       <h2>*currently notes appear for all Items* </h2>
       <p>Will be updating so notes will be discrete for each item</p>
       <ul>

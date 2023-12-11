@@ -17,6 +17,7 @@ import RelatedItems from "./RelatedItems";
 import NoteTaker from "./NoteTaker";
 import ComparisonEmbed from "./ComparisonEmbed";
 import GraphicInfo from "./GraphicInfo";
+import BannerDetails from "./BannerDetails";
 
 function ItemTabs({
   productData,
@@ -30,7 +31,7 @@ function ItemTabs({
   const [compChart, setComparisonChart] = useState("");
 
   useEffect(() => {
-    setFinishingStyle(productData.Category);
+    setFinishingStyle(productData.SubCategory);
     setComparisonChart(productData.Category);
   }, [productData.Category]);
 
@@ -48,6 +49,22 @@ function ItemTabs({
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleRenderTabs = () => {
+    if (compChart === "Banners & Flags") {
+      return (
+        <Tab
+          style={{
+            backgroundColor: value === 10 ? "white" : "gray",
+            margin: "3px",
+            borderRadius: "10px 10px 0 0px",
+          }}
+        >
+          Banner Details
+        </Tab>
+      );
+    }
   };
 
   return (
@@ -134,7 +151,7 @@ function ItemTabs({
             </Tab>
             <Tab
               style={{
-                backgroundColor: value === 7 ? "white" : "gray",
+                backgroundColor: value === 8 ? "white" : "gray",
                 margin: "3px",
                 borderRadius: "10px 10px 0 0px",
               }}
@@ -143,13 +160,14 @@ function ItemTabs({
             </Tab>
             <Tab
               style={{
-                backgroundColor: value === 7 ? "white" : "gray",
+                backgroundColor: value === 9 ? "white" : "gray",
                 margin: "3px",
                 borderRadius: "10px 10px 0 0px",
               }}
             >
               Graphic Info
             </Tab>
+            {handleRenderTabs()}
           </TabList>
           <TabPanel value={0}>
             <Details
@@ -159,13 +177,14 @@ function ItemTabs({
             />
           </TabPanel>
           <TabPanel value={1}>
-            <Item style={{ backgroundColor: "#7B919C" }}>
+            <Item>
               <FlatRateShipping productData={productData} />
             </Item>
           </TabPanel>
           <TabPanel value={2}>
-            <Item style={{ backgroundColor: "#7B919C" }}>
-              <ColorBox productData={productData} />
+            {/* style={{ backgroundColor: "#7B919C" }} */}
+            <Item>
+              <ColorBox productData={productData} compChart={compChart} />
             </Item>
           </TabPanel>
           <TabPanel value={3}>
@@ -207,6 +226,9 @@ function ItemTabs({
               category={category}
               subCategory={subCategory}
             />
+          </TabPanel>
+          <TabPanel value={10}>
+            <BannerDetails productData={productData} compChart={compChart} />
           </TabPanel>
         </Tabs>
       </Grid>

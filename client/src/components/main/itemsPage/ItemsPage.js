@@ -15,6 +15,7 @@ import ItemTabs from "./tabs/ItemTabs";
 import StockButtons from "./stockbuttons/Stockbuttons";
 import DeleteButton from "./Delete/DeleteButton.js";
 import PromoButton from "../promoPage/PromoButton.js";
+import ToggleNewItems from "../forms/admin/ToggleNewItems.js";
 
 function ItemPage({
   productData,
@@ -26,6 +27,7 @@ function ItemPage({
   username,
 }) {
   console.log(productData.Name);
+  console.log(productData.New_Item);
 
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
@@ -45,10 +47,30 @@ function ItemPage({
 
   const stockStyling = () => {
     if (isLowStock) {
-      return <h1 style={{ backgroundColor: "yellow" }}>{productData.Name}</h1>;
+      return (
+        <h1
+          style={{
+            backgroundColor: "yellow",
+            borderRadius: "10px",
+            width: "50%",
+          }}
+        >
+          {productData.Name}
+        </h1>
+      );
     }
     if (isOutOfStock) {
-      return <h1 style={{ backgroundColor: "red" }}>{productData.Name}</h1>;
+      return (
+        <h1
+          style={{
+            backgroundColor: "red",
+            borderRadius: "10px",
+            width: "50%",
+          }}
+        >
+          {productData.Name}
+        </h1>
+      );
     } else {
       return <h1>{productData.Name}</h1>;
     }
@@ -110,6 +132,9 @@ function ItemPage({
               <ContentCopyIcon></ContentCopyIcon>
               {isCopied ? "Copied!" : "Copy to Clipboard"}
             </button>
+            <h6>
+              {productData.Category} / {productData.SubCategory}
+            </h6>
             <hr
               class="rounded"
               stye={{
@@ -177,7 +202,7 @@ function ItemPage({
                 // gridGap: "10px", // Adjust the gap between grid items
               }}
             >
-              <h1>Stock & Promo stuff</h1>
+              <h3>Promo</h3>
               <hr />
               <PromoButton productData={productData} />
               <StockButtons
@@ -189,6 +214,7 @@ function ItemPage({
                 isOutOfStock={isOutOfStock}
                 setIsOutOfStock={setIsOutOfStock}
               />
+              <ToggleNewItems productData={productData} />
 
               <hr />
 

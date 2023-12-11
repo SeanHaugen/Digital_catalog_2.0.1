@@ -43,7 +43,7 @@ const RelatedItems = ({ productData, subCategory, category, setProduct }) => {
   console.log(filteredItems);
 
   return (
-    <Item style={{ backgroundColor: "#7B919C" }}>
+    <Item>
       <ul>
         <b>Suggested Items</b>
         {filteredItems.map((item, index) => (

@@ -61,16 +61,7 @@ function App() {
 
   return (
     <Router>
-      <div
-        className="App"
-        onContextMenu={handleContextMenu}
-        // style={{
-        //   cursor: "context-menu",
-        //   display: "flex",
-        //   flexFlow: "row no-wrap",
-        //   marginTop: "4em",
-        // }}
-      >
+      <div className="App" onContextMenu={handleContextMenu}>
         <DashBoard
           setCategory={setCategory}
           setSubCategory={setSubCategory}

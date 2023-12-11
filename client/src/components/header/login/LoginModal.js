@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
@@ -21,14 +22,23 @@ const CustomButton = styled(Button)(({ theme }) => ({
 }));
 
 function LoginModal({ onLogin, username, setUsername }) {
-  const [open, setOpen] = React.useState(false);
-  const [password, setPassword] = React.useState("");
-  const [successMessage, setSuccessMessage] = React.useState("");
-  const [errorMessage, setErrorMessage] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [password, setPassword] = useState("");
+  const [isLogin, setIsLogin] = useState(true);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleLogin = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (isLogin) {
+      handleLogin();
+    } else {
+      handleNewUser();
+    }
+  };
+
+  const handleLogin = async () => {
     try {
       const response = await axios.post(
         "https://dull-pink-termite-slip.cyclic.app/login",
@@ -38,21 +48,7 @@ function LoginModal({ onLogin, username, setUsername }) {
         }
       );
 
-      if (response.status === 200) {
-        const data = response.data;
-        const authToken = data.token;
-        localStorage.setItem("authToken", authToken);
-        // Store the JWT token in a secure manner (e.g., context or local storage)
-        // You can implement this part according to your app's architecture
-        console.log("login successful");
-        setSuccessMessage("Login successful!");
-        setErrorMessage(""); // Clear any previous error messages
-        setOpen(false); // Close the modal
-      } else {
-        // Handle authentication error
-        setSuccessMessage("");
-        setErrorMessage("Authentication failed");
-      }
+      handleResponse(response);
     } catch (error) {
       console.error("Login request failed", error);
       setSuccessMessage("");
@@ -60,78 +56,124 @@ function LoginModal({ onLogin, username, setUsername }) {
     }
   };
 
-  const authToken = localStorage.getItem("authToken");
-  console.log(authToken);
+  const handleNewUser = async () => {
+    if (!username || !password) {
+      setErrorMessage("Username and password are required");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "https://dull-pink-termite-slip.cyclic.app/register",
+        {
+          username,
+          password,
+        }
+      );
+
+      handleResponse(response);
+    } catch (error) {
+      console.error("Registration request failed", error);
+
+      if (error.response) {
+        setErrorMessage(
+          `Authentication failed: ${error.response.data.message}`
+        );
+      } else {
+        setErrorMessage("Registration request failed");
+      }
+
+      setSuccessMessage("");
+    }
+  };
+
+  const handleResponse = (response) => {
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      const authToken = data.token;
+      localStorage.setItem("authToken", authToken);
+      console.log("Authentication successful");
+      setSuccessMessage("Authentication successful!");
+      setErrorMessage("");
+      setOpen(false);
+    } else {
+      setSuccessMessage("");
+      setErrorMessage("Authentication failed");
+    }
+  };
 
   return (
     <>
-      <React.Fragment>
-        <CustomButton variant="contained" onClick={() => setOpen(true)}>
-          Login
-        </CustomButton>
-        <Modal
-          aria-labelledby="modal-title"
-          aria-describedby="modal-desc"
-          open={open}
-          onClose={() => setOpen(false)}
+      <CustomButton variant="contained" onClick={() => setOpen(true)}>
+        Login
+      </CustomButton>
+      <Modal
+        aria-labelledby="modal-title"
+        aria-describedby="modal-desc"
+        open={open}
+        onClose={() => setOpen(false)}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Sheet
+          variant="outlined"
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            maxWidth: 500,
+            borderRadius: "md",
+            p: 3,
+            boxShadow: "lg",
           }}
         >
-          <Sheet
-            variant="outlined"
-            sx={{
-              maxWidth: 500,
-              borderRadius: "md",
-              p: 3,
-              boxShadow: "lg",
-            }}
+          <ModalClose variant="plain" sx={{ m: 1 }} />
+          <Typography
+            component="h2"
+            id="modal-title"
+            level="h4"
+            textColor="inherit"
+            fontWeight="lg"
+            mb={1}
           >
-            <ModalClose variant="plain" sx={{ m: 1 }} />
-            <Typography
-              component="h2"
-              id="modal-title"
-              level="h4"
-              textColor="inherit"
-              fontWeight="lg"
-              mb={1}
-            >
-              Login
-            </Typography>
-            <Typography id="modal-desc" textColor="text.tertiary">
-              <div className="login">
-                {successMessage && (
-                  <div className="success-message">{successMessage}</div>
-                )}
-                {errorMessage && (
-                  <div className="error-message">{errorMessage}</div>
-                )}
-                <form onSubmit={handleLogin}>
-                  <div>
-                    <label>User Name</label>
-                    <input
-                      type="text"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                  </div>
-                  <div>
-                    <label>Password</label>
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-                  <button type="submit">Submit</button>
-                </form>
-              </div>
-            </Typography>
-          </Sheet>
-        </Modal>
-      </React.Fragment>
+            {isLogin ? "Login" : "Register"}
+          </Typography>
+          <Typography id="modal-desc" textColor="text.tertiary">
+            <div className="login">
+              {successMessage && (
+                <div className="success-message">{successMessage}</div>
+              )}
+              {errorMessage && (
+                <div className="error-message">{errorMessage}</div>
+              )}
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <label>User Name</label>
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <button type="submit">{isLogin ? "Login" : "Register"}</button>
+              </form>
+              <p onClick={() => setIsLogin(!isLogin)}>
+                {isLogin
+                  ? "New user? Register here"
+                  : "Already have an account? Login"}
+              </p>
+            </div>
+          </Typography>
+        </Sheet>
+      </Modal>
     </>
   );
 }

@@ -16,9 +16,9 @@ const DeleteButton = ({ itemNumber, onDeleteSuccess, onDeleteError }) => {
 
   return (
     <div>
-      <Button variant="contained" color="error" onClick={handleClick}>
+      {/* <Button variant="contained" color="error" onClick={handleClick}>
         Delete Item
-      </Button>
+      </Button> */}
     </div>
   );
 };

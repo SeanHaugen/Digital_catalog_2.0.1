@@ -1,8 +1,23 @@
 import React from "react";
 import "./colorBox.css";
+import TableThrowColors from "../../../../../Resources/misc/colors.png";
 
-function ColorBox({ productData }) {
+function ColorBox({ productData, compChart }) {
   // console.log(productData.Colors.split(","));
+
+  const colorsArray = Array.isArray(productData.Colors)
+    ? productData.Colors
+    : productData.Colors.split(",");
+
+  const handleColorChart = () => {
+    if (colorsArray.length > 10 && compChart === "Table Covers") {
+      return (
+        <>
+          <img src={TableThrowColors} alt="TableThrowColors color chart" />
+        </>
+      );
+    }
+  };
 
   const colorMap = {
     Aquamarine: "#00FFFF",
@@ -94,9 +109,10 @@ function ColorBox({ productData }) {
         >
           <div
             style={{
-              width: "20px",
-              height: "20px",
+              width: "40px",
+              height: "40px",
               marginRight: "8px",
+              borderRadius: "50px",
               background: colorMap[color] || "white",
             }}
           ></div>
@@ -109,9 +125,12 @@ function ColorBox({ productData }) {
 
   return (
     <>
+      <h2>Colors for item {productData.Item_Number}</h2>
       <div className="box color parent">
         <div className="child">{handleColors(productData.Colors)}</div>
       </div>
+      <h2></h2>
+      {handleColorChart()}
     </>
   );
 }

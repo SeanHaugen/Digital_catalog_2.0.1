@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function AddNew() {
+function AddNew({ productData }) {
   const [formData, setFormData] = useState({
     Item_Number: "",
     Name: "",
@@ -67,7 +67,7 @@ function AddNew() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Add new Item</h1>
+      <h1>Add Item</h1>
       <input
         type="number"
         name="Item_Number"
@@ -194,6 +194,7 @@ function AddNew() {
         value={formData.Origin}
         onChange={handleChange}
       />
+
       {/* <label>
         Promo Item:
         <input

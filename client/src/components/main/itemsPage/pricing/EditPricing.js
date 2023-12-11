@@ -5,6 +5,7 @@ import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import Stack from "@mui/joy/Stack";
 import Input from "@mui/joy/Input";
+
 // import { useHandleUpdatePricing } from "../../../../api/api";
 
 function EditPricing({ productData }) {
@@ -98,9 +99,7 @@ function EditPricing({ productData }) {
               onChange={(e) => setUpdatedElement(e.target.value)}
             />
             <Button onClick={handleFormSubmit}>Update Pricing</Button>
-            <Button variant="outlined" onClick={handlePriceEdit}>
-              Close
-            </Button>
+            <Button variant="outlined">Close</Button>
           </>
         )}
       </Stack>
