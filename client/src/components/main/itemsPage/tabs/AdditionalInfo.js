@@ -62,6 +62,14 @@ function AdditionalInfo({ productData }) {
 
   console.log(productData.additional_info);
 
+  const renderAdditionalInfoList = () => {
+    return additionalInfoList.map((info, index) => (
+      <ul key={index}>
+        <li>{info}</li>
+      </ul>
+    ));
+  };
+
   return (
     <div>
       <Item>
@@ -74,7 +82,14 @@ function AdditionalInfo({ productData }) {
           let an admin know and we can add that info here for all to have.
         </p>
         {eurofitSlice}
-        {productData.additional_info}
+        {/* {renderAdditionalInfoList()} */}
+        {productData.additional_info.map((info, index) => {
+          return (
+            <ul key={index}>
+              <li>{info}</li>
+            </ul>
+          );
+        })}
         <form onSubmit={handleFormSubmit}>
           <label>
             Additional Info:

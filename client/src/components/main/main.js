@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "@mui/joy/Card";
 import "./main.css";
@@ -14,6 +14,7 @@ import FormPage from "./forms/FormPage";
 import Promos from "./promoPage/Promos";
 import StockOutList from "./outOfStockPage/OutOfStock";
 import NewProducts from "./newProductsPage/NewProducts";
+import OutdoorProducts from "./OutdoorProductsPage/OutdoorProductsPage";
 // import FavoriteList from "./favorites/Favorites";
 
 function Main({
@@ -53,6 +54,25 @@ function Main({
     }
     console.log("Selected Promo after update:", selectedPromo);
   };
+
+  const useFetchPromoData = (setState) => {
+    useEffect(() => {
+      async function fetchData() {
+        try {
+          const response = await axios.get(
+            "https://dull-pink-termite-slip.cyclic.app/promo-items"
+          );
+          setState(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      fetchData();
+    }, []);
+  };
+
+  useFetchPromoData(setSelectedPromo);
 
   return (
     <React.Fragment>
@@ -108,6 +128,7 @@ function Main({
                 category={category}
                 subCategory={subCategory}
                 selectedPromo={selectedPromo}
+                setSelectedPromo={setSelectedPromo}
                 handlePromoSelect={handlePromoSelect}
                 setProduct={setProduct}
                 username={username}
@@ -185,6 +206,19 @@ function Main({
               />
             }
           />
+          <Route
+            path="/OutdoorProducts"
+            element={
+              <OutdoorProducts
+                searchData={searchData}
+                setProduct={setProduct}
+                category={category}
+                subCategory={subCategory}
+                item={item}
+                productData={productData}
+              />
+            }
+          />
         </Routes>
       </div>
     </React.Fragment>
@@ -192,3 +226,4 @@ function Main({
 }
 
 export default Main;
+//OutdoorProducts

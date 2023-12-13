@@ -4,19 +4,18 @@ import Button from "@mui/joy/Button";
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import Stack from "@mui/joy/Stack";
-import Input from "@mui/joy/Input";
-
 // import { useHandleUpdatePricing } from "../../../../api/api";
+import "./EditPricing.css";
 
 function EditPricing({ productData }) {
   // const [itemNumber, setItemNumber] = useState(productData.Item_Number);
-  const [openPriceEdit, setOpenPriceEdit] = useState(false);
   const [outerIndex, setOuterIndex] = useState("");
   const [innerIndex, setInnerIndex] = useState("");
   const [updatedElement, setUpdatedElement] = useState("");
+  const [isEditingOpen, setIsEditingOpen] = useState(false);
 
-  const handlePriceEdit = () => {
-    setOpenPriceEdit(!openPriceEdit);
+  const handleToggleEditing = () => {
+    setIsEditingOpen((prevIsEditingOpen) => !prevIsEditingOpen);
   };
 
   const handleFormSubmit = async () => {
@@ -55,56 +54,144 @@ function EditPricing({ productData }) {
   ];
 
   return (
-    <div>
-      <Stack
-        spacing={1}
-        style={{
-          width: "20%",
-          display: "flex",
-          flexFlow: "column wrap",
-        }}
-      >
-        {!openPriceEdit ? (
-          <Button onClick={handlePriceEdit}>Edit Pricing</Button>
-        ) : (
-          <>
-            <Select
-              value={outerIndex}
-              onChange={(e) => setOuterIndex(e.target.value)}
-              style={{ height: "30px" }}
-            >
-              <Option value="">Select Row</Option>
-              {outerIndexOptions.map((option, index) => (
-                <Option key={option.value} value={option.value}>
-                  {option.label}
-                </Option>
-              ))}
-            </Select>
-            <Select
-              value={innerIndex}
-              onChange={(e) => setInnerIndex(e.target.value)}
-              style={{ height: "30px" }}
-            >
-              <Option value="">Select column</Option>
-              {innerIndexOptions.map((option, index) => (
-                <Option key={option.value} value={option.value}>
-                  {option.label}
-                </Option>
-              ))}
-            </Select>
-            <Input
-              type="text"
-              placeholder="new price"
-              value={updatedElement}
-              onChange={(e) => setUpdatedElement(e.target.value)}
-            />
-            <Button onClick={handleFormSubmit}>Update Pricing</Button>
-            <Button variant="outlined">Close</Button>
-          </>
-        )}
-      </Stack>
+    <div className="form-container">
+      <Button onClick={handleToggleEditing}>
+        {isEditingOpen ? "Close Editing" : "Open Editing"}
+      </Button>
+      {isEditingOpen && (
+        <div>
+          <select
+            className="custom-select"
+            value={outerIndex}
+            onChange={(e) => setOuterIndex(e.target.value)}
+          >
+            <option value="">Select Row</option>
+            {outerIndexOptions.map((option, index) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          <select
+            className="custom-select"
+            value={innerIndex}
+            onChange={(e) => setInnerIndex(e.target.value)}
+          >
+            <option value="">Select column</option>
+            {innerIndexOptions.map((option, index) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          <input
+            className="custom-input"
+            type="text"
+            placeholder="new price"
+            value={updatedElement}
+            onChange={(e) => setUpdatedElement(e.target.value)}
+          />
+          <Button
+            className="custom-button"
+            // variant="contained"
+            // color="success"
+            onClick={handleFormSubmit}
+          >
+            Update Pricing
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
+
+// function EditPricing({ productData, initialPricing }) {
+//   const [elementIndex, setElementIndex] = useState(0);
+//   const [updatedElement, setUpdatedElement] = useState([""]);
+
+//   const handleElementIndexChange = (e) => {
+//     setElementIndex(parseInt(e.target.value, 10)); // Parse to integer
+//     setUpdatedPrice(""); // Reset the price input when changing elements
+//   };
+
+//   const handleUpdatedElementChange = (e, index) => {
+//     const updatedElementCopy = [...updatedElement];
+//     updatedElementCopy[index] = e.target.value;
+//     setUpdatedElement(updatedElementCopy);
+//   };
+
+//   const handleSave = async () => {
+//     try {
+//       const response = await axios.put(
+//         `https://dull-pink-termite-slip.cyclic.app//update/pricing/${productData.Item_Number}`,
+//         {
+//           elementIndex,
+//           updatedElement,
+//         }
+//       );
+
+//       if (response.status === 200) {
+//         console.log("Pricing updated successfully");
+//       } else {
+//         console.error("Failed to update pricing");
+//       }
+//     } catch (error) {
+//       console.error("Error updating pricing", error);
+//     }
+//   };
+
+//   console.log(initialPricing);
+
+//   return (
+//     <div>
+//       <h2>Edit Pricing</h2>
+//       <div>
+//         <label>Item Number:</label>
+//         <span>{productData.Item_Number}</span>
+//       </div>
+//       <div>
+//         <label>Element Index:</label>
+//         <select value={elementIndex} onChange={handleElementIndexChange}>
+//           {initialPricing.map((price, index) => (
+//             <div>
+//               <option key={index} value={index}>
+//                 Element {index}
+//               </option>
+//             </div>
+//           ))}
+//         </select>
+//       </div>
+//       <div>
+//         <label>Updated Price:</label>
+//         <input
+//           type="text"
+//           value={updatedElement} // Display the existing price for editing
+//           onChange={handleUpdatedElementChange}
+//         />
+//       </div>
+//       <button onClick={handleSave}>Save Pricing</button>
+//     </div>
+//   );
+// }
+
+// const handleSave = async () => {
+//   try {
+//     const response = await axios.put(
+//       `https://dull-pink-termite-slip.cyclic.app/update/pricing/${productData.Item_Number}`,
+//       {
+//         elementIndex,
+//         updatedElement, // Send the updated price
+//       }
+//     );
+
+//     if (response.status === 200) {
+//       console.log("Pricing updated successfully");
+//     } else {
+//       console.error("Failed to update pricing");
+//     }
+//   } catch (error) {
+//     console.error("Error updating pricing", error);
+//   }
+// };
 
 export default EditPricing;

@@ -35,7 +35,7 @@ const LowerBar = ({ username, setUsername, productData, setProduct }) => {
           alignContent: "center",
         }}
       >
-        <NavLink to="/addProduct">
+        {/* <NavLink to="/addProduct">
           <CustomButton
             variant="contained"
             style={{
@@ -46,7 +46,7 @@ const LowerBar = ({ username, setUsername, productData, setProduct }) => {
           >
             Add products
           </CustomButton>
-        </NavLink>
+        </NavLink> */}
 
         <NavLink to="/StockOutList">
           <CustomButton
@@ -60,7 +60,7 @@ const LowerBar = ({ username, setUsername, productData, setProduct }) => {
           </CustomButton>
         </NavLink>
         <BottomNav productData={productData} setProduct={setProduct} />
-        <NavLink to={"/Promos"}>
+        {/* <NavLink to={"/Promos"}>
           <CustomButton
             variant="contained"
             style={{
@@ -70,8 +70,8 @@ const LowerBar = ({ username, setUsername, productData, setProduct }) => {
           >
             Promos
           </CustomButton>
-        </NavLink>
-        <NavLink to={"/NewProducts"}>
+        </NavLink> */}
+        {/* <NavLink to={"/NewProducts"}>
           <CustomButton
             variant="contained"
             style={{
@@ -81,7 +81,7 @@ const LowerBar = ({ username, setUsername, productData, setProduct }) => {
           >
             New Items
           </CustomButton>
-        </NavLink>
+        </NavLink> */}
 
         <LoginModal username={username} setUsername={setUsername} />
       </div>

@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import Promos from "../promoPage/Promos";
+import OutdoorProducts from "../OutdoorProductsPage/OutdoorProductsPage";
 import frontPageImg1 from "../../../Resources/frontpage_images/cb84cb63-bdb0-4c50-af78-5fc0fb0e0e15.jpg";
 import outDoorProducts from "../../../Resources/frontpage_images/outDoor_products.jpg";
 import banner from "../../../Resources/frontpage_images/banner.jpg";
@@ -20,110 +22,6 @@ function FrontPage({ category, setSubCategory }) {
 
   return (
     <Box>
-      <Grid>
-        <Paper>
-          <header>
-            <h1>Product guide</h1>
-            {/* <p>When I started here it baffled me that we essentially look at the same information any savvy customer sees and getting any additional information required flipping through paper manuals. I knew there was a better way to be doing things</p> */}
-            <h2>Why?</h2>
-            <p>
-              This project was born out of a desire to put all of the aggregated
-              information about a product in one place without having to check
-              sharepoint, a paper manual, NAV or the copious amounts of "tribal
-              knowledge" we've accumulated.
-            </p>
-            <h2>Ownership</h2>
-            <p>
-              This is for US! The QA's can add any information or resources to
-              make your jobs easier
-            </p>
-            <p>
-              Let me or a QA know if there is any information or links you want
-              added on an item.
-            </p>
-            <p>
-              For example if you have had to email product questions and they
-              let you know some obscure piece of info let me know. We want that
-              added for everyone
-            </p>
-            <p>
-              This resource allows us to add up to date with the most accurate
-              information on an item
-            </p>
-            <h2>User Experience</h2>
-            <p>
-              Any suggestions or ideas to help improve the overall user
-              experience is wanted.
-            </p>
-            <p></p>
-            <h2>Updates</h2>
-            <p>
-              I will be periodically updating the app however it currently does
-              not support automatic updates. You will need to re-download the
-              app to apply the updates. I would recommend re-downloading once a
-              week on monday mornings when your starting everything up. There
-              may also be more immediate updates which i will let you know via
-              email.{" "}
-            </p>
-            <h2>Future plans</h2>
-            <p>Plans for future additions to this app</p>
-            <ul>
-              <li>Allow users to Save Items in a "Favorites" list</li>
-              <li>
-                Implement a Fedex freight calculator where all that is needed is
-                a zip code
-              </li>
-              <li>Allow users to edit their individual layout</li>
-              <li>
-                Add dedicated sidebar or Tab for the hardware and replacement
-                graphics of relevant items
-              </li>
-              <li>
-                Self promo and Canada Flat rate calculations done automatically
-              </li>
-              <li>
-                Revamping related items to be more useful. For example the
-                related items should show the related, hardware, graphic, or kit
-                for the item your looking at.
-              </li>
-              <li>
-                Adding a pop open sidebar for subcategories when hovering over
-                that category
-              </li>
-            </ul>
-            <h2>Wishlist</h2>
-            These are things that I'm hoping we can implement however due to
-            limitations in my position they may not be possible
-            <ul>
-              <li>Pricing up to qty 100</li>
-              <li>Inventory linked to item pages</li>
-              <li>Matching cases to items</li>
-            </ul>
-            <h2>Work in progress</h2>
-            <p>
-              Rome wasn't built in a day. Not everything we envision is going to
-              be immediately available. I'm going to be looking for more and
-              better ways to make this the best resource as possible, so there
-              will be some growing pains. I'd just ask for your patience for
-              with any issues that pop up.{" "}
-            </p>
-            <h3>Bugs</h3>
-            <p>
-              There are many bugs you might encounter. If you find one please
-              let me know and I'll address it as soon as possible.
-            </p>
-          </header>
-        </Paper>
-        <Paper>
-          <h1>Change Log</h1>
-          <ul>
-            <li>Added Change Log</li>
-            <li>Updated buttons</li>
-            <li>Added Comparison Charts</li>
-            <li>Added new user registration</li>
-          </ul>
-        </Paper>
-      </Grid>
       {/* Grid container */}
       <div container>
         {/* Grid item with image and link */}
@@ -164,7 +62,7 @@ function FrontPage({ category, setSubCategory }) {
                   }}
                   style={{ color: "white" }}
                 >
-                  Custom Master Document
+                  Custom Banner Tool
                 </NavLink>
               </Button>
             </Typography>
@@ -194,13 +92,181 @@ function FrontPage({ category, setSubCategory }) {
               variant="body1"
               style={{ display: "flex", marginTop: ".5em" }}
             >
-              <Button variant="contained" color="success">
-                <NavLink style={{ color: "white" }}>
-                  Outdoor products page coming soon
-                </NavLink>
-              </Button>
+              <NavLink to={"/OutdoorProducts"}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  style={{
+                    // backgroundColor: "#7B919C",
+                    marginRight: "5px",
+                  }}
+                >
+                  Outdoor Products
+                </Button>
+              </NavLink>
+            </Typography>
+            <Typography
+              variant="body1"
+              style={{ display: "flex", marginTop: ".5em" }}
+            >
+              <NavLink to={"/Promos"}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  style={{
+                    // backgroundColor: "#7B919C",
+                    marginRight: "5px",
+                  }}
+                >
+                  Promo Products
+                </Button>
+              </NavLink>
+            </Typography>
+            <Typography
+              variant="body1"
+              style={{ display: "flex", marginTop: ".5em" }}
+            >
+              <NavLink to={"/addProduct"}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  style={{
+                    // backgroundColor: "#7B919C",
+                    marginRight: "5px",
+                  }}
+                >
+                  Add Products
+                </Button>
+              </NavLink>
+            </Typography>
+            <Typography
+              variant="body1"
+              style={{ display: "flex", marginTop: ".5em" }}
+            >
+              <NavLink to={"/NewProducts"}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  style={{
+                    // backgroundColor: "#7B919C",
+                    marginRight: "5px",
+                  }}
+                >
+                  New Products
+                </Button>
+              </NavLink>
             </Typography>
           </div>
+          <Grid>
+            <Paper>
+              <h1>Change Log</h1>
+              <ul>
+                <li>Added Change Log</li>
+                <li>Updated buttons</li>
+                <li>Added Comparison Charts</li>
+                <li>Added new user registration</li>
+              </ul>
+            </Paper>
+          </Grid>
+          <Paper>
+            <header>
+              <h1>Product guide</h1>
+              {/* <p>When I started here it baffled me that we essentially look at the same information any savvy customer sees and getting any additional information required flipping through paper manuals. I knew there was a better way to be doing things</p> */}
+              <h2>Why?</h2>
+              <p>
+                This project was born out of a desire to put all of the
+                aggregated information about a product in one place without
+                having to check sharepoint, a paper manual, NAV or the copious
+                amounts of "tribal knowledge" we've accumulated.
+              </p>
+              <h2>Ownership</h2>
+              <p>
+                This is for US! The QA's can add any information or resources to
+                make your jobs easier
+              </p>
+              <p>
+                Let me or a QA know if there is any information or links you
+                want added on an item.
+              </p>
+              <p>
+                For example if you have had to email product questions and they
+                let you know some obscure piece of info let me know. We want
+                that added for everyone
+              </p>
+              <p>
+                This resource allows us to add up to date with the most accurate
+                information on an item
+              </p>
+              <h2>User Experience</h2>
+              <p>
+                Make a more useful user experience tailored to customer support
+              </p>
+              <p>
+                Any suggestions or ideas to help improve the overall user
+                experience is wanted.
+              </p>
+              <p></p>
+              <h2>Updates</h2>
+              <p>
+                I will be periodically updating the app however it currently
+                does not support automatic updates. You will need to re-download
+                the app to apply the updates. I would recommend re-downloading
+                once a week on monday mornings when your starting everything up.
+                There may also be more immediate updates which i will let you
+                know via email.{" "}
+              </p>
+              <h2>Future plans</h2>
+              <p>Plans for future development</p>
+              <ul>
+                <li>Allow users to Save Items in a "Favorites" list</li>
+                <li>
+                  Implement a Fedex freight calculator where all that is needed
+                  is a zip code
+                </li>
+                <li>Allow users to edit their individual layout</li>
+                <li>
+                  Add dedicated sidebar or Tab for the hardware and replacement
+                  graphics of relevant items
+                </li>
+                <li>
+                  Self promo and Canada Flat rate calculations done
+                  automatically
+                </li>
+                <li>
+                  Revamping related items to be more useful. For example the
+                  related items should show the related, hardware, graphic, or
+                  kit for the item your looking at.
+                </li>
+                <li>
+                  Adding a pop open sidebar for subcategories when hovering over
+                  that category
+                </li>
+                <li>Adding clearance items/list</li>
+                <li>User authentication</li>
+              </ul>
+              <h2>Wishlist</h2>
+              These are things that I'm hoping we can implement however due to
+              limitations in my position they may not be possible
+              <ul>
+                <li>Pricing up to qty 100</li>
+                <li>Inventory linked to item pages</li>
+                <li>Matching cases to items</li>
+              </ul>
+              <h2>Work in progress</h2>
+              <p>
+                Rome wasn't built in a day. Not everything we envision is going
+                to be immediately available. I'm going to be looking for more
+                and better ways to make this the best resource as possible, so
+                there will be some growing pains. I'd just ask for your patience
+                for with any issues that pop up.{" "}
+              </p>
+              <h3>Bugs</h3>
+              <p>
+                There are many bugs you might encounter. If you find one please
+                let me know and I'll address it as soon as possible.
+              </p>
+            </header>
+          </Paper>
         </Grid>
       </div>
     </Box>

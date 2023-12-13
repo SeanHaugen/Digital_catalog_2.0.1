@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useFlatRateInfo } from "../../../../api/api";
+import freightMap from "../../../../Resources/misc/freight_maps.png";
 
 function FlatRateShipping({ productData }) {
   const [itemRates, setItemRates] = useState([]);
@@ -46,6 +47,15 @@ function FlatRateShipping({ productData }) {
           </li>
         </ul>
       </div>
+      <img
+        className="freight-map"
+        src={freightMap}
+        alt="freight-map"
+        style={{
+          width: "50%",
+          objectFit: "contain",
+        }}
+      />
     </div>
   );
 }

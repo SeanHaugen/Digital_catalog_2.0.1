@@ -16,7 +16,12 @@ import EditPricing from "./EditPricing";
 import { usePricingData } from "../../../../api/api";
 import { useHandleUpdatePricing } from "../../../../api/api";
 
-function PricingTable({ productData }) {
+function PricingTable({
+  productData,
+  selectedPromo,
+  setSelectedPromo,
+  useFetchPromoData,
+}) {
   const [priceData, setPriceData] = useState([]);
   // const [updatePricing, setUpdatePricing] = useState(null);
   const [selectedElement, setSelectedElement] = useState({
@@ -27,7 +32,7 @@ function PricingTable({ productData }) {
 
   usePricingData(setPriceData, productData.Item_Number);
 
-  // const useFetchPromoData = (setState) => {
+  // const FetchPromoData = (setState) => {
   //   useEffect(() => {
   //     async function fetchData() {
   //       try {
@@ -46,6 +51,11 @@ function PricingTable({ productData }) {
   //     fetchData();
   //   }, []);
   // };
+
+  let promoArray = selectedPromo.map((item, index) => {
+    return item.Item_Number;
+  });
+  console.log(useFetchPromoData);
 
   return (
     <TableContainer component={Paper} style={{ margin: "10px" }}>
@@ -69,7 +79,16 @@ function PricingTable({ productData }) {
                 }}
               >
                 {rowData.map((cellData, cellIndex) => (
-                  <TableCell key={cellIndex}>
+                  <TableCell
+                    key={cellIndex}
+                    style={{
+                      textDecoration:
+                        rowIndex < 2 &&
+                        promoArray.includes(productData.Item_Number)
+                          ? "line-through"
+                          : "none",
+                    }}
+                  >
                     {rowIndex === selectedElement.rowIndex &&
                     cellIndex === selectedElement.cellIndex ? (
                       <>

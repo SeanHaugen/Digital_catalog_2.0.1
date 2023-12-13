@@ -1,0 +1,24 @@
+.form-container {
+  display: flex;
+  /* flex-direction: column; */
+  flex-flow: column wrap;
+  gap: 16px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.custom-select,
+.custom-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.custom-button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 16px;
+}

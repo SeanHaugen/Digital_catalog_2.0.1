@@ -11,28 +11,6 @@ function Promos({ setSelectedPromo, selectedPromo, setProduct, productData }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const useFetchPromoData = (setState) => {
-    useEffect(() => {
-      async function fetchData() {
-        try {
-          const response = await axios.get(
-            "https://dull-pink-termite-slip.cyclic.app/promo-items"
-          );
-          setState(response.data);
-          setLoading(false);
-        } catch (error) {
-          console.error(error);
-          setError(error);
-          setLoading(false);
-        }
-      }
-
-      fetchData();
-    }, []);
-  };
-
-  const promoItems = useFetchPromoData(setSelectedPromo);
-
   const onDeletePromoItem = async () => {
     try {
       const response = await axios.delete(

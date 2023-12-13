@@ -16,6 +16,7 @@ import StockButtons from "./stockbuttons/Stockbuttons";
 import DeleteButton from "./Delete/DeleteButton.js";
 import PromoButton from "../promoPage/PromoButton.js";
 import ToggleNewItems from "../forms/admin/ToggleNewItems.js";
+import ToggleOutdoorItem from "../forms/admin/ToggleOutDoorItem.js";
 
 function ItemPage({
   productData,
@@ -61,9 +62,24 @@ function ItemPage({
     }
     if (isOutOfStock) {
       return (
+        <div>
+          <h1
+            style={{
+              backgroundColor: "red",
+              borderRadius: "10px",
+              width: "50%",
+            }}
+          >
+            {productData.Name}
+          </h1>
+        </div>
+      );
+    }
+    if (productData.Outdoor === true) {
+      return (
         <h1
           style={{
-            backgroundColor: "red",
+            backgroundColor: "green",
             borderRadius: "10px",
             width: "50%",
           }}
@@ -75,6 +91,8 @@ function ItemPage({
       return <h1>{productData.Name}</h1>;
     }
   };
+
+  console.log(productData.Outdoor);
 
   const leadTime = () => {
     if (productData.Lead_Times > 1) {
@@ -120,6 +138,21 @@ function ItemPage({
           <div id="pdf-content">
             <Breadcrumb productData={productData} />
             {stockStyling()}
+            <div
+              style={{
+                backgroundColor: "yellow",
+                borderRadius: "10px",
+                width: "50%",
+              }}
+            >
+              <h2>{productData.Alt}</h2>
+              <h3>
+                {" "}
+                In Stock on:{" "}
+                {productData.Date && <li>{productData.Date.slice(0, 10)}</li>}
+              </h3>
+            </div>
+
             <button
               style={{
                 backgroundColor: "transparent",
@@ -132,6 +165,7 @@ function ItemPage({
               <ContentCopyIcon></ContentCopyIcon>
               {isCopied ? "Copied!" : "Copy to Clipboard"}
             </button>
+
             <h6>
               {productData.Category} / {productData.SubCategory}
             </h6>
@@ -170,7 +204,10 @@ function ItemPage({
                 </Item>
               </Grid>
               <Grid xs={12}>
-                <PricingTable productData={productData} />
+                <PricingTable
+                  productData={productData}
+                  selectedPromo={selectedPromo}
+                />
               </Grid>
             </Grid>
             <Grid sx={{ flexGrow: 1 }} container spacing={0} margin={"5px"}>
@@ -215,6 +252,7 @@ function ItemPage({
                 setIsOutOfStock={setIsOutOfStock}
               />
               <ToggleNewItems productData={productData} />
+              <ToggleOutdoorItem productData={productData} />
 
               <hr />
 
