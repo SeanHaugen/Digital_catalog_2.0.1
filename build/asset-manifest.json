@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "./static/css/main.521988db.css",
-    "main.js": "./static/js/main.64873623.js",
+    "main.js": "./static/js/main.d1182533.js",
     "static/media/banner.jpg": "./static/media/banner.948a5f1a8ef1f0aa74f1.jpg",
     "static/media/cb84cb63-bdb0-4c50-af78-5fc0fb0e0e15.jpg": "./static/media/cb84cb63-bdb0-4c50-af78-5fc0fb0e0e15.b277156b970b04cc0653.jpg",
     "static/media/Q4.jpg": "./static/media/Q4.af7288588a5ea845be6a.jpg",
+    "static/media/freight_maps.png": "./static/media/freight_maps.dcf2b5d8c05eb349cedd.png",
     "static/media/enviro_products.jpg": "./static/media/enviro_products.ceda8dd75c05fb272e0f.jpg",
-    "static/media/freight_maps.png": "./static/media/freight_maps.3fc438ab0bf80650f7aa.png",
     "static/media/outDoor_products.jpg": "./static/media/outDoor_products.b50e29abc6a19e289c1c.jpg",
     "static/media/sewn_finishing_1.jpg": "./static/media/sewn_finishing_1.3e1dae911ee838624525.jpg",
     "static/media/Vinyl_finishing_2.jpg": "./static/media/Vinyl_finishing_2.edef2ba8131845b957ee.jpg",
@@ -24,10 +24,10 @@
     "static/media/sd-logo.png": "./static/media/sd-logo.1b096ea5103bdf5ef4fd.png",
     "index.html": "./index.html",
     "main.521988db.css.map": "./static/css/main.521988db.css.map",
-    "main.64873623.js.map": "./static/js/main.64873623.js.map"
+    "main.d1182533.js.map": "./static/js/main.d1182533.js.map"
   },
   "entrypoints": [
     "static/css/main.521988db.css",
-    "static/js/main.64873623.js"
+    "static/js/main.d1182533.js"
   ]
 }

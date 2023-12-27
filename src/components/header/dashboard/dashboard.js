@@ -57,10 +57,16 @@ export default function DashBoard({
   const handleSearch = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      setQuery(e.target.value);
+      const inputValue = e.target.value.trim(); // Trim leading and trailing spaces
+
+      // Encode the search string
+      const encodedValue = encodeURIComponent(inputValue);
+
+      setQuery(encodedValue);
       navigate(`/search`);
     }
   };
+  console.log(typeof query);
 
   /////////Testing hover state and stuff
   useFetchCategoryData(setProductsCategory, category);

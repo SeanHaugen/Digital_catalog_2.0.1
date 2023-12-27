@@ -170,51 +170,6 @@ function FrontPage({ category, setSubCategory }) {
           </Grid>
           <Paper>
             <header>
-              <h1>Product guide</h1>
-              {/* <p>When I started here it baffled me that we essentially look at the same information any savvy customer sees and getting any additional information required flipping through paper manuals. I knew there was a better way to be doing things</p> */}
-              <h2>Why?</h2>
-              <p>
-                This project was born out of a desire to put all of the
-                aggregated information about a product in one place without
-                having to check sharepoint, a paper manual, NAV or the copious
-                amounts of "tribal knowledge" we've accumulated.
-              </p>
-              <h2>Ownership</h2>
-              <p>
-                This is for US! The QA's can add any information or resources to
-                make your jobs easier
-              </p>
-              <p>
-                Let me or a QA know if there is any information or links you
-                want added on an item.
-              </p>
-              <p>
-                For example if you have had to email product questions and they
-                let you know some obscure piece of info let me know. We want
-                that added for everyone
-              </p>
-              <p>
-                This resource allows us to add up to date with the most accurate
-                information on an item
-              </p>
-              <h2>User Experience</h2>
-              <p>
-                Make a more useful user experience tailored to customer support
-              </p>
-              <p>
-                Any suggestions or ideas to help improve the overall user
-                experience is wanted.
-              </p>
-              <p></p>
-              <h2>Updates</h2>
-              <p>
-                I will be periodically updating the app however it currently
-                does not support automatic updates. You will need to re-download
-                the app to apply the updates. I would recommend re-downloading
-                once a week on monday mornings when your starting everything up.
-                There may also be more immediate updates which i will let you
-                know via email.{" "}
-              </p>
               <h2>Future plans</h2>
               <p>Plans for future development</p>
               <ul>
@@ -252,18 +207,16 @@ function FrontPage({ category, setSubCategory }) {
                 <li>Inventory linked to item pages</li>
                 <li>Matching cases to items</li>
               </ul>
-              <h2>Work in progress</h2>
-              <p>
-                Rome wasn't built in a day. Not everything we envision is going
-                to be immediately available. I'm going to be looking for more
-                and better ways to make this the best resource as possible, so
-                there will be some growing pains. I'd just ask for your patience
-                for with any issues that pop up.{" "}
-              </p>
               <h3>Bugs</h3>
               <p>
                 There are many bugs you might encounter. If you find one please
                 let me know and I'll address it as soon as possible.
+                <ul>Known Bugs</ul>
+                <li>
+                  Search bar not optimized. Will not accept special characters
+                  such as quotations to denote ft and inches
+                </li>
+                {/* <li></li> */}
               </p>
             </header>
           </Paper>

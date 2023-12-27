@@ -73,14 +73,7 @@ function AdditionalInfo({ productData }) {
   return (
     <div>
       <Item>
-        <p>
-          This tab is meant for all of the "tribal" knowledge that accumulates
-          with our products.
-        </p>
-        <p>
-          If there is a piece of information that you find out about a product
-          let an admin know and we can add that info here for all to have.
-        </p>
+        <h2>Group Knowledge</h2>
         {eurofitSlice}
         {/* {renderAdditionalInfoList()} */}
         {productData.additional_info.map((info, index) => {

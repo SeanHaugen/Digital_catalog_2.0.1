@@ -25,6 +25,23 @@ function CategoriesPage({
     setToggleImage(!toggleImage);
   };
 
+  const handleToggleOutOfStock = async () => {
+    try {
+      // Replace 'yourSubcategory' with the actual subcategory or retrieve it dynamically
+      const subcategory = productData.SubCategory;
+
+      const response = await axios.put(
+        `https://dull-pink-termite-slip.cyclic.app/toggle-oos/${subcategory}`
+      );
+
+      // You may need to update this part based on the response structure
+      // If the response doesn't contain 'OOS' directly, adjust accordingly
+      setIsOutOfStock(response.data.OOS);
+    } catch (error) {
+      console.error("Error toggling out-of-stock status:", error);
+    }
+  };
+
   return (
     <>
       <h3

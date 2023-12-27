@@ -49,15 +49,31 @@ function ItemPage({
   const stockStyling = () => {
     if (isLowStock) {
       return (
-        <h1
-          style={{
-            backgroundColor: "yellow",
-            borderRadius: "10px",
-            width: "50%",
-          }}
-        >
-          {productData.Name}
-        </h1>
+        <>
+          <h1
+            style={{
+              backgroundColor: "yellow",
+              borderRadius: "10px",
+              width: "50%",
+            }}
+          >
+            {productData.Name}
+          </h1>
+          <div
+            style={{
+              backgroundColor: "yellow",
+              borderRadius: "10px",
+              width: "50%",
+            }}
+          >
+            <h2>{productData.Alt}</h2>
+            <h3>
+              {" "}
+              In Stock on:{" "}
+              {productData.Date && <li>{productData.Date.slice(0, 10)}</li>}
+            </h3>
+          </div>
+        </>
       );
     }
     if (isOutOfStock) {
@@ -72,6 +88,20 @@ function ItemPage({
           >
             {productData.Name}
           </h1>
+          <div
+            style={{
+              backgroundColor: "yellow",
+              borderRadius: "10px",
+              width: "50%",
+            }}
+          >
+            <h2>{productData.Alt}</h2>
+            <h3>
+              {" "}
+              In Stock on:{" "}
+              {productData.Date && <li>{productData.Date.slice(0, 10)}</li>}
+            </h3>
+          </div>
         </div>
       );
     }
@@ -138,20 +168,6 @@ function ItemPage({
           <div id="pdf-content">
             <Breadcrumb productData={productData} />
             {stockStyling()}
-            <div
-              style={{
-                backgroundColor: "yellow",
-                borderRadius: "10px",
-                width: "50%",
-              }}
-            >
-              <h2>{productData.Alt}</h2>
-              <h3>
-                {" "}
-                In Stock on:{" "}
-                {productData.Date && <li>{productData.Date.slice(0, 10)}</li>}
-              </h3>
-            </div>
 
             <button
               style={{
@@ -192,25 +208,31 @@ function ItemPage({
               </button>
             </h2>
 
-            <Grid sx={{ flexGrow: 1 }} container spacing={2}>
-              <Grid xs={6} md={5} margin="5px" justifyContent="center">
+            <Grid container spacing={2}>
+              {/* Image taking up two rows */}
+              <Grid item xs={12} md={5}>
                 <Item>
                   <FindImage productData={productData} />
                 </Item>
               </Grid>
-              <Grid xs={6} md={6} style={{ margin: 10 }}>
+
+              {/* Description and Pricing in the same row */}
+              <Grid item xs={12} md={7}>
+                {/* Description */}
                 <Item>
                   <Description productData={productData} />
                 </Item>
-              </Grid>
-              <Grid xs={12}>
-                <PricingTable
-                  productData={productData}
-                  selectedPromo={selectedPromo}
-                />
+
+                {/* Pricing */}
+                <Item style={{ marginTop: "10px" }}>
+                  <PricingTable
+                    productData={productData}
+                    selectedPromo={selectedPromo}
+                  />
+                </Item>
               </Grid>
             </Grid>
-            <Grid sx={{ flexGrow: 1 }} container spacing={0} margin={"5px"}>
+            <Grid sx={{ flexGrow: 1 }} container spacing={3} margin={"5px"}>
               <Item>
                 Setup: ${productData.SetupChg} G, $16 net
                 <div>

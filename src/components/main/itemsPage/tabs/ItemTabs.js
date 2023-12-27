@@ -102,7 +102,7 @@ function ItemTabs({
                 borderRadius: "10px 10px 0 0px",
               }}
             >
-              colors
+              Colors
             </Tab>
             <Tab
               style={{

@@ -11,6 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import BottomNav from "./components/footer/BottomNav";
 import CopyToClipboardButton from "./helper/CopyToClipboard";
 import NewWindowButton from "./helper/NewWindow";
+import ZoomableComponent from "./helper/ZoomZoom";
 
 function App() {
   const [category, setCategory] = useState("");
@@ -102,6 +103,7 @@ function App() {
             // drawerOpen={drawerOpen}
           />
         </div>
+        {/* <ZoomableComponent /> */}
         <Menu
           open={contextMenu !== null}
           onClose={handleClose}
