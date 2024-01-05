@@ -98,7 +98,7 @@ export default function DashBoard({
       </StyledToolbar>
       <Drawer variant="permanent" open={open}>
         <List style={{ paddingTop: "5em" }}>
-          {categoryData.slice(2).map((cat, index) => (
+          {categoryData.map((cat, index) => (
             <ListItem key={index} disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{

@@ -62,7 +62,7 @@ export const useFetchCategoryData = (setState, category) => {
     const fetchData = async () => {
       try {
         if (category) {
-          const endpoint = `${category}`;
+          const endpoint = category;
           const apiUrl = `https://dull-pink-termite-slip.cyclic.app/category/${endpoint}`;
 
           const response = await axios.get(apiUrl);

@@ -5,11 +5,11 @@ import { NavLink } from "react-router-dom";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 
-import ListItemText from "@mui/material/ListItemText";
-
 function Promos({ setSelectedPromo, selectedPromo, setProduct, productData }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  console.log(productData.Item_Number);
 
   const onDeletePromoItem = async () => {
     try {
