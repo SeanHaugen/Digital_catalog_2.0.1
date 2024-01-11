@@ -161,10 +161,8 @@ function FrontPage({ category, setSubCategory }) {
             <Paper>
               <h1>Change Log</h1>
               <ul>
-                <li>Added Change Log</li>
-                <li>Updated buttons</li>
-                <li>Added Comparison Charts</li>
-                <li>Added new user registration</li>
+                <li>Updated Item List</li>
+                <li>Updated Pricing for 2024</li>
               </ul>
             </Paper>
           </Grid>
@@ -199,14 +197,7 @@ function FrontPage({ category, setSubCategory }) {
                 <li>Adding clearance items/list</li>
                 <li>User authentication</li>
               </ul>
-              <h2>Wishlist</h2>
-              These are things that I'm hoping we can implement however due to
-              limitations in my position they may not be possible
-              <ul>
-                <li>Pricing up to qty 100</li>
-                <li>Inventory linked to item pages</li>
-                <li>Matching cases to items</li>
-              </ul>
+
               <h3>Bugs</h3>
               <p>
                 There are many bugs you might encounter. If you find one please

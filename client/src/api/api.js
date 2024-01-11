@@ -146,7 +146,7 @@ export const usePricingData = (setState, item) => {
         const response = await axios.get(
           `https://dull-pink-termite-slip.cyclic.app/pricing/item_number/${item}`
         );
-        let itemPricing = response.data;
+        let itemPricing = response.data || []; // Handle empty array
         setState(itemPricing);
       } catch (error) {
         console.error(error);
